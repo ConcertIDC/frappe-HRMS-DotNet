@@ -1,0 +1,26 @@
+.custom {
+    max-width: 300px; 
+    width: 50%;
+}
+
+.frappr-logo {
+    height: 28px;
+    width: auto; 
+}
+
+.signup-body{
+    background-color: #f3f5f8;
+}
+
+.custom-class input {
+    background-color: #f0f0f0;
+}
+
+.login-input{
+    width: 600px;
+}
+
+.logo-dashboard{
+    width: 35px;
+    height: 35px;
+}
