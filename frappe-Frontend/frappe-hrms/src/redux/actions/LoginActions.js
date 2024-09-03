@@ -1,0 +1,26 @@
+import axios from "axios";
+import { Login } from "../constants";
+import { BASEURL } from "../../Constant";
+ 
+export const LoginAction = (payload) => async (dispatch) => {
+    dispatch({
+        type: Login.LOADING,
+        payload: { loading: true },
+    });
+    try {
+        const { data } = await axios.post(`${BASEURL}login`, payload);
+        console.log(data);
+        localStorage.setItem("USER", data && data?.username);
+        await dispatch({
+            type: Login.SUCCESS,
+            payload: { loading: false, data: data },
+        });
+        window.location.href = "/dashboard";
+    } catch (err) {
+        await dispatch({
+            type: Login.ERROR,
+            payload: { loading: false, data: {} },
+        });
+    }
+};
+ 
