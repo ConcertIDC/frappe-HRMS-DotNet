@@ -1,4 +1,4 @@
-import { Login } from "../constants";
+import { Login } from "../constants/login";
 
 const initialValue = {
     LoginModel: [],
