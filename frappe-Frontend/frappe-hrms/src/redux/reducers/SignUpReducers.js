@@ -1,4 +1,4 @@
-import { Signup } from "../constants";
+import { Signup } from "../constants/signUp";
 
 const initialSignupState = {
     SignupModel: [],
