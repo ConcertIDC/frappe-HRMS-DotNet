@@ -1,19 +1,21 @@
 import { Login } from "../constants";
- 
-let initialvalue = {
+
+const initialValue = {
     LoginModel: [],
+    loading: false,
 };
- 
-export const LoginReducer = (value = initialvalue, action) => {
+
+export const LoginReducer = (state = initialValue, action) => {
     switch (action?.type) {
-        case Login.REQUEST:
-            return { LoginModel: action?.payload };
-        case Login.SUCCESS:
-            return { LoginModel: action?.payload };
-        case Login.ERROR:
-            return { LoginModel: action?.payload };
- 
+        case Login.LOADING.type:
+            return { ...state, loading: true };
+        case Login.REQUEST.type:
+            return { ...state, LoginModel: action?.payload };
+        case Login.SUCCESS.type:
+            return { ...state, LoginModel: action?.payload, loading: false };
+        case Login.ERROR.type:
+            return { ...state, LoginModel: action?.payload, loading: false };
         default:
-            return value;
+            return state;
     }
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Login } from "../constants";
-import { BASEURL } from "../../Constant";
+import { BASEURL } from "../../Constant/ConstatntData";
  
 export const LoginAction = (payload) => async (dispatch) => {
     dispatch({
@@ -8,7 +8,7 @@ export const LoginAction = (payload) => async (dispatch) => {
         payload: { loading: true },
     });
     try {
-        const { data } = await axios.post(`${BASEURL}login`, payload);
+        const { data } = await axios.post(`${BASEURL}`, payload);
         console.log(data);
         localStorage.setItem("USER", data && data?.username);
         await dispatch({

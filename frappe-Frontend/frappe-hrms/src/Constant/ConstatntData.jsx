@@ -8,6 +8,7 @@ export const employeeOptions = [
     { value: '1000+', label: '1000+' }
 ];
 
+export const BASEURL="https://localhost:7038/api/Login";
 
 export const inputs = [
     // { label: "Company Name" },

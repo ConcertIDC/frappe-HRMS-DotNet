@@ -7,8 +7,6 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 
 function App() {
-  console.log("gytgyg");
-  
 
   return (
     <div className="App">
@@ -16,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
