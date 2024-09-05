@@ -7,12 +7,11 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />

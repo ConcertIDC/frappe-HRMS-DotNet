@@ -18,11 +18,7 @@ function Signup() {
     };
 
     const handleClick = () => {
-        console.log(formData);
-        
         dispatch(SignupAction(formData));
-        console.log("dcxbhbxc");
-        
     };
 
     const inputs = [
