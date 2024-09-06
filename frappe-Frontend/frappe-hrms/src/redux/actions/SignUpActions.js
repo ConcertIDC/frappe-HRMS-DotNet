@@ -14,6 +14,7 @@ export const SignupAction = (payload) => async (dispatch) => {
             type: Signup.SUCCESS,
             payload: { loading: false, data: data },
         });
+        window.location.href = "/organisation";
 
     } catch (err) {
         await dispatch({

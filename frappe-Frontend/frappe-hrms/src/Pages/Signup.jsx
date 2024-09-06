@@ -16,6 +16,8 @@ function Signup() {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    console.log(formData);
+    
 
     const handleClick = () => {
         dispatch(SignupAction(formData));

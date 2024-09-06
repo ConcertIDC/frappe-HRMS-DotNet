@@ -17,8 +17,6 @@ const LoginComponent = () => {
     const navigate = useNavigate();
 
     const { loading, error, data } = useSelector(state => state.auth);
-    console.log(data,"++++++++++++");
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -39,7 +37,6 @@ const LoginComponent = () => {
         setValidated(true);
     };
 
-    // If login is successful, navigate to dashboard
     if (data?.username) {
         navigate('/dashboard');
     }

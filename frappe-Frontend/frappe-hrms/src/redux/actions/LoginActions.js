@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Login } from "../constants/login";
+import { Login } from "../constants/index";
 import { BASEURL } from "../../Constant/ConstatntData";
- 
+
 export const LoginAction = (payload) => async (dispatch) => {
     dispatch({
         type: Login.LOADING,
@@ -9,7 +9,7 @@ export const LoginAction = (payload) => async (dispatch) => {
     });
     try {
         const { data } = await axios.post(`${BASEURL}Login`, payload);
-        localStorage.setItem("USER", data && data?.username);
+        localStorage.setItem("Token", data?.accessToken);
         await dispatch({
             type: Login.SUCCESS,
             payload: { loading: false, data: data },
@@ -22,4 +22,10 @@ export const LoginAction = (payload) => async (dispatch) => {
         });
     }
 };
- 
+
+export const logoutAction = () => (dispatch) => {
+    dispatch({
+        type: Login.LOGOUT,
+        payload: {},
+    });
+};

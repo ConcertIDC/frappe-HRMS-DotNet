@@ -1,4 +1,4 @@
-import { Login } from "../constants/login";
+import { Login } from "../constants";
 
 const initialValue = {
     LoginModel: [],
@@ -15,6 +15,8 @@ export const LoginReducer = (state = initialValue, action) => {
             return { ...state, LoginModel: action?.payload, loading: false };
         case Login.ERROR.type:
             return { ...state, LoginModel: action?.payload, loading: false };
+        case Login.LOGOUT.type:
+            return initialValue;
         default:
             return state;
     }
