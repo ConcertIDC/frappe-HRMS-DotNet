@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import { thunk } from 'redux-thunk';  
 import { LoginReducer } from '../reducers/LoginReducers';
 import { SignupReducer } from '../reducers/SignUpReducers';
+import { OrganisationReducer } from '../reducers/OrganisationReducer';
 
 const rootReducer = combineReducers({
     auth: LoginReducer,
-    signup : SignupReducer
+    signup : SignupReducer,
+    Organisation : OrganisationReducer
 });
 
 const store = configureStore({

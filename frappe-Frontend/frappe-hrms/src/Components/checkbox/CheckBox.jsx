@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Checkbox = ({ label, checked, onChange, className, id }) => {
+const Checkbox = ({ label, checked, onChange, className, id , name}) => {
   return (
     <div className={className}>
       <input
         type="checkbox"
         className="form-check-input "
+        name={name}
         id={id}
         checked={checked}
         onChange={onChange}

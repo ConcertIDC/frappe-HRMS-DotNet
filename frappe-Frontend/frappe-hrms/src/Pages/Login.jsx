@@ -1,45 +1,36 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Button from '../Components/Button/Button';
 import CustomInput from '../Components/Input/CustomInput';
 import frappelogo from '../Assets/Images/frappe-hr2.png';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { LoginAction } from '../redux/actions/LoginActions';
-import { useNavigate } from 'react-router-dom';
 
-const LoginComponent = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
+const Login = () => {
     const [validated, setValidated] = useState(false);
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const { loading, error, data } = useSelector(state => state.auth);
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
+            event.preventDefault();
             event.stopPropagation();
         } else {
-            console.log(formData);
-            dispatch(LoginAction(formData));
+            event.preventDefault();
+            // Dispatch login action or other necessary logic
+            dispatch(LoginAction());
+            // navigate('/dashboard');
         }
+
         setValidated(true);
     };
 
-    if (data?.username) {
-        navigate('/dashboard');
-    }
+    const inputs = [
+        { label: "Email address" },
+        { label: "Password" }
+    ];
 
     return (
         <div className='vh-100 d-flex align-items-center signup-body justify-content-center'>
@@ -51,42 +42,13 @@ const LoginComponent = () => {
                                 <img src={frappelogo} alt="logo" />
                             </div>
 
-                            <CustomInput
-                                className='fw-bold login-input'
-                                label="Email address"
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            {inputs.map(item => (
+                                <CustomInput className='fw-bold login-input' key={item.label} label={item.label} required />
+                            ))}
 
-                            <CustomInput
-                                className='fw-bold login-input'
-                                label="Password"
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <Button type="submit" className='btn btn-success mt-2 login-input' label="Login" />
 
-                            <Button
-                                type="submit"
-                                className='btn btn-success mt-2 login-input'
-                                label="Login"
-                                disabled={loading}
-                            />
-
-                            {error && (
-                                <div className="text-danger text-center mt-3">
-                                    Login failed. Please try again.
-                                </div>
-                            )}
-
-                            <h6 className='text-center mt-3'>
-                                Don't have an account? <a href='/signup'>Sign Up</a>
-                            </h6>
+                            <h6 className='text-center mt-3'>Don't have an account? <Link to='/'>Sign Up</Link> </h6>
                         </Col>
                     </Row>
                 </Card>
@@ -95,4 +57,4 @@ const LoginComponent = () => {
     );
 };
 
-export default LoginComponent;
+export default Login;
