@@ -97,5 +97,28 @@ namespace frappe_HRMS.WebAPI.Controllers
             await _unitOfWork.Save();
             return result;
         }
+
+
+        [HttpPost("CreateJobApplicant")]
+        public async Task<ActionResult<NewJobApplicant>> CreateJobApplicant(NewJobApplicant jobApplicant)
+        {
+            var result = await _unitOfWork.NewJobApplicantRepository.AddAsync(jobApplicant);
+            return result;
+        }
+
+        [HttpGet("GetAllJobApplicants")]
+        public async Task<ActionResult<List<NewJobApplicant>>> GetAllJobApplicants()
+        {
+            var result = await _unitOfWork.NewJobApplicantRepository.GetAll();
+            return Ok(result);
+        }
+
+        [HttpPost("EditJobApplicant")]
+        public async Task<ActionResult<NewJobApplicant>> EditBranch(NewJobApplicant jobApplicant)
+        {
+            var result = _unitOfWork.NewJobApplicantRepository.Update(jobApplicant);
+            await _unitOfWork.Save();
+            return result;
+        }
     }
 }

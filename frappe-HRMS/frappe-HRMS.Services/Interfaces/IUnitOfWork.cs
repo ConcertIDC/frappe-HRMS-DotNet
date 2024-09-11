@@ -14,7 +14,7 @@ namespace frappe_HRMS.Services.Interfaces
         IEmploymentTypeRepository EmploymentType { get; }
         IEmployeeGroupRepository EmployeeGroup { get; }
         IEmployeeGradeRepository EmployeeGrade { get; }
-
+        INewJobApplicantRepository NewJobApplicantRepository { get; }
         Task<int> Save();
     }
 }
