@@ -35,5 +35,24 @@ namespace frappe_HRMS.Domain.Employee
         [ForeignKey(nameof(EmploymentTypeId))]
         public virtual EmploymentType? EmploymentType { get; set; }
         public string? ReportsTo { get; set; }
+        public int? JobApplicantId { get; set; }
+        [ForeignKey(nameof(JobApplicantId))]
+        public virtual NewJobApplicant? JobApplicant { get; set; }
+        public DateTime? ConfirmationDate { get; set; }
+        public int? NoticeDays { get; set; }
+        public DateTime? OfferDate { get; set; }
+        public DateTime? ContractEndDate { get; set; }
+        public DateTime? DateOfRetirement { get; set; }
+        public string? Mobile { get; set; }
+        public string? PersonalEmail { get; set; }
+        public string? CompanyName { get; set; }
+        public string? PreferedContactEmail {  get; set; }
+        public string? CurrentAddress { get; set; }
+        public bool? CurrentAddressIs { get; set; }
+        public string? PermanentAddress { get; set; }
+        public bool? PermanentAddressIs { get; set; }
+        public string? EmergencyContactName {  get; set; }
+        public string? EmergencyPhone { get; set; }
+        public string? Relation { get; set; }
     }
 }
