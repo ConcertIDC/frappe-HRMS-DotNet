@@ -6,6 +6,7 @@ import frappelogo from '../Assets/Images/frappe-hr2.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { LoginAction } from '../redux/actions/LoginActions';
+import { type } from '@testing-library/user-event/dist/type';
 
 const Login = () => {
     const [validated, setValidated] = useState(false);
@@ -28,8 +29,8 @@ const Login = () => {
     };
 
     const inputs = [
-        { label: "Email address" },
-        { label: "Password" }
+        { label: "Email address" , type : 'email'},
+        { label: "Password" , type : 'password'}
     ];
 
     return (
@@ -43,7 +44,7 @@ const Login = () => {
                             </div>
 
                             {inputs.map(item => (
-                                <CustomInput className='fw-bold login-input' key={item.label} label={item.label} required />
+                                <CustomInput className='fw-bold login-input' key={item.label} label={item.label} type={item.type} required />
                             ))}
 
                             <Button type="submit" className='btn btn-success mt-2 login-input' label="Login" />

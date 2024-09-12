@@ -25,8 +25,8 @@ function Signup() {
 
     const inputs = [
         { label: "Sitename", name: "sitename" },
-        { label: "Firstname", name: "firstname" },
-        { label: "Lastname", name: "lastname" },
+        { label: "First Name", name: "firstname" },
+        { label: "Last Name", name: "lastname" },
         { label: "Email", name: "email" },
         { label: "Password", name: "password" },
     ];

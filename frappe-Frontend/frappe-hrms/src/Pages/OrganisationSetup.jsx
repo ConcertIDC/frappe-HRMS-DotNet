@@ -6,7 +6,7 @@ import frappelogo from '../Assets/Images/frappehr.png';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from '../Components/Button/Button';
 import CustomDropdown from '../Components/Dropdown/CustomDropdown';
-import { countryOptions, currencyOptions, employeeOptions, INDUSTRY, inputs } from '../Constant/ConstatntData';
+import { countryOptions, currencyOptions, designtions, employeeOptions, INDUSTRY, inputs, languageOptions, timeZoneOptions } from '../Constant/ConstatntData';
 import Checkbox from '../Components/checkbox/CheckBox';
 import { useDispatch } from 'react-redux';
 import { OrganisationAction } from '../redux/actions/OrganisationAction'; 
@@ -33,9 +33,12 @@ const Organisation = () => {
     };
 
     const dropdownConfigs = [
+        { label: "Your Designation", options: designtions, className: ""},
         { label: "Number of employees", options: employeeOptions, className: "", name : "numberOfEmployess",id:"numberOfEmployess"},
         { label: "Industry", options: INDUSTRY, className: "mt-3" , name : "industry",id:"industry"},
+        { label: "Your Language", options : languageOptions, className: "", name:"language"},
         { label: "Country", options : countryOptions, className: "", name:"country"},
+        { label: "Time Zone", options : timeZoneOptions, className: "", name:"timeZone"},
         { label: "Currency", options : currencyOptions, className: "", name:"currency"}
     ];
 
