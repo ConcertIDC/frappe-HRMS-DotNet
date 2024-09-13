@@ -6,6 +6,7 @@ import Button from '../Components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupAction } from '../redux/actions/SignUpActions'; 
+import { type } from '@testing-library/user-event/dist/type';
 
 function Signup() {
     const [formData, setFormData] = useState({});
@@ -24,11 +25,11 @@ function Signup() {
     };
 
     const inputs = [
-        { label: "Sitename", name: "sitename" },
-        { label: "First Name", name: "firstname" },
-        { label: "Last Name", name: "lastname" },
-        { label: "Email", name: "email" },
-        { label: "Password", name: "password" },
+        { label: "Sitename", name: "sitename", type : 'text' },
+        { label: "First Name", name: "firstname" , type : 'text' },
+        { label: "Last Name", name: "lastname", type : 'text'  },
+        { label: "Email", name: "email", type: 'email' },
+        { label: "Password", name: "password" , type : 'password'},
     ];
 
     return (
@@ -49,6 +50,7 @@ function Signup() {
                                                 label={item.label}
                                                 name={item.name}
                                                 value={formData[item.name] || ''}
+                                                type={item.type}
                                                 onChange={handleChange}
                                             />
                                         ))}
