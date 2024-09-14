@@ -64,6 +64,7 @@ builder.Services.AddScoped<IEmploymentTypeRepository, EmploymentTypeRepository>(
 builder.Services.AddScoped<IEmployeeGradeRepository, EmployeeGradeRepository>();
 builder.Services.AddScoped<IEmployeeGroupRepository, EmployeeGroupRepository>();
 builder.Services.AddScoped<INewJobApplicantRepository, NewJobApplicantRepository>();
+builder.Services.AddScoped<INewJobOpeningRepository, NewJobOpeningRepository>();
 #endregion
 
 builder.Services.AddSwaggerGen();

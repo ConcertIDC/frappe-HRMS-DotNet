@@ -19,5 +19,12 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<EmployeeGroup> EmployeeGroup { get; set; }
         public DbSet<NewJobApplicant> NewJobApplicant { get; set; }
         public DbSet<NewJobOpening> NewJobOpening { get; set; }
+        public DbSet<EmployeeAddress> EmployeeAddresses { get; set; }
+        public DbSet<EmplyeeJoiningDetails> EmplyeeJoiningDetails { get; set; }
+        public DbSet<EmployeeSalary> EmployeeSalaries { get; set; }
+        public DbSet<CostCenter> CostCenters { get; set; }
+        public DbSet<PersonalDetails> PersonalDetails { get; set; }
+        public DbSet<Exit> Exits { get; set; }
+
     }
 }

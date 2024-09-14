@@ -17,6 +17,7 @@ namespace frappe_HRMS.Services.Services
         public IEmployeeGradeRepository EmployeeGradeRepository { get; }
         public IEmployeeGroupRepository EmployeeGroupRepository { get; }
         public INewJobApplicantRepository NewJobApplicantRepository { get; }
+        public INewJobOpeningRepository NewJobOpeningRepository { get; }
         public ISignupRepository SignupRepository { get; }
         public ICompanyRepository CompanyRepository { get; }
         public UnitOfWork(HRMSDbContext context,
@@ -28,7 +29,8 @@ namespace frappe_HRMS.Services.Services
             IEmploymentTypeRepository employmentTypeRepository,
             IEmployeeGradeRepository employeeGradeRepository,
             IEmployeeGroupRepository employeeGroupRepository,
-            INewJobApplicantRepository newJobApplicantRepository)
+            INewJobApplicantRepository newJobApplicantRepository,
+            INewJobOpeningRepository newJobOpeningRepository)
         {
             _context = context;
             SignupRepository = signupRepository;
@@ -40,6 +42,7 @@ namespace frappe_HRMS.Services.Services
             EmployeeGradeRepository = employeeGradeRepository;
             EmployeeGroupRepository = employeeGroupRepository;
             NewJobApplicantRepository = newJobApplicantRepository;
+            NewJobOpeningRepository = newJobOpeningRepository;
         }
 
 
@@ -53,6 +56,8 @@ namespace frappe_HRMS.Services.Services
         public IEmployeeGroupRepository EmployeeGroup => new EmployeeGroupRepository(_context);
         public IEmployeeGradeRepository EmployeeGrade => new EmployeeGradeRepository(_context);
         public INewJobApplicantRepository NewJobApplicant => new NewJobApplicantRepository(_context);
+        public INewJobOpeningRepository NewJobOpening => new NewJobOpeningRepository(_context);
+
         public async Task<int> Save()
         {
             return await _context.SaveChangesAsync();
