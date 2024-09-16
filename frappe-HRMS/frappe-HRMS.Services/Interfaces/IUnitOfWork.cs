@@ -1,5 +1,6 @@
 ﻿using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
+using frappe_HRMS.Services.Services.Employee;
 
 namespace frappe_HRMS.Services.Interfaces
 {
@@ -14,8 +15,14 @@ namespace frappe_HRMS.Services.Interfaces
         IEmploymentTypeRepository EmploymentType { get; }
         IEmployeeGroupRepository EmployeeGroup { get; }
         IEmployeeGradeRepository EmployeeGrade { get; }
-        INewJobApplicantRepository NewJobApplicantRepository { get; }
-        INewJobOpeningRepository NewJobOpeningRepository { get; }
+        INewJobApplicantRepository NewJobApplicant { get; }
+        INewJobOpeningRepository NewJobOpening { get; }
+        IEmployeeAddressRepository EmployeeAddress{ get; }
+        IEmployeeJoiningRepository EmployeeJoining { get; }
+        IEmployeeSalaryRepository EmployeeSalary { get; }
+        IExitRepository Exit {  get; }
+        ICostCenterRepository CostCenter {  get; }
+        IEmployeePersonalRepository PersonalDetails {  get; }
         Task<int> Save();
     }
 }

@@ -65,6 +65,12 @@ builder.Services.AddScoped<IEmployeeGradeRepository, EmployeeGradeRepository>();
 builder.Services.AddScoped<IEmployeeGroupRepository, EmployeeGroupRepository>();
 builder.Services.AddScoped<INewJobApplicantRepository, NewJobApplicantRepository>();
 builder.Services.AddScoped<INewJobOpeningRepository, NewJobOpeningRepository>();
+builder.Services.AddScoped<IEmployeeAddressRepository, EmployeeAddressRepository>();
+builder.Services.AddScoped<IEmployeeJoiningRepository, EmployeeJoiningRepository>();
+builder.Services.AddScoped<IEmployeeSalaryRepository, EmployeeSalaryRepository>();
+builder.Services.AddScoped<IExitRepository, ExitRepository>();
+builder.Services.AddScoped<ICostCenterRepository,  CostCenterRepository>();
+builder.Services.AddScoped<IEmployeePersonalRepository, EmployeePersonalRepository>();
 #endregion
 
 builder.Services.AddSwaggerGen();

@@ -20,6 +20,12 @@ namespace frappe_HRMS.Services.Services
         public INewJobOpeningRepository NewJobOpeningRepository { get; }
         public ISignupRepository SignupRepository { get; }
         public ICompanyRepository CompanyRepository { get; }
+        public IEmployeeAddressRepository EmployeeAddressRepository { get; }
+        public IEmployeeJoiningRepository EmployeeJoiningRepository { get; }
+        public IEmployeeSalaryRepository EmployeeSalaryRepository { get; }
+        public IExitRepository ExitRepository { get; }
+        public IEmployeePersonalRepository EmployeePersonalRepository { get; }
+        public ICostCenterRepository CostCenterRepository { get; }
         public UnitOfWork(HRMSDbContext context,
             ISignupRepository signupRepository,
             ICompanyRepository companyRepository,
@@ -30,7 +36,13 @@ namespace frappe_HRMS.Services.Services
             IEmployeeGradeRepository employeeGradeRepository,
             IEmployeeGroupRepository employeeGroupRepository,
             INewJobApplicantRepository newJobApplicantRepository,
-            INewJobOpeningRepository newJobOpeningRepository)
+            INewJobOpeningRepository newJobOpeningRepository,
+            IEmployeeAddressRepository employeeAddressRepository,
+            IEmployeeJoiningRepository employeeJoiningRepository,
+            IEmployeeSalaryRepository employeeSalaryRepository,
+            ICostCenterRepository costCenterRepository,
+            IExitRepository exitRepository,
+            IEmployeePersonalRepository employeePersonalRepository)
         {
             _context = context;
             SignupRepository = signupRepository;
@@ -43,6 +55,12 @@ namespace frappe_HRMS.Services.Services
             EmployeeGroupRepository = employeeGroupRepository;
             NewJobApplicantRepository = newJobApplicantRepository;
             NewJobOpeningRepository = newJobOpeningRepository;
+            EmployeeAddressRepository = employeeAddressRepository;
+            EmployeeJoiningRepository = employeeJoiningRepository;
+            EmployeeSalaryRepository = employeeSalaryRepository;
+            CostCenterRepository = costCenterRepository;
+            ExitRepository = exitRepository;
+            EmployeePersonalRepository = employeePersonalRepository;
         }
 
 
@@ -57,7 +75,12 @@ namespace frappe_HRMS.Services.Services
         public IEmployeeGradeRepository EmployeeGrade => new EmployeeGradeRepository(_context);
         public INewJobApplicantRepository NewJobApplicant => new NewJobApplicantRepository(_context);
         public INewJobOpeningRepository NewJobOpening => new NewJobOpeningRepository(_context);
-
+        public IEmployeeAddressRepository EmployeeAddress => new EmployeeAddressRepository(_context);
+        public IEmployeeJoiningRepository EmployeeJoining => new EmployeeJoiningRepository(_context);
+        public IEmployeeSalaryRepository EmployeeSalary => new EmployeeSalaryRepository(_context);
+        public IExitRepository Exit => new ExitRepository(_context);
+        public ICostCenterRepository CostCenter => new CostCenterRepository(_context);
+        public IEmployeePersonalRepository PersonalDetails => new EmployeePersonalRepository(_context);
         public async Task<int> Save()
         {
             return await _context.SaveChangesAsync();

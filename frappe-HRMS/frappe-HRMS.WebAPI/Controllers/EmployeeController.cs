@@ -102,21 +102,62 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("CreateJobApplicant")]
         public async Task<ActionResult<NewJobApplicant>> CreateJobApplicant(NewJobApplicant jobApplicant)
         {
-            var result = await _unitOfWork.NewJobApplicantRepository.AddAsync(jobApplicant);
+            var result = await _unitOfWork.NewJobApplicant.AddAsync(jobApplicant);
             return result;
         }
 
         [HttpGet("GetAllJobApplicants")]
         public async Task<ActionResult<List<NewJobApplicant>>> GetAllJobApplicants()
         {
-            var result = await _unitOfWork.NewJobApplicantRepository.GetAll();
+            var result = await _unitOfWork.NewJobApplicant.GetAll();
             return Ok(result);
         }
 
         [HttpPost("EditJobApplicant")]
-        public async Task<ActionResult<NewJobApplicant>> EditBranch(NewJobApplicant jobApplicant)
+        public async Task<ActionResult<NewJobApplicant>> EditJobApplicant(NewJobApplicant jobApplicant)
         {
-            var result = _unitOfWork.NewJobApplicantRepository.Update(jobApplicant);
+            var result = _unitOfWork.NewJobApplicant.Update(jobApplicant);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateJobOpening")]
+        public async Task<ActionResult<NewJobOpening>> CreateJobOpening(NewJobOpening jobOpening)
+        {
+            var result = await _unitOfWork.NewJobOpening.AddAsync(jobOpening);
+            return result;
+        }
+
+        [HttpGet("GetAllJobOpenings")]
+        public async Task<ActionResult<List<NewJobOpening>>> GetAllJobOpenings()
+        {
+            var result = await _unitOfWork.NewJobOpening.GetAll();
+            return Ok(result);
+        }
+
+        [HttpPost("EditJobOpening")]
+        public async Task<ActionResult<NewJobOpening>> EditJobOpening(NewJobOpening jobOpening)
+        {
+            var result = _unitOfWork.NewJobOpening.Update(jobOpening);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEmployeeAddress")]
+        public async Task<ActionResult<EmployeeAddress>> CreateEmployeeAddress(EmployeeAddress address)
+        {
+            var result = await _unitOfWork.EmployeeAddress.AddAsync(address);
+            return result;
+        }
+
+        [HttpGet("GetAllAddresses")]
+        public async Task<ActionResult<List<EmployeeAddress>>> GetAllAddresses()
+        {
+            var result = await _unitOfWork.EmployeeAddress.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEmployeeAddress")]
+        public async Task<ActionResult<EmployeeAddress>> EditEmployeeAddress(EmployeeAddress address)
+        {
+            var result = _unitOfWork.EmployeeAddress.Update(address);
             await _unitOfWork.Save();
             return result;
         }
