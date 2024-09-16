@@ -25,6 +25,9 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<CostCenter> CostCenters { get; set; }
         public DbSet<PersonalDetails> PersonalDetails { get; set; }
         public DbSet<Exit> Exits { get; set; }
-
+        public DbSet<EmployeeProfile> EmployeeProfiles { get; set; }
+        public DbSet<EmployeeHistory> EmployeeHistory { get; set; }
+        public DbSet<PreviousWorkExperience> PreviousWorkExperience { get; set; }
+        public DbSet<EducationalQualification> EducationalQualifications { get; set; }
     }
 }

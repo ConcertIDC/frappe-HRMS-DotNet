@@ -47,6 +47,9 @@ namespace frappe_HRMS.Domain.Employee
         public int? PersonalId { get; set; }
         [ForeignKey(nameof(PersonalId))]
         public virtual PersonalDetails? Personal { get; set; }
+        public int? ProfileId { get; set; }
+        [ForeignKey(nameof(ProfileId))]
+        public virtual EmployeeProfile? Profile { get; set; }
         public int? ExitId { get; set; }
         [ForeignKey(nameof(ExitId))]
         public virtual Exit? Exit { get; set; }
