@@ -23,6 +23,10 @@ namespace frappe_HRMS.Services.Interfaces
         IExitRepository Exit {  get; }
         ICostCenterRepository CostCenter {  get; }
         IEmployeePersonalRepository PersonalDetails {  get; }
+        IEmployeeProfileRepository EmployeeProfile { get; }
+        IEducationalQualificationRepository EducationalQualification { get; }
+        IPreviousWorkExperienceRepository PreviousWorkExperience { get; }
+        IEmployeeHistoryRepository EmployeeHistory { get; }
         Task<int> Save();
     }
 }

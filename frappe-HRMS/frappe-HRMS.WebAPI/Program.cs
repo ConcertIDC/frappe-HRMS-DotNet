@@ -71,6 +71,10 @@ builder.Services.AddScoped<IEmployeeSalaryRepository, EmployeeSalaryRepository>(
 builder.Services.AddScoped<IExitRepository, ExitRepository>();
 builder.Services.AddScoped<ICostCenterRepository,  CostCenterRepository>();
 builder.Services.AddScoped<IEmployeePersonalRepository, EmployeePersonalRepository>();
+builder.Services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository>();
+builder.Services.AddScoped<IEducationalQualificationRepository, EducationalQualificationRepository>();
+builder.Services.AddScoped<IPreviousWorkExperienceRepository, PreviousWorkExperienceRepository>();
+builder.Services.AddScoped<IEmployeeHistoryRepository, EmployeeHistoryRepository>();
 #endregion
 
 builder.Services.AddSwaggerGen();

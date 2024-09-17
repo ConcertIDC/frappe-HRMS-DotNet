@@ -26,6 +26,11 @@ namespace frappe_HRMS.Services.Services
         public IExitRepository ExitRepository { get; }
         public IEmployeePersonalRepository EmployeePersonalRepository { get; }
         public ICostCenterRepository CostCenterRepository { get; }
+        public IEmployeeProfileRepository EmployeeProfileRepository { get; }
+        public IEducationalQualificationRepository EducationalQualificationRepository { get; }
+        public IPreviousWorkExperienceRepository PreviousWorkExperienceRepository { get; }
+        public IEmployeeHistoryRepository EmployeeHistoryRepository { get; }
+
         public UnitOfWork(HRMSDbContext context,
             ISignupRepository signupRepository,
             ICompanyRepository companyRepository,
@@ -42,7 +47,11 @@ namespace frappe_HRMS.Services.Services
             IEmployeeSalaryRepository employeeSalaryRepository,
             ICostCenterRepository costCenterRepository,
             IExitRepository exitRepository,
-            IEmployeePersonalRepository employeePersonalRepository)
+            IEmployeePersonalRepository employeePersonalRepository,
+            IEmployeeProfileRepository employeeProfileRepository,
+            IEducationalQualificationRepository educationalQualificationRepository,
+            IPreviousWorkExperienceRepository previousWorkExperienceRepository,
+            IEmployeeHistoryRepository employeeHistoryRepository)
         {
             _context = context;
             SignupRepository = signupRepository;
@@ -61,6 +70,10 @@ namespace frappe_HRMS.Services.Services
             CostCenterRepository = costCenterRepository;
             ExitRepository = exitRepository;
             EmployeePersonalRepository = employeePersonalRepository;
+            EmployeeProfileRepository = employeeProfileRepository;
+            EducationalQualificationRepository = educationalQualificationRepository;
+            PreviousWorkExperienceRepository = previousWorkExperienceRepository;
+            EmployeeHistoryRepository = employeeHistoryRepository;
         }
 
 
@@ -81,6 +94,10 @@ namespace frappe_HRMS.Services.Services
         public IExitRepository Exit => new ExitRepository(_context);
         public ICostCenterRepository CostCenter => new CostCenterRepository(_context);
         public IEmployeePersonalRepository PersonalDetails => new EmployeePersonalRepository(_context);
+        public IEmployeeProfileRepository EmployeeProfile => new EmployeeProfileRepository(_context);
+        public IEducationalQualificationRepository EducationalQualification => new EducationalQualificationRepository(_context);
+        public IPreviousWorkExperienceRepository PreviousWorkExperience => new PreviousWorkExperienceRepository(_context);
+        public IEmployeeHistoryRepository EmployeeHistory => new EmployeeHistoryRepository(_context);
         public async Task<int> Save()
         {
             return await _context.SaveChangesAsync();

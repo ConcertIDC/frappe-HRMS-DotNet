@@ -1,6 +1,7 @@
 ﻿using frappe_HRMS.Domain.Company;
 using frappe_HRMS.Domain.Employee;
 using frappe_HRMS.Services.Interfaces;
+using frappe_HRMS.Services.Services.Employee;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -158,6 +159,181 @@ namespace frappe_HRMS.WebAPI.Controllers
         public async Task<ActionResult<EmployeeAddress>> EditEmployeeAddress(EmployeeAddress address)
         {
             var result = _unitOfWork.EmployeeAddress.Update(address);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEmplyeeJoining")]
+        public async Task<ActionResult<EmplyeeJoiningDetails>> CreateEmplyeeJoining(EmplyeeJoiningDetails joiningDetails)
+        {
+            var result = await _unitOfWork.EmployeeJoining.AddAsync(joiningDetails);
+            return result;
+        }
+
+        [HttpGet("GetAllEmplyeeJoiningDetails")]
+        public async Task<ActionResult<List<EmplyeeJoiningDetails>>> GetAllEmplyeeJoiningDetails()
+        {
+            var result = await _unitOfWork.EmployeeJoining.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEmplyeeJoiningDetails")]
+        public async Task<ActionResult<EmplyeeJoiningDetails>> EditEmplyeeJoiningDetails(EmplyeeJoiningDetails joiningDetails)
+        {
+            var result = _unitOfWork.EmployeeJoining.Update(joiningDetails);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEmployeeSalary")]
+        public async Task<ActionResult<EmployeeSalary>> CreateEmployeeSalary(EmployeeSalary employeeSalary)
+        {
+            var result = await _unitOfWork.EmployeeSalary.AddAsync(employeeSalary);
+            return result;
+        }
+
+        [HttpGet("GetAllEmployeeSalary")]
+        public async Task<ActionResult<List<EmployeeSalary>>> GetAllEmployeeSalary()
+        {
+            var result = await _unitOfWork.EmployeeSalary.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEmployeeSalary")]
+        public async Task<ActionResult<EmployeeSalary>> EditEmployeeSalary(EmployeeSalary employeeSalary)
+        {
+            var result = _unitOfWork.EmployeeSalary.Update(employeeSalary);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateCostCenter")]
+        public async Task<ActionResult<CostCenter>> CreateCostCenter(CostCenter costCenter)
+        {
+            var result = await _unitOfWork.CostCenter.AddAsync(costCenter);
+            return result;
+        }
+
+        [HttpGet("GetAllCostCenters")]
+        public async Task<ActionResult<List<CostCenter>>> GetAllCostCenters()
+        {
+            var result = await _unitOfWork.CostCenter.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditCostCenter")]
+        public async Task<ActionResult<CostCenter>> EditCostCenter(CostCenter costCenter)
+        {
+            var result = _unitOfWork.CostCenter.Update(costCenter);
+            await _unitOfWork.Save();
+            return result;
+        }
+
+        [HttpPost("CreateExit")]
+        public async Task<ActionResult<Exit>> CreateExit(Exit exit)
+        {
+            var result = await _unitOfWork.Exit.AddAsync(exit);
+            return result;
+        }
+
+        [HttpPost("EditExit")]
+        public async Task<ActionResult<Exit>> EditExit(Exit exit)
+        {
+            var result = _unitOfWork.Exit.Update(exit);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreatePersonalDetails")]
+        public async Task<ActionResult<PersonalDetails>> CreatePersonalDetails(PersonalDetails personalDetails)
+        {
+            var result = await _unitOfWork.PersonalDetails.AddAsync(personalDetails);
+            return result;
+        }
+
+        [HttpGet("GetAllPersonalDetails")]
+        public async Task<ActionResult<List<PersonalDetails>>> GetAllPersonalDetails()
+        {
+            var result = await _unitOfWork.PersonalDetails.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditPersonalDetails")]
+        public async Task<ActionResult<PersonalDetails>> EditPersonalDetails(PersonalDetails personalDetails)
+        {
+            var result = _unitOfWork.PersonalDetails.Update(personalDetails);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEmployeeProfile")]
+        public async Task<ActionResult<EmployeeProfile>> CreateEmployeeProfile(EmployeeProfile profile)
+        {
+            var result = await _unitOfWork.EmployeeProfile.AddAsync(profile);
+            return result;
+        }
+
+        [HttpGet("GetAllEmployeeProfiles")]
+        public async Task<ActionResult<List<EmployeeProfile>>> GetAllEmployeeProfiles()
+        {
+            var result = await _unitOfWork.EmployeeProfile.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEmployeeProfile")]
+        public async Task<ActionResult<EmployeeProfile>> EditEmployeeProfile(EmployeeProfile profile)
+        {
+            var result = _unitOfWork.EmployeeProfile.Update(profile);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEducationalQualification")]
+        public async Task<ActionResult<EducationalQualification>> CreateEducationalQualification(EducationalQualification qualification)
+        {
+            var result = await _unitOfWork.EducationalQualification.AddAsync(qualification);
+            return result;
+        }
+
+        [HttpGet("GetAllEducationalQualifications")]
+        public async Task<ActionResult<List<EducationalQualification>>> GetAllEducationalQualifications()
+        {
+            var result = await _unitOfWork.EducationalQualification.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEducationalQualification")]
+        public async Task<ActionResult<EducationalQualification>> EditEducationalQualification(EducationalQualification qualification)
+        {
+            var result = _unitOfWork.EducationalQualification.Update(qualification);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreatePreviousWorkExperience")]
+        public async Task<ActionResult<PreviousWorkExperience>> CreatePreviousWorkExperience(PreviousWorkExperience experience)
+        {
+            var result = await _unitOfWork.PreviousWorkExperience.AddAsync(experience);
+            return result;
+        }
+
+        [HttpGet("GetAllPreviousWorkExperiences")]
+        public async Task<ActionResult<List<PreviousWorkExperience>>> GetAllPreviousWorkExperiences()
+        {
+            var result = await _unitOfWork.PreviousWorkExperience.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditPreviousWorkExperience")]
+        public async Task<ActionResult<PreviousWorkExperience>> EditPreviousWorkExperience(PreviousWorkExperience experience)
+        {
+            var result = _unitOfWork.PreviousWorkExperience.Update(experience);
+            await _unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateEmployeeHistory")]
+        public async Task<ActionResult<EmployeeHistory>> CreateEmployeeHistory(EmployeeHistory history)
+        {
+            var result = await _unitOfWork.EmployeeHistory.AddAsync(history);
+            return result;
+        }
+
+        [HttpGet("GetAllEmployeeHistories")]
+        public async Task<ActionResult<List<EmployeeHistory>>> GetAllEmployeeHistories()
+        {
+            var result = await _unitOfWork.EmployeeHistory.GetAll();
+            return Ok(result);
+        }
+        [HttpPost("EditEmployeeHistory")]
+        public async Task<ActionResult<EmployeeHistory>> EditEmployeeHistory(EmployeeHistory history)
+        {
+            var result = _unitOfWork.EmployeeHistory.Update(history);
             await _unitOfWork.Save();
             return result;
         }
