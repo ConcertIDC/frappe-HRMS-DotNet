@@ -2,9 +2,11 @@ using frappe_HRMS.Infrastructure.Context;
 using frappe_HRMS.Services.Interfaces;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
+using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Services;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
+using frappe_HRMS.Services.Services.Leave;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -75,6 +77,9 @@ builder.Services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository
 builder.Services.AddScoped<IEducationalQualificationRepository, EducationalQualificationRepository>();
 builder.Services.AddScoped<IPreviousWorkExperienceRepository, PreviousWorkExperienceRepository>();
 builder.Services.AddScoped<IEmployeeHistoryRepository, EmployeeHistoryRepository>();
+builder.Services.AddScoped<ILeaveApplicationRepository, LeaveApplicationRepository>();
+builder.Services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+builder.Services.AddScoped<ICompensatoryLeaveRequestRepository, CompensatoryLeaveRequestRepository>();
 #endregion
 
 builder.Services.AddSwaggerGen();

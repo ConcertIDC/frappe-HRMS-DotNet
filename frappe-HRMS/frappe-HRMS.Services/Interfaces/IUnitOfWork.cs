@@ -1,5 +1,6 @@
 ﻿using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
+using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Services.Employee;
 
 namespace frappe_HRMS.Services.Interfaces
@@ -27,6 +28,9 @@ namespace frappe_HRMS.Services.Interfaces
         IEducationalQualificationRepository EducationalQualification { get; }
         IPreviousWorkExperienceRepository PreviousWorkExperience { get; }
         IEmployeeHistoryRepository EmployeeHistory { get; }
+        ILeaveApplicationRepository LeaveApplication { get; }
+        ILeaveTypeRepository LeaveType { get; }
+        ICompensatoryLeaveRequestRepository CompensatoryLeaveRequest { get; }
         Task<int> Save();
     }
 }

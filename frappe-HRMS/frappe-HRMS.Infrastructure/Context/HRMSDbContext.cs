@@ -1,6 +1,7 @@
 ﻿using frappe_HRMS.Domain;
 using frappe_HRMS.Domain.Company;
 using frappe_HRMS.Domain.Employee;
+using frappe_HRMS.Domain.Leave;
 using Microsoft.EntityFrameworkCore;
 
 namespace frappe_HRMS.Infrastructure.Context
@@ -29,5 +30,9 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<EmployeeHistory> EmployeeHistory { get; set; }
         public DbSet<PreviousWorkExperience> PreviousWorkExperience { get; set; }
         public DbSet<EducationalQualification> EducationalQualifications { get; set; }
+        public DbSet<LeaveApplication> LeaveApplications { get; set; }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<CompensatoryLeaveRequest> CompensatoryLeaveRequests { get; set; }
+
     }
 }

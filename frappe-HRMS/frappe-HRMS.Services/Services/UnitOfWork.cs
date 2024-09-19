@@ -2,8 +2,10 @@
 using frappe_HRMS.Services.Interfaces;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
+using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
+using frappe_HRMS.Services.Services.Leave;
 
 namespace frappe_HRMS.Services.Services
 {
@@ -30,6 +32,9 @@ namespace frappe_HRMS.Services.Services
         public IEducationalQualificationRepository EducationalQualificationRepository { get; }
         public IPreviousWorkExperienceRepository PreviousWorkExperienceRepository { get; }
         public IEmployeeHistoryRepository EmployeeHistoryRepository { get; }
+        public ILeaveApplicationRepository LeaveApplicationRepository { get; }
+        public ILeaveTypeRepository LeaveTypeRepository { get; }
+        public ICompensatoryLeaveRequestRepository CompensatoryLeaveRequestRepository { get; }
 
         public UnitOfWork(HRMSDbContext context,
             ISignupRepository signupRepository,
@@ -51,7 +56,10 @@ namespace frappe_HRMS.Services.Services
             IEmployeeProfileRepository employeeProfileRepository,
             IEducationalQualificationRepository educationalQualificationRepository,
             IPreviousWorkExperienceRepository previousWorkExperienceRepository,
-            IEmployeeHistoryRepository employeeHistoryRepository)
+            IEmployeeHistoryRepository employeeHistoryRepository,
+            ILeaveApplicationRepository leaveApplicationRepository,
+            ILeaveTypeRepository leaveTypeRepository,
+            ICompensatoryLeaveRequestRepository compensatoryLeaveRequestRepository)
         {
             _context = context;
             SignupRepository = signupRepository;
@@ -74,6 +82,9 @@ namespace frappe_HRMS.Services.Services
             EducationalQualificationRepository = educationalQualificationRepository;
             PreviousWorkExperienceRepository = previousWorkExperienceRepository;
             EmployeeHistoryRepository = employeeHistoryRepository;
+            LeaveApplicationRepository = leaveApplicationRepository;
+            LeaveTypeRepository = leaveTypeRepository;
+            CompensatoryLeaveRequestRepository = compensatoryLeaveRequestRepository;
         }
 
 
@@ -98,6 +109,10 @@ namespace frappe_HRMS.Services.Services
         public IEducationalQualificationRepository EducationalQualification => new EducationalQualificationRepository(_context);
         public IPreviousWorkExperienceRepository PreviousWorkExperience => new PreviousWorkExperienceRepository(_context);
         public IEmployeeHistoryRepository EmployeeHistory => new EmployeeHistoryRepository(_context);
+        public ILeaveApplicationRepository LeaveApplication => new LeaveApplicationRepository(_context);
+        public ILeaveTypeRepository LeaveType => new LeaveTypeRepository(_context);
+        public ICompensatoryLeaveRequestRepository CompensatoryLeaveRequest => new CompensatoryLeaveRequestRepository(_context);
+
         public async Task<int> Save()
         {
             return await _context.SaveChangesAsync();
