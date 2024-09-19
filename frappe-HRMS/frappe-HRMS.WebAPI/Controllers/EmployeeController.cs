@@ -31,6 +31,24 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.Employee.GetAll();
             return Ok(result);
         }
+        [HttpGet("GetEmployeeById")]
+        public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.Employee.GetEmployeeById(id); 
+                if (result == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); 
+            }
+        }
+
         [HttpPost("EditEmployee")]
         public async Task<ActionResult<Employee>> EditEmployee(Employee employee)
         {
