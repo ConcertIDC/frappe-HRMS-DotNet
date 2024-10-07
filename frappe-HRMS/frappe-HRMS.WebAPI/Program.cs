@@ -56,30 +56,6 @@ builder.Services.AddAuthentication(x =>
 
 #region Services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ISignupRepository, SignupRepository>();
-builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IBranchRepository, BranchRepository>();
-builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-builder.Services.AddScoped<IDesignationRepository,DesignationRepository>();
-builder.Services.AddScoped<IEmploymentTypeRepository, EmploymentTypeRepository>();
-builder.Services.AddScoped<IEmployeeGradeRepository, EmployeeGradeRepository>();
-builder.Services.AddScoped<IEmployeeGroupRepository, EmployeeGroupRepository>();
-builder.Services.AddScoped<INewJobApplicantRepository, NewJobApplicantRepository>();
-builder.Services.AddScoped<INewJobOpeningRepository, NewJobOpeningRepository>();
-builder.Services.AddScoped<IEmployeeAddressRepository, EmployeeAddressRepository>();
-builder.Services.AddScoped<IEmployeeJoiningRepository, EmployeeJoiningRepository>();
-builder.Services.AddScoped<IEmployeeSalaryRepository, EmployeeSalaryRepository>();
-builder.Services.AddScoped<IExitRepository, ExitRepository>();
-builder.Services.AddScoped<ICostCenterRepository,  CostCenterRepository>();
-builder.Services.AddScoped<IEmployeePersonalRepository, EmployeePersonalRepository>();
-builder.Services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository>();
-builder.Services.AddScoped<IEducationalQualificationRepository, EducationalQualificationRepository>();
-builder.Services.AddScoped<IPreviousWorkExperienceRepository, PreviousWorkExperienceRepository>();
-builder.Services.AddScoped<IEmployeeHistoryRepository, EmployeeHistoryRepository>();
-builder.Services.AddScoped<ILeaveApplicationRepository, LeaveApplicationRepository>();
-builder.Services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
-builder.Services.AddScoped<ICompensatoryLeaveRequestRepository, CompensatoryLeaveRequestRepository>();
 #endregion
 
 builder.Services.AddSwaggerGen();

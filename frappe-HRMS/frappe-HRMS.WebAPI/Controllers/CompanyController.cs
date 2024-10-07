@@ -9,15 +9,8 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    public class CompanyController(IUnitOfWork _unitOfWork) : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public CompanyController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         [HttpPost("SetupOrganisation")]
         public async Task<ActionResult<Company>> SetupOrganisation(Company company)
         {

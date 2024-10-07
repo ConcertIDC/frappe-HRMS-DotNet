@@ -9,19 +9,13 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SignupController : ControllerBase
+    public class SignupController(IUnitOfWork unitOfWork) : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SignupController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
         [HttpPost]
         public async Task<ActionResult<User>> Create([FromBody] User request)
         {
-            var result =  await _unitOfWork.Signup.AddAsync(request);
-            await _unitOfWork.Save();
+            var result =  await unitOfWork.Signup.AddAsync(request);
+            await unitOfWork.Save();
             return Ok(result);
         }
 

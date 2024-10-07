@@ -9,15 +9,8 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController(IUnitOfWork _unitOfWork) : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public EmployeeController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         [HttpPost("CreateEmployee")]
         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {

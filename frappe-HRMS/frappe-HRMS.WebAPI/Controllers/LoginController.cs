@@ -11,17 +11,8 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class LoginController(IUnitOfWork _unitOfWork, IConfiguration configuration) : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IConfiguration configuration;
-
-        public LoginController(IUnitOfWork unitOfWork, IConfiguration configuration)
-        {
-            _unitOfWork = unitOfWork;
-            this.configuration = configuration;
-        }
-
         [HttpPost]
         public  IActionResult Login([FromBody] LoginRequestDto request)
         {

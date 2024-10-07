@@ -5,7 +5,7 @@ using frappe_HRMS.Services.Services.Employee;
 
 namespace frappe_HRMS.Services.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         ISignupRepository Signup { get; }
         ICompanyRepository Company { get; }
