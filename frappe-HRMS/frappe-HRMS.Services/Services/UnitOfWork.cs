@@ -1,12 +1,13 @@
 ﻿using frappe_HRMS.Infrastructure.Context;
 using frappe_HRMS.Services.Interfaces;
+using frappe_HRMS.Services.Interfaces.Attendance;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
+using frappe_HRMS.Services.Services.Attendance;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
 using frappe_HRMS.Services.Services.Leave;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace frappe_HRMS.Services.Services
 {
@@ -39,7 +40,10 @@ namespace frappe_HRMS.Services.Services
         public ILeaveTypeRepository LeaveType { get; set; }
         public ICompensatoryLeaveRequestRepository CompensatoryLeaveRequest { get; set; }
         public IDesignationRepository Designation { get; set; }
-
+        public IAttendanceRepository Attendance { get; set; }
+        public IAttendanceRequestRepository AttendanceRequest { get; set; }
+        public IShiftTypeRepository ShiftType { get; set; }
+        public IEmployeeCheckinRepository EmployeeCheckin { get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -67,6 +71,10 @@ namespace frappe_HRMS.Services.Services
             LeaveApplication = new LeaveApplicationRepository(_context);
             LeaveType = new LeaveTypeRepository(_context);
             CompensatoryLeaveRequest = new CompensatoryLeaveRequestRepository(_context);
+            Attendance = new AttendanceRepository(_context);
+            AttendanceRequest = new AttendanceRequestRepository(_context);
+            ShiftType = new ShiftTypeRepository(_context);
+            EmployeeCheckin = new EmployeeCheckinRepository(_context);
         }
 
         public async Task<int> Save()
