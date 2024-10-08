@@ -44,6 +44,8 @@ namespace frappe_HRMS.Services.Services
         public IAttendanceRequestRepository AttendanceRequest { get; set; }
         public IShiftTypeRepository ShiftType { get; set; }
         public IEmployeeCheckinRepository EmployeeCheckin { get; set; }
+        public IHolidayListRepository HolidayList { get; set; }
+        public IEmployeeAttendanceRepository EmployeeAttendance { get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -75,6 +77,8 @@ namespace frappe_HRMS.Services.Services
             AttendanceRequest = new AttendanceRequestRepository(_context);
             ShiftType = new ShiftTypeRepository(_context);
             EmployeeCheckin = new EmployeeCheckinRepository(_context);
+            HolidayList = new HolidayListRepository(_context);
+            EmployeeAttendance = new EmployeeAttendanceRepository(_context);
         }
 
         public async Task<int> Save()

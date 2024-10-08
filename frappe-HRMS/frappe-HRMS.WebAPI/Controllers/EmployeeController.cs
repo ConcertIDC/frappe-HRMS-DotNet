@@ -55,7 +55,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmployeeGroup.AddAsync(employeeGroup);
             return result;
         }
-
+        [HttpGet("GetEmployeeGroupById")]
+        public async Task<ActionResult<EmployeeGroup>> GetEmployeGroupeById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeGroup.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee group with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllGroups")]
         public async Task<ActionResult<List<EmployeeGroup>>> GetAllGroups()
         {
@@ -75,7 +91,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmployeeGrade.AddAsync(employeeGrade);
             return result;
         }
-
+        [HttpGet("GetEmployeeGradeById")]
+        public async Task<ActionResult<EmployeeGrade>> GetEmployeeGradeById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeGrade.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Grade with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllEmployeeGrades")]
         public async Task<ActionResult<List<EmployeeGrade>>> GetAllEmployeeGrades()
         {
@@ -102,6 +134,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmploymentType.GetAll();
             return Ok(result);
         }
+        [HttpGet("GetEmploymentTypeById")]
+        public async Task<ActionResult<EmploymentType>> GetEmploymentTypeById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmploymentType.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employment Type with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("EditEmploymentType")]
         public async Task<ActionResult<EmploymentType>> EditEmploymentType(EmploymentType employmentType)
         {
@@ -124,7 +173,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.NewJobApplicant.GetAll();
             return Ok(result);
         }
-
+        [HttpGet("GetJobApplicantById")]
+        public async Task<ActionResult<NewJobApplicant>> GetJobApplicantById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.NewJobApplicant.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("EditJobApplicant")]
         public async Task<ActionResult<NewJobApplicant>> EditJobApplicant(NewJobApplicant jobApplicant)
         {
@@ -166,6 +231,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmployeeAddress.GetAll();
             return Ok(result);
         }
+        [HttpGet("GetEmployeeAddressById")]
+        public async Task<ActionResult<EmployeeAddress>> GetEmployeeAddressById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeAddress.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("EditEmployeeAddress")]
         public async Task<ActionResult<EmployeeAddress>> EditEmployeeAddress(EmployeeAddress address)
         {
@@ -179,7 +261,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmployeeJoining.AddAsync(joiningDetails);
             return result;
         }
-
+        [HttpGet("GetEmplyeeJoiningDetailsById")]
+        public async Task<ActionResult<EmplyeeJoiningDetails>> EmplyeeJoiningDetailsById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeJoining.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee joining details with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllEmplyeeJoiningDetails")]
         public async Task<ActionResult<List<EmplyeeJoiningDetails>>> GetAllEmplyeeJoiningDetails()
         {
@@ -199,7 +297,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.EmployeeSalary.AddAsync(employeeSalary);
             return result;
         }
-
+        [HttpGet("GetEmployeeSalaryById")]
+        public async Task<ActionResult<EmployeeSalary>> GetEmployeeSalaryById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeSalary.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Salary with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllEmployeeSalary")]
         public async Task<ActionResult<List<EmployeeSalary>>> GetAllEmployeeSalary()
         {
@@ -219,7 +333,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.CostCenter.AddAsync(costCenter);
             return result;
         }
-
+        [HttpGet("GetCostCenterById")]
+        public async Task<ActionResult<CostCenter>> GetCostCenterById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.CostCenter.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"CostCenter with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllCostCenters")]
         public async Task<ActionResult<List<CostCenter>>> GetAllCostCenters()
         {
@@ -240,7 +370,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.Exit.AddAsync(exit);
             return result;
         }
-
+        [HttpGet("GetExitById")]
+        public async Task<ActionResult<Exit>> GetExitById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.Exit.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Exit with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("EditExit")]
         public async Task<ActionResult<Exit>> EditExit(Exit exit)
         {
@@ -268,6 +414,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             await _unitOfWork.Save();
             return result;
         }
+        [HttpGet("GetPersonalDetailById")]
+        public async Task<ActionResult<PersonalDetails>> GetPersonalDetailById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.PersonalDetails.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Personal Detail with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("CreateEmployeeProfile")]
         public async Task<ActionResult<EmployeeProfile>> CreateEmployeeProfile(EmployeeProfile profile)
         {
@@ -280,6 +443,23 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             var result = await _unitOfWork.EmployeeProfile.GetAll();
             return Ok(result);
+        }
+        [HttpGet("GetEmployeeProfileById")]
+        public async Task<ActionResult<EmployeeProfile>> GetEmployeeProfileById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EmployeeProfile.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Profile with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPost("EditEmployeeProfile")]
         public async Task<ActionResult<EmployeeProfile>> EditEmployeeProfile(EmployeeProfile profile)
@@ -308,6 +488,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             await _unitOfWork.Save();
             return result;
         }
+        [HttpGet("GetEditEducationalQualificationById")]
+        public async Task<ActionResult<EducationalQualification>> GetEditEducationalQualificationById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.EducationalQualification.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Educational Qualification with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("CreatePreviousWorkExperience")]
         public async Task<ActionResult<PreviousWorkExperience>> CreatePreviousWorkExperience(PreviousWorkExperience experience)
         {
@@ -321,6 +518,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await _unitOfWork.PreviousWorkExperience.GetAll();
             return Ok(result);
         }
+        [HttpGet("GetPreviousWorkExperienceById")]
+        public async Task<ActionResult<PreviousWorkExperience>> GetPreviousWorkExperienceById(int id)
+        {
+            try
+            {
+                var result = _unitOfWork.PreviousWorkExperience.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Previous WorkExperience with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("EditPreviousWorkExperience")]
         public async Task<ActionResult<PreviousWorkExperience>> EditPreviousWorkExperience(PreviousWorkExperience experience)
         {
@@ -328,23 +542,39 @@ namespace frappe_HRMS.WebAPI.Controllers
             await _unitOfWork.Save();
             return result;
         }
-        [HttpPost("CreateEmployeeHistory")]
-        public async Task<ActionResult<EmployeeHistory>> CreateEmployeeHistory(EmployeeHistory history)
+        [HttpPost("CreateEmployeeAttendance")]
+        public async Task<ActionResult<EmployeeAttendanceLeaves>> CreateEmployeeAttendance(EmployeeAttendanceLeaves attendanceLeaves)
         {
-            var result = await _unitOfWork.EmployeeHistory.AddAsync(history);
+            var result = await _unitOfWork.EmployeeAttendance.AddAsync(attendanceLeaves);
             return result;
         }
-
-        [HttpGet("GetAllEmployeeHistories")]
-        public async Task<ActionResult<List<EmployeeHistory>>> GetAllEmployeeHistories()
+        [HttpGet("GetEmployeeAttendanceById")]
+        public async Task<ActionResult<EmployeeAttendanceLeaves>> GetEmployeeAttendanceById(int id)
         {
-            var result = await _unitOfWork.EmployeeHistory.GetAll();
+            try
+            {
+                var result = _unitOfWork.EmployeeAttendance.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employee Attendance with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetAllEmployeeAttendances")]
+        public async Task<ActionResult<List<EmployeeAttendanceLeaves>>> GetAllEmployeeAttendances()
+        {
+            var result = await _unitOfWork.EmployeeAttendance.GetAll();
             return Ok(result);
         }
-        [HttpPost("EditEmployeeHistory")]
-        public async Task<ActionResult<EmployeeHistory>> EditEmployeeHistory(EmployeeHistory history)
+        [HttpPost("EditEmployeeAttendance")]
+        public async Task<ActionResult<EmployeeAttendanceLeaves>> EditEmployeeAttendance(EmployeeAttendanceLeaves attendanceLeaves)
         {
-            var result = _unitOfWork.EmployeeHistory.Update(history);
+            var result = _unitOfWork.EmployeeAttendance.Update(attendanceLeaves);
             await _unitOfWork.Save();
             return result;
         }

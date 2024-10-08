@@ -1,5 +1,6 @@
 ﻿using frappe_HRMS.Domain;
 using frappe_HRMS.Domain.Attendance;
+using frappe_HRMS.Domain.Claim;
 using frappe_HRMS.Domain.Company;
 using frappe_HRMS.Domain.Employee;
 using frappe_HRMS.Domain.Leave;
@@ -38,5 +39,8 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<AttendanceRequest> AttendanceRequests { get; set; }
         public DbSet<EmployeeCheckin> EmployeeCheckin { get; set; }
         public DbSet<ShiftType> ShiftTypes { get; set; }
+        public DbSet<ExpenseClaim> ExpenseClaims { get; set; }
+        public DbSet<EmployeeAttendanceLeaves> EmployeeAttendanceLeaves { get; set;}
+        public DbSet<HolidayList> HolidayList { get; set; }
     }
 }

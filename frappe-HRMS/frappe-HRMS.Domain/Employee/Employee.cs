@@ -22,6 +22,9 @@ namespace frappe_HRMS.Domain.Employee
         public int? CompanyId { get; set; }
         [ForeignKey(nameof(CompanyId))]
         public virtual Company.Company? Company { get; set; }
+        public int? EmployeeAttendanceLeavesId { get; set; }
+        [ForeignKey(nameof(EmployeeAttendanceLeavesId))]
+        public virtual EmployeeAttendanceLeaves? EmployeeAttendanceLeaves { get; set; }
         public int? DesignationId { get; set; }
         [ForeignKey(nameof(DesignationId))]
         public virtual Designation? Designation { get; set; }

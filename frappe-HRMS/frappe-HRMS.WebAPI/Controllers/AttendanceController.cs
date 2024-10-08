@@ -125,5 +125,81 @@ namespace frappe_HRMS.WebAPI.Controllers
             await unitOfWork.Save();
             return result;
         }
+        [HttpPost("CreateEmployeeCheckin")]
+        public async Task<ActionResult<EmployeeCheckin>> CreateEmployeeCheckin(EmployeeCheckin checkin)
+        {
+            var result = await unitOfWork.EmployeeCheckin.AddAsync(checkin);
+            return result;
+        }
+
+        [HttpGet("GetAllEmployeeCheckins")]
+        public async Task<ActionResult<List<EmployeeCheckin>>> GetAllEmployeeCheckins()
+        {
+            var result = await unitOfWork.EmployeeCheckin.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetEmployeeCheckinById")]
+        public async Task<ActionResult<EmployeeCheckin>> GetEmployeeCheckinById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.EmployeeCheckin.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"EmployeeCheckin with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditEmployeeCheckin")]
+        public async Task<ActionResult<EmployeeCheckin>> EditEmployeeCheckin(EmployeeCheckin checkin)
+        {
+            var result = unitOfWork.EmployeeCheckin.Update(checkin);
+            await unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateHolidayList")]
+        public async Task<ActionResult<HolidayList>> CreateHolidayList(HolidayList holidayList)
+        {
+            var result = await unitOfWork.HolidayList.AddAsync(holidayList);
+            return result;
+        }
+
+        [HttpGet("GetAllHolidayLists")]
+        public async Task<ActionResult<List<HolidayList>>> GetAllHolidayLists()
+        {
+            var result = await unitOfWork.HolidayList.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetHolidayListById")]
+        public async Task<ActionResult<HolidayList>> GetHolidayListById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.HolidayList.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"HolidayList with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditHolidayList")]
+        public async Task<ActionResult<HolidayList>> EditHolidayList(HolidayList holidayList)
+        {
+            var result = unitOfWork.HolidayList.Update(holidayList);
+            await unitOfWork.Save();
+            return result;
+        }
     }
 }

@@ -36,6 +36,8 @@ namespace frappe_HRMS.Services.Interfaces
         IAttendanceRequestRepository AttendanceRequest { get; }
         IShiftTypeRepository ShiftType { get; }
         IEmployeeCheckinRepository EmployeeCheckin { get; }
+        IHolidayListRepository HolidayList { get; }
+        IEmployeeAttendanceRepository EmployeeAttendance { get; }
         Task<int> Save();
     }
 }
