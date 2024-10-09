@@ -56,7 +56,9 @@ namespace frappe_HRMS.Domain.Employee
         public int? ExitId { get; set; }
         [ForeignKey(nameof(ExitId))]
         public virtual Exit? Exit { get; set; }
-
+        public virtual ICollection<EducationalQualification>? EducationalQualifications { get; set; }
+        public virtual ICollection<PreviousWorkExperience>? PreviousWorkExperiences { get; set; }
+        public virtual ICollection<EmployeeHistory>? EmployeeHistories { get; set; }
 
     }
 }

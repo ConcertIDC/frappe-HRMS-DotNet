@@ -15,5 +15,7 @@ namespace frappe_HRMS.Domain.Employee
         public int? YearOfPassing { get; set; }
         public decimal? Percentage { get; set; }
         public string? MajorSubjects { get; set; }
+        public int EmployeeId { get; set; }
+        public virtual Employee? Employee { get; set; }
     }
 }

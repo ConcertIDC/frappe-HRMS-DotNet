@@ -1,10 +1,12 @@
 ﻿using frappe_HRMS.Infrastructure.Context;
 using frappe_HRMS.Services.Interfaces;
 using frappe_HRMS.Services.Interfaces.Attendance;
+using frappe_HRMS.Services.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Services.Attendance;
+using frappe_HRMS.Services.Services.Claim;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
 using frappe_HRMS.Services.Services.Leave;
@@ -46,6 +48,17 @@ namespace frappe_HRMS.Services.Services
         public IEmployeeCheckinRepository EmployeeCheckin { get; set; }
         public IHolidayListRepository HolidayList { get; set; }
         public IEmployeeAttendanceRepository EmployeeAttendance { get; set; }
+
+        public IExpenseClaimRepository ExpenseClaim {get; set; }
+
+        public IAccountingDetailsRepository AccountingDetails { get; set; }
+
+        public IExpensesRepository Expenses { get; set; }
+
+        public IExpenseClaimTypeRepository ExpenseClaimType { get; set; }
+
+        public IProjectRepository Project { get; set; }
+
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -79,6 +92,11 @@ namespace frappe_HRMS.Services.Services
             EmployeeCheckin = new EmployeeCheckinRepository(_context);
             HolidayList = new HolidayListRepository(_context);
             EmployeeAttendance = new EmployeeAttendanceRepository(_context);
+            ExpenseClaim = new ExpenseClaimRepository(_context);
+            ExpenseClaimType = new ExpenseClaimTypeRepository(_context);
+            Expenses = new ExpensesRepository(_context);
+            AccountingDetails = new AccountingDetailsRepository(_context);
+            Project = new ProjectRepository(_context);
         }
 
         public async Task<int> Save()

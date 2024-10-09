@@ -1,4 +1,5 @@
 ﻿using frappe_HRMS.Services.Interfaces.Attendance;
+using frappe_HRMS.Services.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
@@ -38,6 +39,11 @@ namespace frappe_HRMS.Services.Interfaces
         IEmployeeCheckinRepository EmployeeCheckin { get; }
         IHolidayListRepository HolidayList { get; }
         IEmployeeAttendanceRepository EmployeeAttendance { get; }
+        IExpenseClaimRepository ExpenseClaim { get; }
+        IAccountingDetailsRepository AccountingDetails { get; }
+        IExpensesRepository Expenses { get; }
+        IExpenseClaimTypeRepository ExpenseClaimType { get; }
+        IProjectRepository Project {  get; }
         Task<int> Save();
     }
 }

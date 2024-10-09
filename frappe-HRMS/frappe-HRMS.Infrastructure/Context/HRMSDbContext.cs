@@ -42,5 +42,9 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<ExpenseClaim> ExpenseClaims { get; set; }
         public DbSet<EmployeeAttendanceLeaves> EmployeeAttendanceLeaves { get; set;}
         public DbSet<HolidayList> HolidayList { get; set; }
+        public DbSet<Expenses> Expenses { get; set; }
+        public DbSet<ExpenseClaimType> ExpenseClaimTypes { get;set; }
+        public DbSet<AccountingDetails> AccountingDetails { get; set; }
+        public DbSet<Project> Projects { get; set; }
     }
 }

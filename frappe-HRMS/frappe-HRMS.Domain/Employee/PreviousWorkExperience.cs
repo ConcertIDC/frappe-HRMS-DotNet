@@ -15,6 +15,8 @@ namespace frappe_HRMS.Domain.Employee
         public string? Address { get; set;}
         public string? Contact { get; set; }
         public int? TotalExperience { get; set; }
+        public int EmployeeId { get; set; }
+        public virtual Employee? Employee { get; set; }
 
     }
 }
