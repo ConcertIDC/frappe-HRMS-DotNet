@@ -17,7 +17,7 @@ namespace frappe_HRMS.Domain.Claim
         public int? AccountingDetailsId { get; set; }
         [ForeignKey(nameof(AccountingDetailsId))]
         public virtual AccountingDetails? AccountingDetails { get; set; }
-        public virtual ICollection<ExpenseClaim>? ExpenseClaims { get; set; }
+        public virtual ICollection<Expenses>? Expenses { get; set; }
         public string? Status { get; set; } = "Draft";
     }
 }

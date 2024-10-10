@@ -59,6 +59,12 @@ namespace frappe_HRMS.Services.Services
 
         public IProjectRepository Project { get; set; }
 
+        public ITravelRequestRepository TravelRequest { get; set; }
+
+        public ITravelItineraryRepository TravelItinerary { get; set; }
+
+        public IPurposeOfTravelRepository PurposeOfTravel { get; set; }
+
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -96,6 +102,9 @@ namespace frappe_HRMS.Services.Services
             ExpenseClaimType = new ExpenseClaimTypeRepository(_context);
             Expenses = new ExpensesRepository(_context);
             AccountingDetails = new AccountingDetailsRepository(_context);
+            TravelRequest = new TravelRequestRepository(_context);
+            TravelItinerary = new TravelItineraryRepository(_context);
+            PurposeOfTravel = new PurposeOfTravelRepository(_context);
             Project = new ProjectRepository(_context);
         }
 

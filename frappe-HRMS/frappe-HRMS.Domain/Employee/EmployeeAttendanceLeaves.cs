@@ -9,7 +9,7 @@ namespace frappe_HRMS.Domain.Employee
         public string? AttendanceDeviceID { get; set; }
         public int? HolidayListId { get; set; }
         [ForeignKey(nameof(HolidayListId))]
-        public virtual ShiftType? HolidayList { get; set; }
+        public virtual HolidayList? HolidayList { get; set; }
         public int? ShiftTypeId { get; set; }
         [ForeignKey(nameof(ShiftTypeId))]
         public virtual ShiftType? ShiftType { get; set; }

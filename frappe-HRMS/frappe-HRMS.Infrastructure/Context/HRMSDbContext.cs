@@ -46,5 +46,11 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<ExpenseClaimType> ExpenseClaimTypes { get;set; }
         public DbSet<AccountingDetails> AccountingDetails { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<TravelRequest> TravelRequests { get; set; }
+        public DbSet<PurposeOfTravel> PurposeOfTravels { get; set; }
+        public DbSet<TravelItinerary> TravelItineraries { get; set; }
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+        public DbSet<CostingDetails> CostingDetails { get; set; }
+
     }
 }

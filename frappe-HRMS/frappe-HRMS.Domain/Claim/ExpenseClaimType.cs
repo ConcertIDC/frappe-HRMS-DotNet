@@ -5,5 +5,6 @@ namespace frappe_HRMS.Domain.Claim
     public class ExpenseClaimType : BaseEntity
     {
         public string? Name { get; set; }
+
     }
 }

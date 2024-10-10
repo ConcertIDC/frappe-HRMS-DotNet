@@ -44,6 +44,9 @@ namespace frappe_HRMS.Services.Interfaces
         IExpensesRepository Expenses { get; }
         IExpenseClaimTypeRepository ExpenseClaimType { get; }
         IProjectRepository Project {  get; }
+        ITravelRequestRepository TravelRequest { get; }
+        ITravelItineraryRepository TravelItinerary { get; }
+        IPurposeOfTravelRepository PurposeOfTravel { get; }
         Task<int> Save();
     }
 }
