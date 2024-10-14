@@ -47,6 +47,11 @@ namespace frappe_HRMS.Services.Interfaces
         ITravelRequestRepository TravelRequest { get; }
         ITravelItineraryRepository TravelItinerary { get; }
         IPurposeOfTravelRepository PurposeOfTravel { get; }
+        IAdvancePaymentRepository AdvancePayment { get; }
+        IAccountRepository Account {  get; }
+        IEmployeeAdvanceRepository EmployeeAdvance { get; }
+        IModeOfPaymentReposiory ModeOfPayment {  get; }
+        ITaxesAndChargesRepository TaxesAndCharges { get; }
         Task<int> Save();
     }
 }

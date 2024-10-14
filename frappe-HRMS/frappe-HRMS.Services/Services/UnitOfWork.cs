@@ -64,7 +64,11 @@ namespace frappe_HRMS.Services.Services
         public ITravelItineraryRepository TravelItinerary { get; set; }
 
         public IPurposeOfTravelRepository PurposeOfTravel { get; set; }
-
+        public IAdvancePaymentRepository AdvancePayment { get; set; }
+        public IAccountRepository Account {  get; set; }
+        public IEmployeeAdvanceRepository EmployeeAdvance { get; set; }
+        public IModeOfPaymentReposiory ModeOfPayment {  get; set; }
+        public ITaxesAndChargesRepository TaxesAndCharges { get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -106,6 +110,11 @@ namespace frappe_HRMS.Services.Services
             TravelItinerary = new TravelItineraryRepository(_context);
             PurposeOfTravel = new PurposeOfTravelRepository(_context);
             Project = new ProjectRepository(_context);
+            AdvancePayment = new AdvancePaymentRepository(_context);
+            Account = new AccountRepository(_context);
+            EmployeeAdvance = new EmployeeAdvanceRepository(_context);
+            ModeOfPayment = new ModeOfPaymentReposiory(_context);
+            TaxesAndCharges = new TaxesAndChargesRepository(_context);
         }
 
         public async Task<int> Save()

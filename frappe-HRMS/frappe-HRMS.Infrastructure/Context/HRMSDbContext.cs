@@ -51,6 +51,10 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<TravelItinerary> TravelItineraries { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<CostingDetails> CostingDetails { get; set; }
-
+        public DbSet<AdvancePayments> AdvancePayments { get; set;}
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<EmployeeAdvance> EmployeeAdvances { get; set; }
+        public DbSet<ModeOfPayment> ModeOfPayment { get; set; }
+        public DbSet<TaxesAndCharges> TaxesAndCharges { get; set; }
     }
 }
