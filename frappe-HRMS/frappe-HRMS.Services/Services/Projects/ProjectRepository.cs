@@ -1,8 +1,8 @@
-﻿using frappe_HRMS.Domain.Claim;
+﻿using frappe_HRMS.Domain.Projects;
 using frappe_HRMS.Infrastructure.Context;
-using frappe_HRMS.Services.Interfaces.Claim;
+using frappe_HRMS.Services.Interfaces.Projects;
 
-namespace frappe_HRMS.Services.Services.Claim
+namespace frappe_HRMS.Services.Services.Projects
 {
     public class ProjectRepository : GenericRepository<Project>, IProjectRepository
     {

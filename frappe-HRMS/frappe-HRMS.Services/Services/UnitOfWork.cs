@@ -5,11 +5,13 @@ using frappe_HRMS.Services.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
+using frappe_HRMS.Services.Interfaces.Projects;
 using frappe_HRMS.Services.Services.Attendance;
 using frappe_HRMS.Services.Services.Claim;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
 using frappe_HRMS.Services.Services.Leave;
+using frappe_HRMS.Services.Services.Projects;
 
 namespace frappe_HRMS.Services.Services
 {
@@ -48,27 +50,22 @@ namespace frappe_HRMS.Services.Services
         public IEmployeeCheckinRepository EmployeeCheckin { get; set; }
         public IHolidayListRepository HolidayList { get; set; }
         public IEmployeeAttendanceRepository EmployeeAttendance { get; set; }
-
         public IExpenseClaimRepository ExpenseClaim {get; set; }
-
         public IAccountingDetailsRepository AccountingDetails { get; set; }
-
         public IExpensesRepository Expenses { get; set; }
-
         public IExpenseClaimTypeRepository ExpenseClaimType { get; set; }
-
-        public IProjectRepository Project { get; set; }
-
         public ITravelRequestRepository TravelRequest { get; set; }
-
         public ITravelItineraryRepository TravelItinerary { get; set; }
-
         public IPurposeOfTravelRepository PurposeOfTravel { get; set; }
         public IAdvancePaymentRepository AdvancePayment { get; set; }
         public IAccountRepository Account {  get; set; }
         public IEmployeeAdvanceRepository EmployeeAdvance { get; set; }
         public IModeOfPaymentReposiory ModeOfPayment {  get; set; }
         public ITaxesAndChargesRepository TaxesAndCharges { get; set; }
+        public IProjectRepository Project { get; set; }
+        public IProjectTemplateRepository ProjectTemplate { get; set; }
+        public IProjectTypeRepository ProjectType { get; set; }
+        public ITaskRepository Task { get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -109,12 +106,15 @@ namespace frappe_HRMS.Services.Services
             TravelRequest = new TravelRequestRepository(_context);
             TravelItinerary = new TravelItineraryRepository(_context);
             PurposeOfTravel = new PurposeOfTravelRepository(_context);
-            Project = new ProjectRepository(_context);
             AdvancePayment = new AdvancePaymentRepository(_context);
             Account = new AccountRepository(_context);
             EmployeeAdvance = new EmployeeAdvanceRepository(_context);
             ModeOfPayment = new ModeOfPaymentReposiory(_context);
             TaxesAndCharges = new TaxesAndChargesRepository(_context);
+            Project = new ProjectRepository(_context);
+            ProjectTemplate = new ProjectTemplateRepository(_context);
+            ProjectType = new ProjectTypeRepository(_context);
+            Task = new TaskRepository(_context);
         }
 
         public async Task<int> Save()

@@ -1,5 +1,6 @@
 ﻿using frappe_HRMS.Domain.Base;
 using frappe_HRMS.Domain.Employee;
+using frappe_HRMS.Domain.Projects;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace frappe_HRMS.Domain.Claim

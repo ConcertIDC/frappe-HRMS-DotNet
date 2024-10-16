@@ -3,6 +3,7 @@ using frappe_HRMS.Services.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
+using frappe_HRMS.Services.Interfaces.Projects;
 using frappe_HRMS.Services.Services.Employee;
 
 namespace frappe_HRMS.Services.Interfaces
@@ -43,7 +44,6 @@ namespace frappe_HRMS.Services.Interfaces
         IAccountingDetailsRepository AccountingDetails { get; }
         IExpensesRepository Expenses { get; }
         IExpenseClaimTypeRepository ExpenseClaimType { get; }
-        IProjectRepository Project {  get; }
         ITravelRequestRepository TravelRequest { get; }
         ITravelItineraryRepository TravelItinerary { get; }
         IPurposeOfTravelRepository PurposeOfTravel { get; }
@@ -52,6 +52,10 @@ namespace frappe_HRMS.Services.Interfaces
         IEmployeeAdvanceRepository EmployeeAdvance { get; }
         IModeOfPaymentReposiory ModeOfPayment {  get; }
         ITaxesAndChargesRepository TaxesAndCharges { get; }
+        IProjectRepository Project { get; }
+        IProjectTemplateRepository ProjectTemplate { get; }
+        IProjectTypeRepository ProjectType { get; }
+        ITaskRepository Task { get; }
         Task<int> Save();
     }
 }

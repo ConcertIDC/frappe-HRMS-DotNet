@@ -236,5 +236,157 @@ namespace frappe_HRMS.WebAPI.Controllers
             await unitOfWork.Save();
             return result;
         }
+        [HttpPost("CreateAccount")]
+        public async Task<ActionResult<Account>> CreateAccount(Account account)
+        {
+            var result = await unitOfWork.Account.AddAsync(account);
+            return result;
+        }
+
+        [HttpGet("GetAllAccounts")]
+        public async Task<ActionResult<List<Account>>> GetAllAccounts()
+        {
+            var result = await unitOfWork.Account.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetAccountById")]
+        public async Task<ActionResult<Account>> GetAccountById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.Account.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Account with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditAccount")]
+        public async Task<ActionResult<Account>> EditAccount(Account account)
+        {
+            var result = unitOfWork.Account.Update(account);
+            await unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateAdvancePayments")]
+        public async Task<ActionResult<AdvancePayments>> CreateAdvancePayments(AdvancePayments advancePayments)
+        {
+            var result = await unitOfWork.AdvancePayment.AddAsync(advancePayments);
+            return result;
+        }
+
+        [HttpGet("GetAllAdvancePayments")]
+        public async Task<ActionResult<List<AdvancePayments>>> GetAllAdvancePayments()
+        {
+            var result = await unitOfWork.AdvancePayment.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetAdvancePaymentsById")]
+        public async Task<ActionResult<AdvancePayments>> GetAdvancePaymentsById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.AdvancePayment.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"AdvancePayments with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditAdvancePayments")]
+        public async Task<ActionResult<AdvancePayments>> EditAdvancePayments(AdvancePayments advancePayments)
+        {
+            var result = unitOfWork.AdvancePayment.Update(advancePayments);
+            await unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateModeOfPayment")]
+        public async Task<ActionResult<ModeOfPayment>> CreateModeOfPayment(ModeOfPayment modeOfPayment)
+        {
+            var result = await unitOfWork.ModeOfPayment.AddAsync(modeOfPayment);
+            return result;
+        }
+
+        [HttpGet("GetAllModeOfPayments")]
+        public async Task<ActionResult<List<ModeOfPayment>>> GetAllModeOfPayments()
+        {
+            var result = await unitOfWork.ModeOfPayment.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetModeOfPaymentById")]
+        public async Task<ActionResult<ModeOfPayment>> GetModeOfPaymentById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.ModeOfPayment.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"ModeOfPayment with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditModeOfPayment")]
+        public async Task<ActionResult<ModeOfPayment>> EditModeOfPayment(ModeOfPayment modeOfPayment)
+        {
+            var result = unitOfWork.ModeOfPayment.Update(modeOfPayment);
+            await unitOfWork.Save();
+            return result;
+        }
+        [HttpPost("CreateTaxesAndCharges")]
+        public async Task<ActionResult<TaxesAndCharges>> CreateTaxesAndCharges(TaxesAndCharges taxes)
+        {
+            var result = await unitOfWork.TaxesAndCharges.AddAsync(taxes);
+            return result;
+        }
+
+        [HttpGet("GetAllTaxesAndCharges")]
+        public async Task<ActionResult<List<TaxesAndCharges>>> GetAllTaxesAndCharges()
+        {
+            var result = await unitOfWork.TaxesAndCharges.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetTaxesAndChargesById")]
+        public async Task<ActionResult<TaxesAndCharges>> GetTaxesAndChargesById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.TaxesAndCharges.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"TaxesAndCharges with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditTaxesAndCharges")]
+        public async Task<ActionResult<TaxesAndCharges>> EditTaxesAndCharges(TaxesAndCharges taxes)
+        {
+            var result = unitOfWork.TaxesAndCharges.Update(taxes);
+            await unitOfWork.Save();
+            return result;
+        }
     }
 }

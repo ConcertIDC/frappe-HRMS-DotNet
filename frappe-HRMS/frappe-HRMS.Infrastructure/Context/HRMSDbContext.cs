@@ -4,6 +4,7 @@ using frappe_HRMS.Domain.Claim;
 using frappe_HRMS.Domain.Company;
 using frappe_HRMS.Domain.Employee;
 using frappe_HRMS.Domain.Leave;
+using frappe_HRMS.Domain.Projects;
 using Microsoft.EntityFrameworkCore;
 
 namespace frappe_HRMS.Infrastructure.Context
@@ -44,8 +45,7 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<HolidayList> HolidayList { get; set; }
         public DbSet<Expenses> Expenses { get; set; }
         public DbSet<ExpenseClaimType> ExpenseClaimTypes { get;set; }
-        public DbSet<AccountingDetails> AccountingDetails { get; set; }
-        public DbSet<Project> Projects { get; set; }
+        public DbSet<AccountingDetails> AccountingDetails { get; set; }       
         public DbSet<TravelRequest> TravelRequests { get; set; }
         public DbSet<PurposeOfTravel> PurposeOfTravels { get; set; }
         public DbSet<TravelItinerary> TravelItineraries { get; set; }
@@ -56,5 +56,9 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<EmployeeAdvance> EmployeeAdvances { get; set; }
         public DbSet<ModeOfPayment> ModeOfPayment { get; set; }
         public DbSet<TaxesAndCharges> TaxesAndCharges { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectTemplate> ProjectTemplates { get; set; }
+        public DbSet<ProjectType> ProjectTypes { get; set; }
+        public DbSet<Domain.Projects.Task> Tasks { get; set; }
     }
 }

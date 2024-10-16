@@ -7,9 +7,6 @@ namespace frappe_HRMS.Domain.Claim
 {
     public class PurposeOfTravel : BaseEntity
     {
-        public string? PurposeofTravel {  get; set; }
-        public int? TravelRequestId { get; set; }
-        [ForeignKey(nameof(TravelRequestId))]
-        public virtual TravelRequest? TravelRequest { get; set; }       
+        public string? PurposeofTravel {  get; set; }     
     }
 }
