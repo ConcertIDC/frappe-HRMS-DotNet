@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import CustomInput from '../Components/Input/CustomInput';
 import frappelogo from '../Assets/Images/frappe-hr2.png';
@@ -9,6 +9,10 @@ import { SignupAction } from '../redux/actions/SignUpActions';
 import { type } from '@testing-library/user-event/dist/type';
 
 function Signup() {
+    useEffect(() => {
+        localStorage.removeItem("Token");
+    }, []);
+ 
     const [formData, setFormData] = useState({});
     // const navigate = useNavigate();
     const dispatch = useDispatch();

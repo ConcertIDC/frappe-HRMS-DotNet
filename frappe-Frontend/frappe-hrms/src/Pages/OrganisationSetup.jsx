@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomInput from '../Components/Input/CustomInput';
 import { Container, Col, Row, Form } from 'react-bootstrap';
 import '../Assets/Css/Style.css';
@@ -12,6 +12,10 @@ import { useDispatch } from 'react-redux';
 import { OrganisationAction } from '../redux/actions/OrganisationAction'; 
 
 const Organisation = () => {
+    useEffect(() => {
+        localStorage.removeItem("Token");
+    }, []);
+ 
     const [formData, setFormData] = useState({});
     const [isChecked, setIsChecked] = useState(false);
     console.log(formData);

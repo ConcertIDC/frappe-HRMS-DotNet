@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import { Login } from "../constants/index";
-import { BASEURL } from "../../Constant/ConstatntData";
+// import { BASEURL } from "../../Constant/ConstatntData";
+import { loginApi } from "../../interceptor/service/loginService";
 
 export const LoginAction = (payload) => async (dispatch) => {
     dispatch({
@@ -8,7 +9,7 @@ export const LoginAction = (payload) => async (dispatch) => {
         payload: { loading: true },
     });
     try {
-        const { data } = await axios.post(`${BASEURL}Login`, payload);
+        const { data } = await loginApi(payload);
         localStorage.setItem("Token", data?.accessToken);
         await dispatch({
             type: Login.SUCCESS,

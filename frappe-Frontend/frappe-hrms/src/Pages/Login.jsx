@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Button from '../Components/Button/Button';
@@ -15,6 +15,10 @@ const LoginComponent = () => {
     const [validated, setValidated] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useEffect(() => {
+        localStorage.removeItem("Token");
+    }, []);
+ 
 
     const { loading, error, data } = useSelector(state => state.auth);
     const handleInputChange = (e) => {
@@ -37,9 +41,9 @@ const LoginComponent = () => {
         setValidated(true);
     };
 
-    if (data?.username) {
-        navigate('/dashboard');
-    }
+    // if (data?.username) {
+    //     navigate('/dashboard');
+    // }
 
     return (
         <div className='vh-100 d-flex align-items-center signup-body justify-content-center'>
