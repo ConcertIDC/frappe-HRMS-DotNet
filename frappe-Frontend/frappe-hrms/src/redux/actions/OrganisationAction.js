@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Organisation } from "../constants/organisation";
 import { BASEURL } from "../../Constant/ConstatntData";
+import { organisationSetupApi } from "../../interceptor/service/OrganisationSetupService";
 
 export const OrganisationAction = (payload) => async (dispatch) => {
     dispatch({
@@ -10,7 +11,7 @@ export const OrganisationAction = (payload) => async (dispatch) => {
     try {
         console.log("dcvh",payload);
         
-        const { data } = await axios.post(`${BASEURL}Company/SetupOrganisation`, payload);
+        const { data } = await organisationSetupApi(payload);
         console.log(data);
         await dispatch({
             type: Organisation.SUCCESS,

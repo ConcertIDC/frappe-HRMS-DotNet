@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Signup } from "../constants/signUp";
 import { BASEURL } from "../../Constant/ConstatntData";
+import { signupApi } from "../../interceptor/service/SignupService";
 
 export const SignupAction = (payload) => async (dispatch) => {
     dispatch({
@@ -8,7 +9,7 @@ export const SignupAction = (payload) => async (dispatch) => {
         payload: { loading: true },
     });
     try {
-        const { data } = await axios.post(`${BASEURL}Signup`, payload);
+        const { data } = await signupApi(payload);
         
         await dispatch({
             type: Signup.SUCCESS,

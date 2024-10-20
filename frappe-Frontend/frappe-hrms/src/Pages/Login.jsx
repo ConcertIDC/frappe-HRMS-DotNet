@@ -41,10 +41,6 @@ const LoginComponent = () => {
         setValidated(true);
     };
 
-    // if (data?.username) {
-    //     navigate('/dashboard');
-    // }
-
     return (
         <div className='vh-100 d-flex align-items-center signup-body justify-content-center'>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
