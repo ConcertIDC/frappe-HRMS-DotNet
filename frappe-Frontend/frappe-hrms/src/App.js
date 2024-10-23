@@ -6,6 +6,7 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import Layout from './Pages/Layout';
 import PrivateRoute from "./PrivateRouter/PrivateRouter";
+import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/employee-list" element={<EmployeeListPage />} />
             </Route>
           </Route>
         </Routes>

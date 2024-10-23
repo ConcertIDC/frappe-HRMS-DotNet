@@ -6,9 +6,9 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 
 const NavbarComponent = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="py-3 shadow-sm">
+    <Navbar bg="dark" variant="dark" expand="lg" className="p-2 shadow-sm">
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
+          <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '10px' ,borderRadius:'10px'}} />
           <span className="fw-bold text-light">Dashboard</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
