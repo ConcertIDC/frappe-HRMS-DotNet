@@ -66,6 +66,7 @@ namespace frappe_HRMS.Services.Services
         public IProjectTemplateRepository ProjectTemplate { get; set; }
         public IProjectTypeRepository ProjectType { get; set; }
         public ITaskRepository Task { get; set; }
+        public IProjectUpdateRepository ProjectUpdate {  get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -115,6 +116,7 @@ namespace frappe_HRMS.Services.Services
             ProjectTemplate = new ProjectTemplateRepository(_context);
             ProjectType = new ProjectTypeRepository(_context);
             Task = new TaskRepository(_context);
+            ProjectUpdate = new ProjectUpdateRepository(_context);
         }
 
         public async Task<int> Save()

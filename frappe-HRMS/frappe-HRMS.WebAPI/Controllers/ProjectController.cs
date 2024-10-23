@@ -161,5 +161,43 @@ namespace frappe_HRMS.WebAPI.Controllers
             await unitOfWork.Save();
             return result;
         }
+        [HttpPost("CreateProjectUpdate")]
+        public async Task<ActionResult<ProjectUpdate>> CreateProjectUpdate(ProjectUpdate projectUpdate)
+        {
+            var result = await unitOfWork.ProjectUpdate.AddAsync(projectUpdate);
+            return result;
+        }
+
+        [HttpGet("GetAllProjectUpdates")]
+        public async Task<ActionResult<List<ProjectUpdate>>> GetAllProjectUpdates()
+        {
+            var result = await unitOfWork.ProjectUpdate.GetAll();
+            return Ok(result);
+        }
+        [HttpGet("GetProjectUpdateById")]
+        public async Task<ActionResult<Project>> GetProjectUpdateById(int id)
+        {
+            try
+            {
+                var result = unitOfWork.ProjectUpdate.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Project Update with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("EditProjectUpdate")]
+        public async Task<ActionResult<ProjectUpdate>> EditProjectUpdate(ProjectUpdate projectUpdate)
+        {
+            var result = unitOfWork.ProjectUpdate.Update(projectUpdate);
+            await unitOfWork.Save();
+            return result;
+        }
     }
 }

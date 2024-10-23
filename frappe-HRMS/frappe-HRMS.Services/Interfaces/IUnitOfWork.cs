@@ -56,6 +56,7 @@ namespace frappe_HRMS.Services.Interfaces
         IProjectTemplateRepository ProjectTemplate { get; }
         IProjectTypeRepository ProjectType { get; }
         ITaskRepository Task { get; }
+        IProjectUpdateRepository ProjectUpdate { get; }
         Task<int> Save();
     }
 }

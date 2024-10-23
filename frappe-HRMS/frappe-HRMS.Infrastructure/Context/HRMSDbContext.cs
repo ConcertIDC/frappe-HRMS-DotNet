@@ -60,5 +60,6 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<ProjectTemplate> ProjectTemplates { get; set; }
         public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<Domain.Projects.Task> Tasks { get; set; }
+        public DbSet<ProjectUpdate> ProjectUpdates { get; set; }
     }
 }
