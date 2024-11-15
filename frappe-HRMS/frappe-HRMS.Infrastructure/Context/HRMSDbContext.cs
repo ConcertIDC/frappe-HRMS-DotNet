@@ -5,6 +5,7 @@ using frappe_HRMS.Domain.Company;
 using frappe_HRMS.Domain.Employee;
 using frappe_HRMS.Domain.Leave;
 using frappe_HRMS.Domain.Projects;
+using frappe_HRMS.Domain.TimeSheets;
 using Microsoft.EntityFrameworkCore;
 
 namespace frappe_HRMS.Infrastructure.Context
@@ -61,5 +62,9 @@ namespace frappe_HRMS.Infrastructure.Context
         public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<Domain.Projects.Task> Tasks { get; set; }
         public DbSet<ProjectUpdate> ProjectUpdates { get; set; }
+        public DbSet<TimeSheet> TimeSheets { get; set; }
+        public DbSet<TimeSheetList> TimeSheetsList { get; set; }
+        public DbSet<ActivityType> ActivityTypes { get; set; }
+        public DbSet<BillingDetails> BillingDetails { get; set; }
     }
 }

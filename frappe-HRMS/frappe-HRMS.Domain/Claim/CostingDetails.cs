@@ -5,6 +5,9 @@ namespace frappe_HRMS.Domain.Claim
 {
     public class CostingDetails : BaseEntity
     {
+        public int? TravelRequestId { get; set; }
+        [ForeignKey(nameof(TravelRequestId))]
+        public virtual TravelRequest? TravelRequest { get; set; }
         public int ExpenseClaimTypeId { get; set; }
         [ForeignKey(nameof(ExpenseClaimTypeId))]
         public virtual ExpenseClaimType? ExpenseClaimType { get; set; }
