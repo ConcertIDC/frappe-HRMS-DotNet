@@ -4,6 +4,7 @@ using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Interfaces.Projects;
+using frappe_HRMS.Services.Interfaces.TimeSheet;
 using frappe_HRMS.Services.Services.Employee;
 
 namespace frappe_HRMS.Services.Interfaces
@@ -57,6 +58,10 @@ namespace frappe_HRMS.Services.Interfaces
         IProjectTypeRepository ProjectType { get; }
         ITaskRepository Task { get; }
         IProjectUpdateRepository ProjectUpdate { get; }
+        ITimeSheetRepository TimeSheet { get; }
+        ITimeSheetListRepository TimeSheetList { get; }
+        IActivityTypeRepository ActivityType { get; }
+        IBillingDetailsRepository BillingDetails { get; }
         Task<int> Save();
     }
 }
