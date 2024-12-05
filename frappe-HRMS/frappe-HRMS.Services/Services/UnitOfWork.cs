@@ -6,12 +6,14 @@ using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Interfaces.Projects;
+using frappe_HRMS.Services.Interfaces.TimeSheet;
 using frappe_HRMS.Services.Services.Attendance;
 using frappe_HRMS.Services.Services.Claim;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
 using frappe_HRMS.Services.Services.Leave;
 using frappe_HRMS.Services.Services.Projects;
+using frappe_HRMS.Services.Services.TimeSheet;
 
 namespace frappe_HRMS.Services.Services
 {
@@ -67,6 +69,10 @@ namespace frappe_HRMS.Services.Services
         public IProjectTypeRepository ProjectType { get; set; }
         public ITaskRepository Task { get; set; }
         public IProjectUpdateRepository ProjectUpdate {  get; set; }
+        public ITimeSheetRepository TimeSheet { get; set; }
+        public ITimeSheetListRepository TimeSheetList { get; set; }
+        public IActivityTypeRepository ActivityType { get; set; }
+        public IBillingDetailsRepository BillingDetails { get; set; }
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
@@ -117,6 +123,10 @@ namespace frappe_HRMS.Services.Services
             ProjectType = new ProjectTypeRepository(_context);
             Task = new TaskRepository(_context);
             ProjectUpdate = new ProjectUpdateRepository(_context);
+            TimeSheetList = new TimeSheetListRepository(_context);
+            TimeSheet = new TimeSheetRepository(_context);
+            ActivityType = new ActivityTypeRepository(_context);
+            BillingDetails = new BillingDetailsRepository(_context);
         }
 
         public async Task<int> Save()
