@@ -7,21 +7,24 @@ import Dashboard from "./Pages/Dashboard";
 import Layout from './Pages/Layout';
 import PrivateRoute from "./PrivateRouter/PrivateRouter";
 import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
+import CompanyList from "./Company/CompanyList";
+import Shortcut from "./Components/Shortcut/Shortcut";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
+          <Route path="/" element={<Dashboard />} />
+          {/* <Route path="/Signup" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/employee-list" element={<EmployeeListPage />} />
+              <Route path="/company-list" element={<CompanyList />} />
             </Route>
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </div>

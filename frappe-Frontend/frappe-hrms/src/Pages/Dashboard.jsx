@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../Components/navbar/Navbar';
 import Sidebar from '../Components/sidebar/Sidebar';
 import '../Assets/Css/Style.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Shortcut from '../Components/Shortcut/Shortcut';
 
 const Dashboard = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -22,9 +23,9 @@ const Dashboard = () => {
             <h5 className="text-dark mb-4">Your Shortcuts</h5>
             <Row className="mb-4">
                 <Col md={3} className="mb-4">
-                    <a href="#" className="d-block mb-2 text-dark text-decoration-none hover-effect"onClick={handleNavigate}>
-                        Employee <span className="badge bg-success ms-2">1 Active</span>
-                    </a>
+                    <Link to="/employee-list"  className="d-block mb-2 text-dark text-decoration-none hover-effect">
+                        <Shortcut name="Company" />
+                    </Link>
                     <a href="#" className="d-block mb-2 text-dark text-decoration-none hover-effect">Employee Lifecycle Dashboard</a>
                 </Col>
                 <Col md={3} className="mb-4">
