@@ -1,46 +1,89 @@
-// Sidebar.js
-import React, { useState } from 'react';
-import { Button, Col } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Nav } from "react-bootstrap";
+import {
+  FaUserFriends,
+  FaUserCircle,
+  FaChartLine,
+  FaClock,
+  FaMoneyCheckAlt,
+  FaClipboardList,
+  FaFolder,
+  FaUsers,
+  FaGlobe,
+  FaCog,
+  FaTools,
+  FaBuilding,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 const Sidebar = () => {
-    const [isPublicOpen, setIsPublicOpen] = useState(false);
+  const [expanded, setExpanded] = useState({});
 
-    const togglePublicDropdown = () => {
-        setIsPublicOpen(!isPublicOpen);
-    };
+  const toggleExpand = (key) => {
+    setExpanded((prevState) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }));
+  };
 
-    return (
-        <Col xs={2} className="bg-light vh-100 position-fixed p-4 sidebar shadow-sm">
-            <h4 className="text-dark mb-4">HR</h4>
-            <ul className="nav flex-column">
-                <li className="nav-item">
-                    <Button
-                        variant="link"
-                        className="nav-link text-dark"
-                        onClick={togglePublicDropdown}
-                        style={{ textAlign: 'left' }}
-                    >
-                        Public
-                    </Button>
-                    <div className={isPublicOpen ? 'collapse show' : 'collapse'}>
-                        <ul className="list-unstyled ps-3">
-                            {['HR', 'Projects', 'Users', 'Website', 'Payroll', 'Tools', 'ERPNext Settings', 'Integrations', 'Build'].map(item => (
-                                <li key={item} className="nav-item">
-                                    <a
-                                        className="nav-link text-dark hover-effect"
-                                        href="#"
-                                        style={{ paddingLeft: '10px' }}
-                                    >
-                                        {item}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </Col>
-    );
+  return (
+    <Nav className=" bg-light vh-100 p-3 relative text-nowrap">
+      <Nav.Item>
+        <Nav.Link style={{ color: "black !important" }} onClick={() => toggleExpand("hr")}>
+          HR {expanded["hr"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
+        </Nav.Link>
+        {expanded["hr"] && (
+          <Nav className="flex-column ms-3">
+            <Nav.Link><FaUserFriends className="me-2" />Recruitment</Nav.Link>
+            <Nav.Link><FaUserCircle className="me-2" />Employee Lifecycle</Nav.Link>
+            <Nav.Link><FaChartLine className="me-2" />Performance</Nav.Link>
+            <Nav.Link><FaClock className="me-2" />Shift & Attendance</Nav.Link>
+            <Nav.Link><FaMoneyCheckAlt className="me-2" />Expense Claims</Nav.Link>
+            <Nav.Link><FaClipboardList className="me-2" />Leaves</Nav.Link>
+          </Nav>
+        )}
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link><FaFolder className="me-2" />Projects</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaUsers className="me-2" />Users</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaGlobe className="me-2" />Website</Nav.Link>
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link onClick={() => toggleExpand("payroll")}>
+          Payroll {expanded["payroll"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
+        </Nav.Link>
+        {expanded["payroll"] && (
+          <Nav className="flex-column ms-3">
+            <Nav.Link><FaMoneyCheckAlt className="me-2" />Salary Payout</Nav.Link>
+            <Nav.Link><FaBuilding className="me-2" />Tax & Benefits</Nav.Link>
+          </Nav>
+        )}
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link><FaTools className="me-2" />Tools</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaCog className="me-2" />ERPNext Settings</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaCog className="me-2" />Integrations</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaCog className="me-2" />ERPNext Integrations</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link><FaTools className="me-2" />Build</Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
 };
 
 export default Sidebar;

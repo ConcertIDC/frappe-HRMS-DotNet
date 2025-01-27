@@ -1,3 +1,8 @@
+body,#root{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
 .custom {
     max-width: 300px; 
     width: 50%;
@@ -27,12 +32,13 @@
 /* Ensure the sidebar and navbar are fixed */
 .fixed-sidebar {
     position: fixed;
-    top: 0;
+    top: 12%;
     bottom: 0;
     width: 16.6667%; /* This is 2/12 or xs={2} in Bootstrap */
     z-index: 1000;
     background-color: #f8f9fa; /* Light background for the sidebar */
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -46,10 +52,8 @@
 
 /* Scrollable main content */
 .main-content {
-    position: relative;
-    height: 100vh;
+    height: 88vh;
     overflow-y: auto;
-    padding-top: 80px; /* Adjust to navbar height */
 }
 
 .scrollable-content {
@@ -63,3 +67,12 @@
 .hover-effect:hover {
     text-decoration: underline;
 }
+.section-title{
+    font-weight: 510 !important;
+}
+.nav-link {
+    color: black !important;
+  }
+
+
+    

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CustomInput from '../Components/Input/CustomInput';
 import { Container, Col, Row, Form } from 'react-bootstrap';
-import '../Assets/Css/Style.css';
+import '../Assets/Css/style.css';
 import frappelogo from '../Assets/Images/frappehr.png';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from '../Components/Button/Button';

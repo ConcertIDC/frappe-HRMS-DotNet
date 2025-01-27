@@ -3,19 +3,20 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../Components/Header/Header';
 import Sidebar from '../Components/sidebar/Sidebar';
-import { Col } from 'react-bootstrap';
+import { Col,Row } from 'react-bootstrap';
 
 const Layout = () => {
   return (
     <div>
+      <Row>
       <Header />
-      <Col xs={2} className="fixed-sidebar p-0">
+      </Row>
+      
+      <Col xs={2} className="fixed-sidebar ">
           <Sidebar />
       </Col>
-      <Col xs={10} className="offset-2 bg-light p-4 main-content scrollable-content">
-      <main>
+      <Col xs={10} className="offset-2 bg-light p-4 main-content ">
         <Outlet />
-      </main>
       </Col>
     </div>
   );
