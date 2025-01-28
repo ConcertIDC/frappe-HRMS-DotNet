@@ -22,7 +22,7 @@ const EmployeeListPage = () => {
     console.log('Filter Clicked');
   };
 
-  return <CommonTable columns={columns} data={data} onAdd={handleAdd} onFilter={handleFilter} />;
+  return <CommonTable data={data} />;
 };
 
 export default EmployeeListPage;

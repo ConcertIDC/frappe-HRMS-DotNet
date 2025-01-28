@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRouter/PrivateRouter";
 import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
 import CompanyList from "./Company/CompanyList";
 import Shortcut from "./Components/Shortcut/Shortcut";
+import CommonTable from "./Components/Common/CommonTable";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<EmployeeListPage />} />
           </Route>
           {/* <Route path="/Signup" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
