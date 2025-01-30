@@ -40,7 +40,6 @@ const Header = () => {
     <Navbar
       expand="lg"
       className="shadow-sm px-4"
-      style={{backgroundColor: '#f8f9fa'}}
     >
       <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
            <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '10px' ,borderRadius:'10px',marginLeft:'10px'}} />
@@ -51,12 +50,12 @@ const Header = () => {
         <FormControl
           type="search"
           placeholder="Search or type a command (Ctrl + G)"
-          className="me-2 rounded-pill"
+          className="me-2 border-0"
           aria-label="Search"
           style={{
-            height: "36px",
             paddingLeft: "16px",
-            border: "1px solid #ddd",
+            backgroundColor:"#c1c1c145",
+            
           }}
         />
       </Form>

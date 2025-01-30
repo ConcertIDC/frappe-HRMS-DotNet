@@ -15,7 +15,7 @@ const Layout = () => {
       <Col xs={2} className="fixed-sidebar ">
           <Sidebar />
       </Col>
-      <Col xs={10} className="offset-2 bg-light p-4 main-content ">
+      <Col xs={10} className="offset-2 p-4 main-content ">
         <Outlet />
       </Col>
     </div>

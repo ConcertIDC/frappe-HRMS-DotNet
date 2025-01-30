@@ -56,7 +56,7 @@
 
 // export default CommonTable;
 import React, { useState } from "react";
-import { Table, Form, Button, Dropdown, Pagination } from "react-bootstrap";
+import { Table, Form, Button, Dropdown, Pagination, ButtonGroup } from "react-bootstrap";
 
 const CommonTable = ({ data }) => {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -80,25 +80,30 @@ const CommonTable = ({ data }) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-between mb-3">
-        <input type="text" placeholder="Search..." className="form-control w-25" />
-        <Button variant="dark">+ Add Company</Button>
+      <div className="d-flex justify-content-end mb-3">
+        
+        <Button variant="dark" className="rounded">+  Add Company</Button>
       </div>
-      <Table striped bordered hover>
+      <div className="border border-1 rounded">
+      <div className="p-3">
+        <input type="text" placeholder="Search..." className="form-control w-25" />
+      </div>
+      <div className="border-top p-3">
+      <Table  borderless>
         <thead>
           <tr>
-            <th>
+            <th  style={{backgroundColor:"#c1c1c145"}}>
               <Form.Check type="checkbox" />
             </th>
-            <th>ID</th>
-            <th>Country</th>
-            <th>Parent Company</th>
-            <th>Last Updated On</th>
+            <th  style={{backgroundColor:"#c1c1c145",fontWeight:"normal"}}>ID</th>
+            <th style={{backgroundColor:"#c1c1c145",fontWeight:"normal"}}>Country</th>
+            <th style={{backgroundColor:"#c1c1c145",fontWeight:"normal"}}>Parent Company</th>
+            <th style={{backgroundColor:"#c1c1c145",fontWeight:"normal"}}>Last Updated On</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white">
           {paginatedData.map((item) => (
-            <tr key={item.id}>
+            <tr className="border-bottom" key={item.id}>
               <td>
                 <Form.Check
                   type="checkbox"
@@ -111,30 +116,20 @@ const CommonTable = ({ data }) => {
               <td>{item.parentCompany}</td>
               <td>{item.lastUpdated}</td>
             </tr>
+            
           ))}
         </tbody>
       </Table>
-      <div className="d-flex justify-content-between">
-        <Dropdown onSelect={(e) => setItemsPerPage(Number(e))}>
-          <Dropdown.Toggle variant="light">Items per page</Dropdown.Toggle>
-          <Dropdown.Menu>
-            {[20, 100, 500, 2500].map((num) => (
-              <Dropdown.Item key={num} eventKey={num}>{num}</Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Pagination>
-          {[...Array(Math.ceil(data.length / itemsPerPage)).keys()].map((num) => (
-            <Pagination.Item
-              key={num + 1}
-              active={num + 1 === currentPage}
-              onClick={() => handlePageChange(num + 1)}
-            >
-              {num + 1}
-            </Pagination.Item>
-          ))}
-        </Pagination>
       </div>
+      <div className="d-flex justify-content-between border-top p-3">
+      <ButtonGroup className="" aria-label="First group">
+        <Button style={{backgroundColor:"#c1c1c145",borderColor:"#d4c0c061"}} variant="light">20</Button>
+        <Button style={{backgroundColor:"#c1c1c145",borderColor:"#d4c0c061"}} variant="light">100</Button>
+        <Button style={{backgroundColor:"#c1c1c145",borderColor:"#d4c0c061"}} variant="light">500</Button>
+        <Button style={{backgroundColor:"#c1c1c145",borderColor:"#d4c0c061"}} variant="light">2500</Button>
+      </ButtonGroup>
+      </div>
+    </div>
     </div>
   );
 };

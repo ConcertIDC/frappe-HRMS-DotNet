@@ -28,7 +28,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Nav className=" bg-light vh-100 p-3 relative text-nowrap">
+    <Nav className="vh-100 p-3 relative text-nowrap bg-white">
       <Nav.Item>
         <Nav.Link style={{ color: "black !important" }} onClick={() => toggleExpand("hr")}>
           HR {expanded["hr"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
