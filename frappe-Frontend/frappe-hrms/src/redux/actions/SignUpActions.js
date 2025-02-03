@@ -5,21 +5,21 @@ import { signupApi } from "../../interceptor/service/SignupService";
 
 export const SignupAction = (payload) => async (dispatch) => {
     dispatch({
-        type: Signup.LOADING,
+        type: Signup.LOADING.type,
         payload: { loading: true },
     });
     try {
         const { data } = await signupApi(payload);
         
         await dispatch({
-            type: Signup.SUCCESS,
+            type: Signup.SUCCESS.type,
             payload: { loading: false, data: data },
         });
         window.location.href = "/organisation";
 
     } catch (err) {
         await dispatch({
-            type: Signup.ERROR,
+            type: Signup.ERROR.type,
             payload: { loading: false, data: {} },
         });
     }

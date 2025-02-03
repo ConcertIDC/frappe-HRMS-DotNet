@@ -5,22 +5,20 @@ import { organisationSetupApi } from "../../interceptor/service/OrganisationSetu
 
 export const OrganisationAction = (payload) => async (dispatch) => {
     dispatch({
-        type: Organisation.LOADING,
+        type: Organisation.LOADING.type,
         payload: { loading: true },
     });
     try {
-        console.log("dcvh",payload);
-        
         const { data } = await organisationSetupApi(payload);
         console.log(data);
         await dispatch({
-            type: Organisation.SUCCESS,
+            type: Organisation.SUCCESS.type,
             payload: { loading: false, data: data },
         });
         window.location.href = "/dashboard";    
     } catch (err) {
         await dispatch({
-            type: Organisation.ERROR,
+            type: Organisation.ERROR.type,
             payload: { loading: false, data: {} },
         });
     }

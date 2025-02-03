@@ -4,12 +4,15 @@ import { thunk } from 'redux-thunk';
 import { LoginReducer } from '../reducers/LoginReducers';
 import { SignupReducer } from '../reducers/SignUpReducers';
 import { OrganisationReducer } from '../reducers/OrganisationReducer';
+import { CompanyReducer } from '../reducers/CompanyReducers';
 
 const rootReducer = combineReducers({
     auth: LoginReducer,
     signup : SignupReducer,
-    Organisation : OrganisationReducer
+    Organisation : OrganisationReducer,
+    Company : CompanyReducer
 });
+console.log('CompanyReducer');
 
 const store = configureStore({
     reducer: rootReducer,

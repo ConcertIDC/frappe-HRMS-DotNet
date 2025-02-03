@@ -2,11 +2,11 @@ import React from 'react';
 import CommonTable from '../../Components/Common/CommonTable';
 
 const EmployeeListPage = () => {
-  const columns = [
-    { key: 'fullName', header: 'Full Name' },
-    { key: 'status', header: 'Status' },
-    { key: 'designation', header: 'Designation' },
+  const columns = [    
     { key: 'id', header: 'ID' },
+    { key: 'country', header: 'Country' },
+    { key: 'parentCompany', header: 'Parent Company' },
+    { key: 'action', header: 'Actions' },
   ];
 
   const data = [
@@ -22,7 +22,7 @@ const EmployeeListPage = () => {
     console.log('Filter Clicked');
   };
 
-  return <CommonTable data={data} />;
+  return <CommonTable data={data} columns={columns} title={'Company'}/>;
 };
 
 export default EmployeeListPage;

@@ -10,24 +10,26 @@ import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
 import CompanyList from "./Company/CompanyList";
 import Shortcut from "./Components/Shortcut/Shortcut";
 import CommonTable from "./Components/Common/CommonTable";
+import CompanyListPage from "./Pages/Company/CompanyListPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<EmployeeListPage />} />
-          </Route>
-          {/* <Route path="/Signup" element={<Signup />} />
+        {/*<Route element={<Layout />}>
+           <Route path="/" element={<CompanyListPage />} />
+          </Route> */}
+          <Route path="/" element={<Login />}/>
+          <Route path="/Signup" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/employee-list" element={<EmployeeListPage />} />
-              <Route path="/company-list" element={<CompanyList />} />
+              <Route path="/company-list" element={<CompanyListPage />} />
             </Route>
-          </Route> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

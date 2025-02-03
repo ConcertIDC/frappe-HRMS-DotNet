@@ -5,20 +5,20 @@ import { loginApi } from "../../interceptor/service/loginService";
 
 export const LoginAction = (payload) => async (dispatch) => {
     dispatch({
-        type: Login.LOADING,
+        type: Login.LOADING.type,
         payload: { loading: true },
     });
     try {
         const { data } = await loginApi(payload);
         localStorage.setItem("Token", data?.accessToken);
         await dispatch({
-            type: Login.SUCCESS,
+            type: Login.SUCCESS.type,
             payload: { loading: false, data: data },
         });
         window.location.href = "/dashboard";
     } catch (err) {
         await dispatch({
-            type: Login.ERROR,
+            type: Login.ERROR.type,
             payload: { loading: false, data: {} },
         });
     }
@@ -26,7 +26,9 @@ export const LoginAction = (payload) => async (dispatch) => {
 
 export const logoutAction = () => (dispatch) => {
     dispatch({
-        type: Login.LOGOUT,
+        type: Login.LOGOUT.type,
         payload: {},
     });
+    window.location.href = "/";
+
 };
