@@ -13,14 +13,6 @@ const CompanyListPage = () => {
   const dispatch = useDispatch();
   const companyList = useSelector((state) => state.Company.CompanyModel);
 
-  const handleAdd = () => {
-    console.log('Add Employee Clicked');
-  };
-
-  const handleFilter = () => {
-    console.log('Filter Clicked');
-  };
-
   useEffect(() => {
     dispatch(getCompanyList());
   }, [dispatch]);
@@ -28,7 +20,7 @@ const CompanyListPage = () => {
   console.log(companyList);
   
 
-  return <CommonTable data={companyList} columns={columns} title={'Company'}/>;
+  return <CommonTable data={companyList} columns={columns} title={'Company'} searchTitle={'ID'}/>;
 };
 
 export default CompanyListPage;

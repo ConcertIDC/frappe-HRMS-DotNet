@@ -5,12 +5,14 @@ import { LoginReducer } from '../reducers/LoginReducers';
 import { SignupReducer } from '../reducers/SignUpReducers';
 import { OrganisationReducer } from '../reducers/OrganisationReducer';
 import { CompanyReducer } from '../reducers/CompanyReducers';
+import { EmployeeReducer } from '../reducers/EmployeeReducer';
 
 const rootReducer = combineReducers({
     auth: LoginReducer,
     signup : SignupReducer,
     Organisation : OrganisationReducer,
-    Company : CompanyReducer
+    Company : CompanyReducer,
+    Employee : EmployeeReducer,
 });
 console.log('CompanyReducer');
 

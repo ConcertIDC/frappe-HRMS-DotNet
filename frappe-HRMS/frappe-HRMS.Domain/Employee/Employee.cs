@@ -11,6 +11,7 @@ namespace frappe_HRMS.Domain.Employee
         public GenderEnum Gender { get; set; }
         public string? FirsetName { get; set; }
         public string? LastName { get; set; }
+        public string? FullName => $"{FirsetName} {LastName}";
         public string? MiddleName { get; set; }
         public DateTime DateofJoining { get; set; }
         public DateTime DateOfBirth { get; set; }

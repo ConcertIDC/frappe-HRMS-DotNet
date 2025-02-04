@@ -1,28 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CommonTable from '../../Components/Common/CommonTable';
+import { getEmployeeList } from '../../redux/actions/EmployeeAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const EmployeeListPage = () => {
   const columns = [    
-    { key: 'id', header: 'ID' },
-    { key: 'country', header: 'Country' },
-    { key: 'parentCompany', header: 'Parent Company' },
+    { key: 'fullName', header: 'Full Name' },
+    { key: 'status', header: 'Status' },
+    { key: 'Designation.DesignationName', header: 'Designation' },
+    { key: 'series', header: 'ID' },
     { key: 'action', header: 'Actions' },
   ];
+  const dispatch = useDispatch();
+  const EmployeeList = useSelector((state) => state.Employee.EmployeeModel);
+  
+  useEffect(() => {
+    dispatch(getEmployeeList());
+  }, [dispatch]);
 
-  const data = [
-    { fullName: 'SARAN', status: 'Active', designation: 'HR', id: 'HR-EMP-00001' },
-    // Add more rows as needed
-  ];
+  console.log(EmployeeList);
+  
 
-  const handleAdd = () => {
-    console.log('Add Employee Clicked');
-  };
-
-  const handleFilter = () => {
-    console.log('Filter Clicked');
-  };
-
-  return <CommonTable data={data} columns={columns} title={'Company'}/>;
+  return <CommonTable data={EmployeeList} columns={columns} title={'Employee'} searchTitle={'Full Name'}/>;
 };
 
 export default EmployeeListPage;

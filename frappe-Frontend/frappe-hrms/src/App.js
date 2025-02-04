@@ -26,8 +26,8 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/employee-list" element={<EmployeeListPage />} />
-              <Route path="/company-list" element={<CompanyListPage />} />
+              <Route path="/employee" element={<EmployeeListPage />} />
+              <Route path="/company" element={<CompanyListPage />} />
             </Route>
           </Route>
         </Routes>

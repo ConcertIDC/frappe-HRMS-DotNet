@@ -9,7 +9,7 @@ const Dashboard = () => {
             <h5 className="fw-semibold mb-4">Your Shortcuts</h5>
             <Row className="mb-4">
                 <Col md={3} className="mb-4">
-                    <Shortcut name="Company" path="/company-list" />
+                    <Shortcut name="Company" path="/company" />
                     <Shortcut name="Employee Lifecycle Dashboard" path="/employee-lifecycle-dashboard" />
                 </Col>
                 <Col md={3} className="mb-4">

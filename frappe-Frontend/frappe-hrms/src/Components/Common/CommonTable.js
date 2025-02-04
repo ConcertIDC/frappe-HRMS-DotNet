@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
 
-const CommonTable = ({ data, columns, title }) => {
+const CommonTable = ({ data, columns, title ,searchTitle}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Check if all rows are selected
+  const allRowsSelected = selectedRows.length === data.length && data.length > 0;
+
+  // Toggle individual row selection
   const toggleRowSelection = (id) => {
     setSelectedRows((prev) =>
       prev.includes(id) ? prev.filter((row) => row !== id) : [...prev, id]
     );
+  };
+
+  // Toggle "Select All" functionality
+  const toggleSelectAll = () => {
+    if (allRowsSelected) {
+      setSelectedRows([]); // Deselect all
+    } else {
+      setSelectedRows(data.map((item) => item.id)); // Select all
+    }
   };
 
   const handlePageChange = (pageNumber) => {
@@ -22,11 +35,10 @@ const CommonTable = ({ data, columns, title }) => {
     setCurrentPage(1); // Reset to first page on new search
   };
 
-  // Assuming the second column is at index 1
   const secondColumnKey = columns[0]?.key;
 
   const filteredData = data?.filter((item) =>
-    item[secondColumnKey]?.toLowerCase().includes(searchQuery)
+    item[secondColumnKey]?.toString().toLowerCase().includes(searchQuery)
   );
 
   const paginatedData = filteredData?.slice(
@@ -45,19 +57,23 @@ const CommonTable = ({ data, columns, title }) => {
         <div className="p-3">
           <input
             type="text"
-            placeholder="ID"
-            style={{backgroundColor:"#c1c1c145"}}
+            placeholder={searchTitle}
+            style={{ backgroundColor: "#c1c1c145" }}
             className="form-control w-25"
             value={searchQuery}
             onChange={handleSearchChange}
           />
         </div>
         <div className="border-top p-3">
-          <Table borderless>
-            <thead>
-              <tr>
-                <th style={{ backgroundColor: "#c1c1c145" }}>
-                  <Form.Check type="checkbox" />
+          <Table className="rounded">
+            <thead className="rounded">
+              <tr className="rounded">
+                <th style={{ backgroundColor: "#c1c1c145"}} >
+                  <Form.Check
+                    type="checkbox"
+                    checked={allRowsSelected}
+                    onChange={toggleSelectAll}
+                  />
                 </th>
                 {columns.map((item) => (
                   <th
@@ -72,6 +88,7 @@ const CommonTable = ({ data, columns, title }) => {
             <tbody className="bg-white">
               {paginatedData?.map((item) => (
                 <tr className="border-bottom" key={item.id}>
+                  {/* Individual row checkboxes */}
                   <td>
                     <Form.Check
                       type="checkbox"
@@ -80,7 +97,19 @@ const CommonTable = ({ data, columns, title }) => {
                     />
                   </td>
                   {columns.map((col) => (
-                    <td key={col.key}>{item[col.key]}</td>
+                    <td key={col.key}>
+                      {col.key === "status" ? (
+                        <span
+                          className={`status-badge ${
+                            item[col.key] === 0 ? "active-status" : "inactive-status"
+                          }`}
+                        >
+                          {item[col.key] === 0 ? "Active" : "Inactive"}
+                        </span>
+                      ) : (
+                        item[col.key]
+                      )}
+                    </td>
                   ))}
                 </tr>
               ))}
@@ -95,7 +124,7 @@ const CommonTable = ({ data, columns, title }) => {
                 style={{
                   backgroundColor: itemsPerPage === number ? "#ffffff" : "#c1c1c145",
                   borderColor: "#d4c0c061",
-                  color: itemsPerPage === number ? "#000000" : "#000000",
+                  color: itemsPerPage === number ? "#000000" : "rgb(106, 102, 102)",
                 }}
                 variant="light"
                 onClick={() => {
@@ -107,9 +136,30 @@ const CommonTable = ({ data, columns, title }) => {
               </Button>
             ))}
           </ButtonGroup>
-          {/* Pagination controls can be added here */}
         </div>
       </div>
+
+      {/* Custom CSS for Active/Inactive Badges */}
+      <style>
+        {`
+          .status-badge {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 12px;
+            min-width: 80px;
+            text-align: center;
+          }
+          .active-status {
+            background-color: rgba(46, 204, 113, 0.2);
+            color:rgb(16, 145, 70);
+          }
+          .inactive-status {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #c0392b;
+          }
+        `}
+      </style>
     </div>
   );
 };
