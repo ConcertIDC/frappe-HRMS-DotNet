@@ -21,7 +21,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllEmployees")]
         public async Task<ActionResult<List<Employee>>> GetAllEmployees()
         {
-            var result = await _unitOfWork.Employee.GetAll();
+            var result = await _unitOfWork.Employee.GetAllEmployees();
             return Ok(result);
         }
         [HttpGet("GetEmployeeById")]

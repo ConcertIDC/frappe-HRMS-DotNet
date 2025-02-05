@@ -7,19 +7,15 @@ import Dashboard from "./Pages/Dashboard";
 import Layout from './Pages/Layout';
 import PrivateRoute from "./PrivateRouter/PrivateRouter";
 import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
-import CompanyList from "./Company/CompanyList";
-import Shortcut from "./Components/Shortcut/Shortcut";
-import CommonTable from "./Components/Common/CommonTable";
 import CompanyListPage from "./Pages/Company/CompanyListPage";
+import BranchListPage from "./Pages/Company/BranchListPage";
+import DepartmentListPage from "./Pages/Company/DepartmentListPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-        {/*<Route element={<Layout />}>
-           <Route path="/" element={<CompanyListPage />} />
-          </Route> */}
           <Route path="/" element={<Login />}/>
           <Route path="/Signup" element={<Signup />} />
           <Route path="/organisation" element={<Organisation />} />
@@ -28,6 +24,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/employee" element={<EmployeeListPage />} />
               <Route path="/company" element={<CompanyListPage />} />
+              <Route path="/branch" element={<BranchListPage />} />
+              <Route path="/department" element={<DepartmentListPage />} />
             </Route>
           </Route>
         </Routes>

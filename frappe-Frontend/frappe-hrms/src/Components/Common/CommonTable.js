@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
 
-const CommonTable = ({ data, columns, title ,searchTitle}) => {
+const CommonTable = ({ data, columns, title, searchTitle }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,10 +24,6 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
     } else {
       setSelectedRows(data.map((item) => item.id)); // Select all
     }
-  };
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
   };
 
   const handleSearchChange = (event) => {
@@ -68,7 +64,7 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
           <Table className="rounded">
             <thead className="rounded">
               <tr className="rounded">
-                <th style={{ backgroundColor: "#c1c1c145"}} >
+                <th style={{ backgroundColor: "#c1c1c145" }}>
                   <Form.Check
                     type="checkbox"
                     checked={allRowsSelected}
@@ -78,7 +74,11 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
                 {columns.map((item) => (
                   <th
                     key={item.key}
-                    style={{ backgroundColor: "#c1c1c145", fontWeight: "normal" }}
+                    style={{
+                      backgroundColor: "#c1c1c145",
+                      color: "rgb(77, 75, 75)",
+                      fontWeight:'normal'
+                    }}
                   >
                     {item.header}
                   </th>
@@ -96,8 +96,14 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
                       onChange={() => toggleRowSelection(item.id)}
                     />
                   </td>
-                  {columns.map((col) => (
-                    <td key={col.key}>
+                  {columns.map((col, index) => (
+                    <td
+                      key={col.key}
+                      style={{
+                        fontWeight: index === 0 ? "550" : "normal",
+                        color: index === 0 ? "rgb(78, 76, 76)" : "rgb(77, 75, 75)",
+                      }}
+                    >
                       {col.key === "status" ? (
                         <span
                           className={`status-badge ${
@@ -106,6 +112,8 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
                         >
                           {item[col.key] === 0 ? "Active" : "Inactive"}
                         </span>
+                      ) : col.key === "designation" ? (
+                        item.designation?.designationName
                       ) : (
                         item[col.key]
                       )}
@@ -152,7 +160,7 @@ const CommonTable = ({ data, columns, title ,searchTitle}) => {
           }
           .active-status {
             background-color: rgba(46, 204, 113, 0.2);
-            color:rgb(16, 145, 70);
+            color: rgb(16, 145, 70);
           }
           .inactive-status {
             background-color: rgba(231, 76, 60, 0.2);
