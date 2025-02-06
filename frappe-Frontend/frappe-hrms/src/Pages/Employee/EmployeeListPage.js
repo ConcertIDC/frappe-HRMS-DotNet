@@ -7,7 +7,7 @@ const EmployeeListPage = () => {
   const columns = [    
     { key: 'fullName', header: 'Full Name' },
     { key: 'status', header: 'Status' },
-    { key: 'Designation.DesignationName', header: 'Designation' },
+    { key: 'designation', header: 'Designation' },
     { key: 'series', header: 'ID' },
     { key: 'action', header: 'Actions' },
   ];

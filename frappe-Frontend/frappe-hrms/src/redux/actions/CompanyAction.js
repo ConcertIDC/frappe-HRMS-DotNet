@@ -1,7 +1,5 @@
-// import axios from "axios";
 import { Company } from "../constants/company";
-// import { BASEURL } from "../../Constant/ConstatntData";
-import { companyApi } from "../../interceptor/service/companyService";
+import { branchApi, companyApi, departmentApi, designationtApi } from "../../interceptor/service/companyService";
 
 export const getCompanyList = () => async (dispatch) => {
     dispatch({
@@ -22,4 +20,45 @@ export const getCompanyList = () => async (dispatch) => {
         });
     }
 };
+
+export const getBranchList = () => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        const { data } = await branchApi();
+        console.log("data", data);
+        await dispatch({
+            type: Company.SUCCESS.type,
+            payload: { loading: false, data: data },
+        });
+    } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false, data: {} },
+        });
+    }
+};
+
+export const getDepartmentList = () => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        const { data } = await departmentApi();
+        console.log("data", data);
+        await dispatch({
+            type: Company.SUCCESS.type,
+            payload: { loading: false, data: data },
+        });
+    } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false, data: {} },
+        });
+    }
+};
+
 

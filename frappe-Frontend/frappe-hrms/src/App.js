@@ -10,6 +10,7 @@ import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
 import CompanyListPage from "./Pages/Company/CompanyListPage";
 import BranchListPage from "./Pages/Company/BranchListPage";
 import DepartmentListPage from "./Pages/Company/DepartmentListPage";
+import DesignationListPage from "./Pages/Company/DesignationListPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/company" element={<CompanyListPage />} />
               <Route path="/branch" element={<BranchListPage />} />
               <Route path="/department" element={<DepartmentListPage />} />
+              <Route path="/designation" element={<DesignationListPage />} />
             </Route>
           </Route>
         </Routes>

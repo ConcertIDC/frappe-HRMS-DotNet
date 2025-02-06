@@ -77,7 +77,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                     style={{
                       backgroundColor: "#c1c1c145",
                       color: "rgb(77, 75, 75)",
-                      fontWeight:'normal'
+                      fontWeight: "normal",
                     }}
                   >
                     {item.header}
@@ -85,15 +85,18 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody >
               {paginatedData?.map((item) => (
-                <tr className="border-bottom" key={item.id}>
+                <tr className="border-bottom bg-dark" key={item.id}>
                   {/* Individual row checkboxes */}
                   <td>
                     <Form.Check
                       type="checkbox"
                       checked={selectedRows.includes(item.id)}
                       onChange={() => toggleRowSelection(item.id)}
+                      style={{
+                        cursor: "pointer",
+                      }}
                     />
                   </td>
                   {columns.map((col, index) => (
@@ -102,7 +105,9 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                       style={{
                         fontWeight: index === 0 ? "550" : "normal",
                         color: index === 0 ? "rgb(78, 76, 76)" : "rgb(77, 75, 75)",
+                        cursor: "pointer",
                       }}
+                      className="hover-table"
                     >
                       {col.key === "status" ? (
                         <span
@@ -112,13 +117,21 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                         >
                           {item[col.key] === 0 ? "Active" : "Inactive"}
                         </span>
-                      ) : col.key === "designation" ? (
+                      )
+                      :col.key === "disabled"?(<span
+                        className={`status-badge ${
+                          item.disabled ? "enabled-status" : "disabled-status"
+                        }`}
+                      >
+                        {item.disabled ? "Enabled" : "Disabled"}
+                      </span>)
+                       : col.key === "designation" ? (
                         item.designation?.designationName
                       ) : (
                         item[col.key]
                       )}
                     </td>
-                  ))}
+                  ))}                 
                 </tr>
               ))}
             </tbody>
@@ -146,28 +159,6 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
           </ButtonGroup>
         </div>
       </div>
-
-      {/* Custom CSS for Active/Inactive Badges */}
-      <style>
-        {`
-          .status-badge {
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 12px;
-            min-width: 80px;
-            text-align: center;
-          }
-          .active-status {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: rgb(16, 145, 70);
-          }
-          .inactive-status {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #c0392b;
-          }
-        `}
-      </style>
     </div>
   );
 };
