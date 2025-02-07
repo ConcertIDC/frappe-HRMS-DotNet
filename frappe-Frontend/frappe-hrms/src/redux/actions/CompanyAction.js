@@ -61,4 +61,22 @@ export const getDepartmentList = () => async (dispatch) => {
     }
 };
 
-
+export const getDesignationList = () => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        const { data } = await designationtApi();
+        console.log("data", data);
+        await dispatch({
+            type: Company.SUCCESS.type,
+            payload: { loading: false, data: data },
+        });
+    } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false, data: {} },
+        });
+    }
+};

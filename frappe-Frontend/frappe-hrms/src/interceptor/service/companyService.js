@@ -9,4 +9,7 @@ export const branchApi = () => {
 export const departmentApi = () => {
     return axiosInstance.get('/Company/GetAllDepartments');
 };
+export const designationtApi = () => {
+    return axiosInstance.get('/Company/GetAllDesignations');
+};
 
