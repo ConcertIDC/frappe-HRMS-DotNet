@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Nav } from "react-bootstrap";
+import { BiCoinStack } from "react-icons/bi";
 import {
   FaUserFriends,
   FaUserCircle,
@@ -15,7 +16,12 @@ import {
   FaBuilding,
   FaChevronDown,
   FaChevronUp,
+  FaRocket,
+  FaServer,
 } from "react-icons/fa";
+import { LiaToolsSolid } from "react-icons/lia";
+import { SlBriefcase } from "react-icons/sl";
+import { VscTools } from "react-icons/vsc";
 
 const Sidebar = () => {
   const [expanded, setExpanded] = useState({});
@@ -28,10 +34,10 @@ const Sidebar = () => {
   };
 
   return (
-    <Nav className="vh-100 p-3 relative text-nowrap bg-white">
+    <Nav className="vh-100 p-3 relative text-nowrap bg-white" style={{ fontSize: "15px" }}>
       <Nav.Item>
         <Nav.Link style={{ color: "black !important" }} onClick={() => toggleExpand("hr")}>
-          HR {expanded["hr"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
+        <SlBriefcase className="me-2" />HR {expanded["hr"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
         </Nav.Link>
         {expanded["hr"] && (
           <Nav className="flex-column ms-3">
@@ -57,30 +63,30 @@ const Sidebar = () => {
 
       <Nav.Item>
         <Nav.Link onClick={() => toggleExpand("payroll")}>
-          Payroll {expanded["payroll"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
+        <BiCoinStack className="me-2" />Payroll {expanded["payroll"] ? <FaChevronUp className="ms-2" /> : <FaChevronDown className="ms-2" />}
         </Nav.Link>
         {expanded["payroll"] && (
           <Nav className="flex-column ms-3">
-            <Nav.Link><FaMoneyCheckAlt className="me-2" />Salary Payout</Nav.Link>
+            <Nav.Link><SlBriefcase className="me-2" />Salary Payout</Nav.Link>
             <Nav.Link><FaBuilding className="me-2" />Tax & Benefits</Nav.Link>
           </Nav>
         )}
       </Nav.Item>
 
       <Nav.Item>
-        <Nav.Link><FaTools className="me-2" />Tools</Nav.Link>
+        <Nav.Link><VscTools className="me-2" />Tools</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link><FaCog className="me-2" />ERPNext Settings</Nav.Link>
+        <Nav.Link><FaServer className="me-2" />ERPNext Settings</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link><FaCog className="me-2" />Integrations</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link><FaCog className="me-2" />ERPNext Integrations</Nav.Link>
+        <Nav.Link><FaRocket className="me-2" />ERPNext Integrations</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link><FaTools className="me-2" />Build</Nav.Link>
+        <Nav.Link><VscTools className="me-2" />Build</Nav.Link>
       </Nav.Item>
     </Nav>
   );

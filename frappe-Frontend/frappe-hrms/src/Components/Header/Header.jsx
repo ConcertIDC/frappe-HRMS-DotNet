@@ -14,7 +14,7 @@ const Header = () => {
       expand="lg"
       className="shadow-sm px-4"
     >
-      <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+      <Navbar.Brand as={Link} to="/dashboard" className="d-flex align-items-center">
            <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '10px' ,borderRadius:'10px',marginLeft:'10px'}} />
         </Navbar.Brand>
 

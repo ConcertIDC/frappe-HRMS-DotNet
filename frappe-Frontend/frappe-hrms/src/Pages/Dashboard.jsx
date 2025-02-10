@@ -4,7 +4,7 @@ import Shortcut from '../Components/Shortcut/Shortcut';
 
 const Dashboard = () => {
     return (
-        <Container fluid>
+        <Container fluid className='border rounded p-4'>
             {/* Shortcuts Section */}
             <h5 className="fw-semibold mb-4">Your Shortcuts</h5>
             <Row className="mb-4">
