@@ -31,10 +31,11 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
     setCurrentPage(1); // Reset to first page on new search
   };
 
-  const secondColumnKey = columns[0]?.key;
+  const firstColumnKey = columns[0]?.key;
+  const lastColumnKey = columns[columns.length - 1]?.key;
 
   const filteredData = data?.filter((item) =>
-    item[secondColumnKey]?.toString().toLowerCase().includes(searchQuery)
+    item[firstColumnKey]?.toString().toLowerCase().includes(searchQuery)
   );
 
   const paginatedData = filteredData?.slice(
@@ -64,20 +65,21 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
           <Table className="rounded">
             <thead className="rounded">
               <tr className="rounded">
-                <th style={{ backgroundColor: "#c1c1c145" }}>
+                <th style={{ backgroundColor: "#c1c1c145",width:"10px" }}>
                   <Form.Check
                     type="checkbox"
                     checked={allRowsSelected}
                     onChange={toggleSelectAll}
                   />
                 </th>
-                {columns.map((item) => (
+                {columns.map((item, index) => (
                   <th
                     key={item.key}
                     style={{
                       backgroundColor: "#c1c1c145",
                       color: "rgb(77, 75, 75)",
                       fontWeight: "normal",
+                      textAlign: index === columns.length - 1 ? "right" : "left",
                     }}
                   >
                     {item.header}
@@ -85,7 +87,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                 ))}
               </tr>
             </thead>
-            <tbody >
+            <tbody>
               {paginatedData?.map((item) => (
                 <tr className="border-bottom bg-dark" key={item.id}>
                   {/* Individual row checkboxes */}
@@ -106,6 +108,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                         fontWeight: index === 0 ? "550" : "normal",
                         color: index === 0 ? "rgb(78, 76, 76)" : "rgb(77, 75, 75)",
                         cursor: "pointer",
+                        textAlign: index === columns.length - 1 ? "right" : "left",
                       }}
                       className="hover-table"
                     >
@@ -117,21 +120,21 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                         >
                           {item[col.key] === 0 ? "Active" : "Inactive"}
                         </span>
-                      )
-                      :col.key === "disabled"?(<span
-                        className={`status-badge ${
-                          item.disabled ? "enabled-status" : "disabled-status"
-                        }`}
-                      >
-                        {item.disabled ? "Enabled" : "Disabled"}
-                      </span>)
-                       : col.key === "designation" ? (
+                      ) : col.key === "disabled" ? (
+                        <span
+                          className={`status-badge ${
+                            item.disabled ? "enabled-status" : "disabled-status"
+                          }`}
+                        >
+                          {item.disabled ? "Enabled" : "Disabled"}
+                        </span>
+                      ) : col.key === "designation" ? (
                         item.designation?.designationName
                       ) : (
                         item[col.key]
                       )}
                     </td>
-                  ))}                 
+                  ))}
                 </tr>
               ))}
             </tbody>
