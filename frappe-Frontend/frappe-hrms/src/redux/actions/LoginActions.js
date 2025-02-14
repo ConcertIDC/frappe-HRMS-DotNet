@@ -1,7 +1,7 @@
 // import axios from "axios";
 import { Login } from "../constants/index";
 // import { BASEURL } from "../../Constant/ConstatntData";
-import { loginApi } from "../../interceptor/service/loginService";
+import { loginApi } from "../../interceptor/service/LoginService";
 
 export const LoginAction = (payload) => async (dispatch) => {
     dispatch({

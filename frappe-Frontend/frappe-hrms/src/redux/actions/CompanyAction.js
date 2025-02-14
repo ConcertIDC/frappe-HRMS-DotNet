@@ -1,5 +1,5 @@
 import { Company } from "../constants/company";
-import { branchApi, companyApi, departmentApi, designationtApi } from "../../interceptor/service/companyService";
+import { branchApi, companyApi, departmentApi, designationtApi, employmentTypeApi } from "../../interceptor/service/CompanyServices";
 
 export const getCompanyList = () => async (dispatch) => {
     dispatch({
@@ -68,6 +68,26 @@ export const getDesignationList = () => async (dispatch) => {
     });
     try {
         const { data } = await designationtApi();
+        console.log("data", data);
+        await dispatch({
+            type: Company.SUCCESS.type,
+            payload: { loading: false, data: data },
+        });
+    } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false, data: {} },
+        });
+    }
+};
+
+export const getEmploymentTypeList = () => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        const { data } = await employmentTypeApi();
         console.log("data", data);
         await dispatch({
             type: Company.SUCCESS.type,

@@ -6,6 +6,7 @@ import { SignupReducer } from '../reducers/SignUpReducers';
 import { OrganisationReducer } from '../reducers/OrganisationReducer';
 import { CompanyReducer } from '../reducers/CompanyReducers';
 import { EmployeeReducer } from '../reducers/EmployeeReducer';
+import { JobReducer } from '../reducers/JobReducer';
 
 const rootReducer = combineReducers({
     auth: LoginReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     Organisation : OrganisationReducer,
     Company : CompanyReducer,
     Employee : EmployeeReducer,
+    Job : JobReducer,
 });
 console.log('CompanyReducer');
 

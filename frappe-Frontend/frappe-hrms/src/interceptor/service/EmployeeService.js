@@ -1,4 +1,4 @@
-import axiosInstance from '../cofig/axiosConfig';
+import axiosInstance from '../config/axiosConfig';
 
 export const employeeApi = () => {
     return axiosInstance.get('/Employee/GetAllEmployees');

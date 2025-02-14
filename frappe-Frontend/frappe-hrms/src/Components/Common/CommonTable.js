@@ -7,33 +7,28 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Check if all rows are selected
   const allRowsSelected = selectedRows.length === data.length && data.length > 0;
 
-  // Toggle individual row selection
   const toggleRowSelection = (id) => {
     setSelectedRows((prev) =>
       prev.includes(id) ? prev.filter((row) => row !== id) : [...prev, id]
     );
   };
 
-  // Toggle "Select All" functionality
   const toggleSelectAll = () => {
     if (allRowsSelected) {
-      setSelectedRows([]); // Deselect all
+      setSelectedRows([]);
     } else {
-      setSelectedRows(data.map((item) => item.id)); // Select all
+      setSelectedRows(data.map((item) => item.id));
     }
   };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value.toLowerCase());
-    setCurrentPage(1); // Reset to first page on new search
+    setCurrentPage(1);
   };
 
   const firstColumnKey = columns[0]?.key;
-  const lastColumnKey = columns[columns.length - 1]?.key;
-
   const filteredData = data?.filter((item) =>
     item[firstColumnKey]?.toString().toLowerCase().includes(searchQuery)
   );
@@ -65,7 +60,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
           <Table className="rounded">
             <thead className="rounded">
               <tr className="rounded">
-                <th style={{ backgroundColor: "#c1c1c145",width:"10px" }}>
+                <th style={{ backgroundColor: "#c1c1c145", width: "10px" }}>
                   <Form.Check
                     type="checkbox"
                     checked={allRowsSelected}
@@ -90,7 +85,6 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
             <tbody>
               {paginatedData?.map((item) => (
                 <tr className="border-bottom bg-dark" key={item.id}>
-                  {/* Individual row checkboxes */}
                   <td>
                     <Form.Check
                       type="checkbox"
@@ -114,11 +108,42 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                     >
                       {col.key === "status" ? (
                         <span
-                          className={`status-badge ${
-                            item[col.key] === 0 ? "active-status" : "inactive-status"
-                          }`}
+                          style={{
+                            padding: "0px 10px",
+                            borderRadius: "15px",
+                            fontSize: "14px",
+                            display: "inline-block",
+                            color:
+                              item[col.key] === "Open" || item[col.key] === "Replied"
+                                ? "#a14f00"
+                                : item[col.key] === "Accepted"
+                                ? "#267e4c"
+                                : item[col.key] === "Rejected" || item[col.key] === "Hold"
+                                ? "#b23c3c"
+                                : item[col.key] === 1
+                                ? "#267e4c"
+                                : item[col.key] === 0
+                                ? "#b23c3c"
+                                : "#000",
+                            backgroundColor:
+                              item[col.key] === "Open"|| item[col.key] === "Replied"
+                                ? "#ffecd6"
+                                : item[col.key] === "Accepted"
+                                ? "#d7f5e5"
+                                : item[col.key] === "Rejected" || item[col.key] === "Hold"
+                                ? "#fde8e8"
+                                : item[col.key] === 1
+                                ? "#d7f5e5"
+                                : item[col.key] === 0
+                                ? "#fde8e8"
+                                : "#f1f1f1",
+                          }}
                         >
-                          {item[col.key] === 0 ? "Active" : "Inactive"}
+                          {item[col.key] === 1
+                            ? "Active"
+                            : item[col.key] === 0
+                            ? "Inactive"
+                            : item[col.key]}
                         </span>
                       ) : col.key === "disabled" ? (
                         <span
@@ -153,7 +178,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
                 variant="light"
                 onClick={() => {
                   setItemsPerPage(number);
-                  setCurrentPage(1); // Reset to first page when items per page changes
+                  setCurrentPage(1);
                 }}
               >
                 {number}

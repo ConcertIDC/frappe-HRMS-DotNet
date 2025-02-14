@@ -13,6 +13,8 @@ import DepartmentListPage from "./Pages/Company/DepartmentListPage";
 import DesignationListPage from "./Pages/Company/DesignationListPage";
 import EmployeeGradeListPage from "./Pages/Employee/EmployeeGradeListPage";
 import EmployeeGroupListPage from "./Pages/Employee/EmployeeGroupListPage";
+import EmploymentTypeListPage from "./Pages/Employee/EmploymentTypeListPage";
+import JobApplicantListPage from "./Pages/Job/JobApplicantListPage";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
               <Route path="/designation" element={<DesignationListPage />} />
               <Route path="/employee-grade" element={<EmployeeGradeListPage />} />
               <Route path="/employee-group" element={<EmployeeGroupListPage />} />
+              <Route path="/employment-type" element={<EmploymentTypeListPage />} />
+              <Route path="/job-applicant" element={<JobApplicantListPage />} />
             </Route>
           </Route>
         </Routes>

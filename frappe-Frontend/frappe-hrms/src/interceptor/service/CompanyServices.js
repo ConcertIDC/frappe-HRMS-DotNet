@@ -1,4 +1,4 @@
-import axiosInstance from '../cofig/axiosConfig';
+import axiosInstance from '../config/axiosConfig';
 
 export const companyApi = () => {
     return axiosInstance.get('/Company/GetAllCompanies');
@@ -11,5 +11,8 @@ export const departmentApi = () => {
 };
 export const designationtApi = () => {
     return axiosInstance.get('/Company/GetAllDesignations');
+};
+export const employmentTypeApi = () => {
+    return axiosInstance.get('/Company/GetAllemploymentTypes');
 };
 
