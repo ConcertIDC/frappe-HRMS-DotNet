@@ -1,6 +1,5 @@
 ﻿using frappe_HRMS.Services.Interfaces.Attendance;
 using frappe_HRMS.Services.Interfaces.Claim;
-using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Interfaces.Projects;
@@ -11,13 +10,13 @@ namespace frappe_HRMS.Services.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        ISignupRepository Signup { get; }
-        ICompanyRepository Company { get; }
+        //ISignupService Signup { get; }
+        //ICompanyService Company { get; }
         IEmployeeRepository Employee { get; }
-        IBranchRepository Branch { get; }
-        IDesignationRepository Designation { get; }
-        IDepartmentRepository Department { get; }
-        IEmploymentTypeRepository EmploymentType { get; }
+        //IBranchService Branch { get; }
+        //IDesignationService Designation { get; }
+        //IDepartmentService Department { get; }
+        //IEmploymentTypeService EmploymentType { get; }
         IEmployeeGroupRepository EmployeeGroup { get; }
         IEmployeeGradeRepository EmployeeGrade { get; }
         INewJobApplicantRepository NewJobApplicant { get; }
@@ -35,24 +34,13 @@ namespace frappe_HRMS.Services.Interfaces
         ILeaveApplicationRepository LeaveApplication { get; }
         ILeaveTypeRepository LeaveType { get; }
         ICompensatoryLeaveRequestRepository CompensatoryLeaveRequest { get; }
-        IAttendanceRepository Attendance { get; }
-        IAttendanceRequestRepository AttendanceRequest { get; }
-        IShiftTypeRepository ShiftType { get; }
-        IEmployeeCheckinRepository EmployeeCheckin { get; }
-        IHolidayListRepository HolidayList { get; }
+        //IAttendanceService Attendance { get; }
+        //IAttendanceRequestService AttendanceRequest { get; }
+        //IShiftTypeService ShiftType { get; }
+        //IEmployeeCheckinService EmployeeCheckin { get; }
+        //IHolidayListService HolidayList { get; }
         IEmployeeAttendanceRepository EmployeeAttendance { get; }
-        IExpenseClaimRepository ExpenseClaim { get; }
-        IAccountingDetailsRepository AccountingDetails { get; }
-        IExpensesRepository Expenses { get; }
-        IExpenseClaimTypeRepository ExpenseClaimType { get; }
-        ITravelRequestRepository TravelRequest { get; }
-        ITravelItineraryRepository TravelItinerary { get; }
-        IPurposeOfTravelRepository PurposeOfTravel { get; }
-        IAdvancePaymentRepository AdvancePayment { get; }
-        IAccountRepository Account {  get; }
-        IEmployeeAdvanceRepository EmployeeAdvance { get; }
-        IModeOfPaymentReposiory ModeOfPayment {  get; }
-        ITaxesAndChargesRepository TaxesAndCharges { get; }
+        
         IProjectRepository Project { get; }
         IProjectTemplateRepository ProjectTemplate { get; }
         IProjectTypeRepository ProjectType { get; }

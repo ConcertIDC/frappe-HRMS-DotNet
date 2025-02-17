@@ -8,26 +8,25 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUnitOfWork _unitOfWork) : ControllerBase
+    public class UserController(ISignupService signupService) : ControllerBase
     {
         [HttpPost("CreateUser")]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
-            var result = await _unitOfWork.Signup.AddAsync(user);
+            var result = await signupService.AddAsync(user);
             return result;
         }
 
         [HttpGet("GetAllUsers")]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
-            var result = await _unitOfWork.Signup.GetAll();
+            var result = await signupService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditUser")]
         public async Task<ActionResult<User>> EditUser(User user)
         {
-            var result = _unitOfWork.Signup.Update(user);
-            await _unitOfWork.Save();
+            var result = await signupService.Update(user);
             return result;
         }
     }

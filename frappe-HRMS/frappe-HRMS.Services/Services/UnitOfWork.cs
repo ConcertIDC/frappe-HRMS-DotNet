@@ -23,15 +23,15 @@ namespace frappe_HRMS.Services.Services
         private bool _disposed;
 
         public IEmployeeRepository Employee { get; set; }
-        public IBranchRepository Branch { get; set; }
+        /*public IBranchRepository Branch { get; set; }
         public IDepartmentRepository Department { get; set; }
-        public IEmploymentTypeRepository EmploymentType { get; set; }
+        public IEmploymentTypeRepository EmploymentType { get; set; }*/
         public IEmployeeGradeRepository EmployeeGrade { get; set; }
         public IEmployeeGroupRepository EmployeeGroup { get; set; }
         public INewJobApplicantRepository NewJobApplicant { get; set; }
         public INewJobOpeningRepository NewJobOpening { get; set; }
-        public ISignupRepository Signup { get; set; }
-        public ICompanyRepository Company { get; set; }
+        public ISignupService Signup { get; set; }
+        /*public ICompanyRepository Company { get; set; }*/
         public IEmployeeAddressRepository EmployeeAddress { get; set; }
         public IEmployeeJoiningRepository EmployeeJoining { get; set; }
         public IEmployeeSalaryRepository EmployeeSalary { get; set; }
@@ -45,25 +45,25 @@ namespace frappe_HRMS.Services.Services
         public ILeaveApplicationRepository LeaveApplication { get; set; }
         public ILeaveTypeRepository LeaveType { get; set; }
         public ICompensatoryLeaveRequestRepository CompensatoryLeaveRequest { get; set; }
-        public IDesignationRepository Designation { get; set; }
-        public IAttendanceRepository Attendance { get; set; }
-        public IAttendanceRequestRepository AttendanceRequest { get; set; }
-        public IShiftTypeRepository ShiftType { get; set; }
-        public IEmployeeCheckinRepository EmployeeCheckin { get; set; }
-        public IHolidayListRepository HolidayList { get; set; }
+        /*public IDesignationRepository Designation { get; set; }*/
+        public IAttendanceService Attendance { get; set; }
+        public IAttendanceRequestService AttendanceRequest { get; set; }
+        public IShiftTypeService ShiftType { get; set; }
+        public IEmployeeCheckinService EmployeeCheckin { get; set; }
+        public IHolidayListService HolidayList { get; set; }
         public IEmployeeAttendanceRepository EmployeeAttendance { get; set; }
-        public IExpenseClaimRepository ExpenseClaim {get; set; }
-        public IAccountingDetailsRepository AccountingDetails { get; set; }
-        public IExpensesRepository Expenses { get; set; }
-        public IExpenseClaimTypeRepository ExpenseClaimType { get; set; }
-        public ITravelRequestRepository TravelRequest { get; set; }
-        public ITravelItineraryRepository TravelItinerary { get; set; }
-        public IPurposeOfTravelRepository PurposeOfTravel { get; set; }
-        public IAdvancePaymentRepository AdvancePayment { get; set; }
-        public IAccountRepository Account {  get; set; }
-        public IEmployeeAdvanceRepository EmployeeAdvance { get; set; }
-        public IModeOfPaymentReposiory ModeOfPayment {  get; set; }
-        public ITaxesAndChargesRepository TaxesAndCharges { get; set; }
+        public IExpenseClaimService ExpenseClaim {get; set; }
+        public IAccountingDetailsService AccountingDetails { get; set; }
+        public IExpensesService Expenses { get; set; }
+        public IExpenseClaimTypeService ExpenseClaimType { get; set; }
+        public ITravelRequestService TravelRequest { get; set; }
+        public ITravelItineraryService TravelItinerary { get; set; }
+        public IPurposeOfTravelService PurposeOfTravel { get; set; }
+        public IAdvancePaymentService AdvancePayment { get; set; }
+        public IAccountService Account {  get; set; }
+        public IEmployeeAdvanceService EmployeeAdvance { get; set; }
+        public IModeOfPaymentService ModeOfPayment {  get; set; }
+        public ITaxesAndChargesService TaxesAndCharges { get; set; }
         public IProjectRepository Project { get; set; }
         public IProjectTemplateRepository ProjectTemplate { get; set; }
         public IProjectTypeRepository ProjectType { get; set; }
@@ -76,13 +76,7 @@ namespace frappe_HRMS.Services.Services
         public UnitOfWork(HRMSDbContext context)
         {
             _context = context;
-            Signup = new SignupRepository(_context);
-            Company = new CompanyRepository(_context);
             Employee = new EmployeeRepository(_context);
-            Branch = new BranchRepository(_context);
-            Designation = new DesignationRepository(_context);
-            Department = new DepartmentRepository(_context);
-            EmploymentType = new EmploymentTypeRepository(_context);
             EmployeeGrade = new EmployeeGradeRepository(_context);
             EmployeeGroup = new EmployeeGroupRepository(_context);
             NewJobApplicant = new NewJobApplicantRepository(_context);
@@ -100,24 +94,6 @@ namespace frappe_HRMS.Services.Services
             LeaveApplication = new LeaveApplicationRepository(_context);
             LeaveType = new LeaveTypeRepository(_context);
             CompensatoryLeaveRequest = new CompensatoryLeaveRequestRepository(_context);
-            Attendance = new AttendanceRepository(_context);
-            AttendanceRequest = new AttendanceRequestRepository(_context);
-            ShiftType = new ShiftTypeRepository(_context);
-            EmployeeCheckin = new EmployeeCheckinRepository(_context);
-            HolidayList = new HolidayListRepository(_context);
-            EmployeeAttendance = new EmployeeAttendanceRepository(_context);
-            ExpenseClaim = new ExpenseClaimRepository(_context);
-            ExpenseClaimType = new ExpenseClaimTypeRepository(_context);
-            Expenses = new ExpensesRepository(_context);
-            AccountingDetails = new AccountingDetailsRepository(_context);
-            TravelRequest = new TravelRequestRepository(_context);
-            TravelItinerary = new TravelItineraryRepository(_context);
-            PurposeOfTravel = new PurposeOfTravelRepository(_context);
-            AdvancePayment = new AdvancePaymentRepository(_context);
-            Account = new AccountRepository(_context);
-            EmployeeAdvance = new EmployeeAdvanceRepository(_context);
-            ModeOfPayment = new ModeOfPaymentReposiory(_context);
-            TaxesAndCharges = new TaxesAndChargesRepository(_context);
             Project = new ProjectRepository(_context);
             ProjectTemplate = new ProjectTemplateRepository(_context);
             ProjectType = new ProjectTypeRepository(_context);

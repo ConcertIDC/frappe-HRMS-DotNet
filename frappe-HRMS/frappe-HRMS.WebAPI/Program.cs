@@ -1,9 +1,14 @@
 using frappe_HRMS.Infrastructure.Context;
+using frappe_HRMS.Infrastructure.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces;
+using frappe_HRMS.Services.Interfaces.Attendance;
+using frappe_HRMS.Services.Interfaces.Claim;
 using frappe_HRMS.Services.Interfaces.Company;
 using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Interfaces.Leave;
 using frappe_HRMS.Services.Services;
+using frappe_HRMS.Services.Services.Attendance;
+using frappe_HRMS.Services.Services.Claim;
 using frappe_HRMS.Services.Services.Company;
 using frappe_HRMS.Services.Services.Employee;
 using frappe_HRMS.Services.Services.Leave;
@@ -55,7 +60,31 @@ builder.Services.AddAuthentication(x =>
 });
 
 #region Services
+builder.Services.AddScoped<ISignupService, SignupService>();
+builder.Services.AddScoped<IAttendanceService,AttendanceService>();
+builder.Services.AddScoped<IAttendanceRequestService,AttendanceRequestService>();
+builder.Services.AddScoped<IShiftTypeService,ShiftTypeService>();
+builder.Services.AddScoped<IEmployeeCheckinService,EmployeeCheckinService>();
+builder.Services.AddScoped<IHolidayListService,HolidayListService>();
+builder.Services.AddScoped<IBranchService, BranchService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IDesignationService, DesignationService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IEmploymentTypeService, EmploymentTypeService>();
+builder.Services.AddScoped<IAccountingDetailsService,AccountingDetailsService>();
+builder.Services.AddScoped<IAccountService,AccountService>();
+builder.Services.AddScoped<IAdvancePaymentService,AdvancePaymentService>();
+builder.Services.AddScoped<IEmployeeAdvanceService, EmployeeAdvanceService>();
+builder.Services.AddScoped<IExpenseClaimService,ExpenseClaimService>();
+builder.Services.AddScoped<IExpenseClaimTypeService,ExpenseClaimTypeService>();
+builder.Services.AddScoped<IExpensesService,ExpensesService>();
+builder.Services.AddScoped<IModeOfPaymentService,ModeOfPaymentService>();
+builder.Services.AddScoped<IPurposeOfTravelService,PurposeOfTravelService>();
+builder.Services.AddScoped<ITaxesAndChargesService,TaxesAndChargesService>();
+builder.Services.AddScoped<ITravelItineraryService,TravelItineraryService>();
+builder.Services.AddScoped<ITravelRequestService,TravelRequestService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<frappe_HRMS.Infrastructure.Interfaces.IUnitOfWork, frappe_HRMS.Infrastructure.Repositories.UnitOfWork>();
 #endregion
 
 builder.Services.AddSwaggerGen();

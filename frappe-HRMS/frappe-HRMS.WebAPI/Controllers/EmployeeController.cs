@@ -121,44 +121,6 @@ namespace frappe_HRMS.WebAPI.Controllers
             await _unitOfWork.Save();
             return result;
         }
-        [HttpPost("CreateEmploymentType")]
-        public async Task<ActionResult<EmploymentType>> CreateEmploymentType(EmploymentType employmentType)
-        {
-            var result = await _unitOfWork.EmploymentType.AddAsync(employmentType);
-            return result;
-        }
-
-        [HttpGet("GetAllemploymentTypes")]
-        public async Task<ActionResult<List<EmploymentType>>> GetAllemploymentTypes()
-        {
-            var result = await _unitOfWork.EmploymentType.GetAll();
-            return Ok(result);
-        }
-        [HttpGet("GetEmploymentTypeById")]
-        public async Task<ActionResult<EmploymentType>> GetEmploymentTypeById(int id)
-        {
-            try
-            {
-                var result = _unitOfWork.EmploymentType.GetById(id);
-                if (result == null)
-                {
-                    return NotFound($"Employment Type with Id = {id} not found.");
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpPost("EditEmploymentType")]
-        public async Task<ActionResult<EmploymentType>> EditEmploymentType(EmploymentType employmentType)
-        {
-            var result = _unitOfWork.EmploymentType.Update(employmentType);
-            await _unitOfWork.Save();
-            return result;
-        }
-
 
         [HttpPost("CreateJobApplicant")]
         public async Task<ActionResult<NewJobApplicant>> CreateJobApplicant(NewJobApplicant jobApplicant)

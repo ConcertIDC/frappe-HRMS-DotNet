@@ -11,14 +11,14 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController(IUnitOfWork _unitOfWork, IConfiguration configuration) : ControllerBase
+    public class LoginController(ISignupService signupService, IConfiguration configuration) : ControllerBase
     {
         [HttpPost]
         public  IActionResult Login([FromBody] LoginRequestDto request)
         {
             try
             {
-                var user = _unitOfWork.Signup.GetAll().Result.Where(x => x.Email == request.Email && x.Password == request.Password).FirstOrDefault();
+                var user = signupService.GetAll().Result.Where(x => x.Email == request.Email && x.Password == request.Password).FirstOrDefault();
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Email),

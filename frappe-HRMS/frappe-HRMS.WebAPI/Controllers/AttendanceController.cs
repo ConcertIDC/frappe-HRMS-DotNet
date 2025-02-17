@@ -1,6 +1,7 @@
 ﻿using frappe_HRMS.Domain.Attendance;
 using frappe_HRMS.Domain.Employee;
 using frappe_HRMS.Services.Interfaces;
+using frappe_HRMS.Services.Interfaces.Attendance;
 using frappe_HRMS.Services.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +10,20 @@ namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AttendanceController(IUnitOfWork unitOfWork) : ControllerBase
+    public class AttendanceController(IAttendanceService attendanceService, IAttendanceRequestService attendanceRequestService,
+        IShiftTypeService shiftTypeService,IEmployeeCheckinService employeeCheckinService,IHolidayListService holidayListService) : ControllerBase
     {
         [HttpPost("CreateAttendance")]
         public async Task<ActionResult<Attendance>> CreateAttendance(Attendance attendance)
         {
-            var result = await unitOfWork.Attendance.AddAsync(attendance);
+            var result = await attendanceService.AddAsync(attendance);
             return result;
         }
 
         [HttpGet("GetAllAttendances")]
         public async Task<ActionResult<List<Attendance>>> GetAllAttendances()
         {
-            var result = await unitOfWork.Attendance.GetAll();
+            var result = await attendanceService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetAttendanceById")]
@@ -29,7 +31,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.Attendance.GetById(id);
+                var result = attendanceService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Attendance with Id = {id} not found.");
@@ -43,23 +45,22 @@ namespace frappe_HRMS.WebAPI.Controllers
         }
 
         [HttpPost("EditAttendance")]
-        public async Task<ActionResult<Attendance>> EditEmployee(Attendance attendance)
+        public async Task<ActionResult<Attendance>> EditAttendance(Attendance attendance)
         {
-            var result = unitOfWork.Attendance.Update(attendance);
-            await unitOfWork.Save();
+            var result = await attendanceService.Update(attendance);
             return result;
         }
         [HttpPost("CreateAttendanceRequest")]
         public async Task<ActionResult<AttendanceRequest>> CreateAttendanceRequest(AttendanceRequest attendance)
         {
-            var result = await unitOfWork.AttendanceRequest.AddAsync(attendance);
+            var result = await attendanceRequestService.AddAsync(attendance);
             return result;
         }
 
         [HttpGet("GetAllAttendanceRequests")]
         public async Task<ActionResult<List<AttendanceRequest>>> GetAllAttendanceRequests()
         {
-            var result = await unitOfWork.AttendanceRequest.GetAll();
+            var result = await attendanceRequestService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetAttendanceRequestById")]
@@ -67,7 +68,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.AttendanceRequest.GetById(id);
+                var result = attendanceRequestService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Attendance with Id = {id} not found.");
@@ -81,23 +82,22 @@ namespace frappe_HRMS.WebAPI.Controllers
         }
 
         [HttpPost("AttendanceRequest")]
-        public async Task<ActionResult<AttendanceRequest>> EditEmployee(AttendanceRequest attendance)
+        public async Task<ActionResult<AttendanceRequest>> EditAttendanceRequest(AttendanceRequest attendance)
         {
-            var result = unitOfWork.AttendanceRequest.Update(attendance);
-            await unitOfWork.Save();
+            var result = await attendanceRequestService.Update(attendance);
             return result;
         }
         [HttpPost("CreateShiftType")]
         public async Task<ActionResult<ShiftType>> CreateAttendance(ShiftType shift)
         {
-            var result = await unitOfWork.ShiftType.AddAsync(shift);
+            var result = await shiftTypeService.AddAsync(shift);
             return result;
         }
 
         [HttpGet("GetAllShiftTypes")]
         public async Task<ActionResult<List<ShiftType>>> GetAllShiftTypes()
         {
-            var result = await unitOfWork.ShiftType.GetAll();
+            var result = await shiftTypeService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetShiftTypeById")]
@@ -105,7 +105,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.ShiftType.GetById(id);
+                var result = shiftTypeService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"ShiftType with Id = {id} not found.");
@@ -121,21 +121,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditShiftType")]
         public async Task<ActionResult<ShiftType>> EditEmployee(ShiftType shift)
         {
-            var result = unitOfWork.ShiftType.Update(shift);
-            await unitOfWork.Save();
+            var result = await shiftTypeService.Update(shift);
             return result;
         }
         [HttpPost("CreateEmployeeCheckin")]
         public async Task<ActionResult<EmployeeCheckin>> CreateEmployeeCheckin(EmployeeCheckin checkin)
         {
-            var result = await unitOfWork.EmployeeCheckin.AddAsync(checkin);
+            var result = await employeeCheckinService.AddAsync(checkin);
             return result;
         }
 
         [HttpGet("GetAllEmployeeCheckins")]
         public async Task<ActionResult<List<EmployeeCheckin>>> GetAllEmployeeCheckins()
         {
-            var result = await unitOfWork.EmployeeCheckin.GetAll();
+            var result = await employeeCheckinService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetEmployeeCheckinById")]
@@ -143,7 +142,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.EmployeeCheckin.GetById(id);
+                var result = employeeCheckinService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"EmployeeCheckin with Id = {id} not found.");
@@ -159,21 +158,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditEmployeeCheckin")]
         public async Task<ActionResult<EmployeeCheckin>> EditEmployeeCheckin(EmployeeCheckin checkin)
         {
-            var result = unitOfWork.EmployeeCheckin.Update(checkin);
-            await unitOfWork.Save();
+            var result = await employeeCheckinService.Update(checkin);
             return result;
         }
         [HttpPost("CreateHolidayList")]
         public async Task<ActionResult<HolidayList>> CreateHolidayList(HolidayList holidayList)
         {
-            var result = await unitOfWork.HolidayList.AddAsync(holidayList);
+            var result = await holidayListService.AddAsync(holidayList);
             return result;
         }
 
         [HttpGet("GetAllHolidayLists")]
         public async Task<ActionResult<List<HolidayList>>> GetAllHolidayLists()
         {
-            var result = await unitOfWork.HolidayList.GetAll();
+            var result = await holidayListService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetHolidayListById")]
@@ -181,7 +179,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.HolidayList.GetById(id);
+                var result = holidayListService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"HolidayList with Id = {id} not found.");
@@ -197,8 +195,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditHolidayList")]
         public async Task<ActionResult<HolidayList>> EditHolidayList(HolidayList holidayList)
         {
-            var result = unitOfWork.HolidayList.Update(holidayList);
-            await unitOfWork.Save();
+            var result = await holidayListService.Update(holidayList);
             return result;
         }
     }
