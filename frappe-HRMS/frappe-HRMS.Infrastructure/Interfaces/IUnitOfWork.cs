@@ -2,6 +2,7 @@
 using frappe_HRMS.Infrastructure.Interfaces.Attendance;
 using frappe_HRMS.Infrastructure.Interfaces.Claim;
 using frappe_HRMS.Infrastructure.Interfaces.Company;
+using frappe_HRMS.Infrastructure.Interfaces.Employee;
 
 namespace frappe_HRMS.Infrastructure.Interfaces
 {
@@ -31,6 +32,21 @@ namespace frappe_HRMS.Infrastructure.Interfaces
         IEmployeeAdvanceRepository EmployeeAdvance { get; }
         IModeOfPaymentReposiory ModeOfPayment { get; }
         ITaxesAndChargesRepository TaxesAndCharges { get; }
+        IEmployeeGroupRepository EmployeeGroup { get; }
+        IEmployeeGradeRepository EmployeeGrade { get; }
+        INewJobApplicantRepository NewJobApplicant { get; }
+        INewJobOpeningRepository NewJobOpening { get; }
+        IEmployeeAddressRepository EmployeeAddress { get; }
+        IEmployeeJoiningRepository EmployeeJoining { get; }
+        IEmployeeSalaryRepository EmployeeSalary { get; }
+        IExitRepository Exit { get; }
+        ICostCenterRepository CostCenter { get; }
+        IEmployeePersonalRepository PersonalDetails { get; }
+        IEmployeeProfileRepository EmployeeProfile { get; }
+        IEducationalQualificationRepository EducationalQualification { get; }
+        IPreviousWorkExperienceRepository PreviousWorkExperience { get; }
+        IEmployeeHistoryRepository EmployeeHistory { get; }
+        IEmployeeRepository Employee { get; }
         Task<int> Save();
     }
 }

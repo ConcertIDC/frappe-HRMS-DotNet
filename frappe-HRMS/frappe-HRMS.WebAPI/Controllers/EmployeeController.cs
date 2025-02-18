@@ -1,27 +1,29 @@
-﻿using frappe_HRMS.Domain.Company;
-using frappe_HRMS.Domain.Employee;
-using frappe_HRMS.Services.Interfaces;
+﻿using frappe_HRMS.Domain.Employee;
+using frappe_HRMS.Services.Interfaces.Employee;
 using frappe_HRMS.Services.Services.Employee;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController(IUnitOfWork _unitOfWork) : ControllerBase
+    public class EmployeeController(IEmployeeService employeeService,IEmployeeGradeService employeeGradeService,IEmployeeGroupService employeeGroupService,
+        INewJobApplicantService newJobApplicantService,INewJobOpeningService newJobOpeningService,IEmployeeAddressService employeeAddressService,
+        IEmployeeJoiningService employeeJoiningService,ICostCenterService costCenterService,IEmployeeSalaryService employeeSalaryService,IExitService exitService,
+        IEmployeePersonalService employeePersonalService,IEmployeeProfileService employeeProfileService,IEmployeeHistoryService employeeHistoryService,
+        IEmployeeAttendanceService employeeAttendanceService,IEducationalQualificationService educationalQualificationService,IPreviousWorkExperienceService previousWorkExperienceService) : ControllerBase
     {
         [HttpPost("CreateEmployee")]
         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {
-            var result = await _unitOfWork.Employee.AddAsync(employee);
+            var result = await employeeService.AddAsync(employee);
             return result;
         }
 
         [HttpGet("GetAllEmployees")]
         public async Task<ActionResult<List<Employee>>> GetAllEmployees()
         {
-            var result = await _unitOfWork.Employee.GetAllEmployees();
+            var result = await employeeService.GetAllEmployees();
             return Ok(result);
         }
         [HttpGet("GetEmployeeById")]
@@ -29,7 +31,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.Employee.GetEmployeeById(id); 
+                var result = employeeService.GetEmployeeById(id); 
                 if (result == null)
                 {
                     return NotFound($"Employee with Id = {id} not found.");
@@ -45,14 +47,13 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditEmployee")]
         public async Task<ActionResult<Employee>> EditEmployee(Employee employee)
         {
-            var result = _unitOfWork.Employee.Update(employee);
-            await _unitOfWork.Save();
+            var result = await employeeService.Update(employee);
             return result;
         }
         [HttpPost("CreateEmployeeGroup")]
         public async Task<ActionResult<EmployeeGroup>> CreateEmployeeGroup(EmployeeGroup employeeGroup)
         {
-            var result = await _unitOfWork.EmployeeGroup.AddAsync(employeeGroup);
+            var result = await employeeGroupService.AddAsync(employeeGroup);
             return result;
         }
         [HttpGet("GetEmployeeGroupById")]
@@ -60,7 +61,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeGroup.GetById(id);
+                var result = employeeGroupService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee group with Id = {id} not found.");
@@ -75,20 +76,19 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllGroups")]
         public async Task<ActionResult<List<EmployeeGroup>>> GetAllGroups()
         {
-            var result = await _unitOfWork.EmployeeGroup.GetAll();
+            var result = await employeeGroupService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEmployeeGroup")]
         public async Task<ActionResult<EmployeeGroup>> EditEmployeeGroup(EmployeeGroup employeeGroup)
         {
-            var result = _unitOfWork.EmployeeGroup.Update(employeeGroup);
-            await _unitOfWork.Save();
+            var result = await employeeGroupService.Update(employeeGroup);
             return result;
         }
         [HttpPost("CreateEmployeeGrade")]
         public async Task<ActionResult<EmployeeGrade>> CreateEmployeeGrade(EmployeeGrade employeeGrade)
         {
-            var result = await _unitOfWork.EmployeeGrade.AddAsync(employeeGrade);
+            var result = await employeeGradeService.AddAsync(employeeGrade);
             return result;
         }
         [HttpGet("GetEmployeeGradeById")]
@@ -96,7 +96,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeGrade.GetById(id);
+                var result = employeeGradeService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Grade with Id = {id} not found.");
@@ -111,28 +111,27 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllEmployeeGrades")]
         public async Task<ActionResult<List<EmployeeGrade>>> GetAllEmployeeGrades()
         {
-            var result = await _unitOfWork.EmployeeGrade.GetAll();
+            var result = await employeeGradeService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEmployeeGrade")]
         public async Task<ActionResult<EmployeeGrade>> EditEmployeeGrade(EmployeeGrade employeeGrade)
         {
-            var result = _unitOfWork.EmployeeGrade.Update(employeeGrade);
-            await _unitOfWork.Save();
+            var result = await employeeGradeService.Update(employeeGrade);
             return result;
         }
 
         [HttpPost("CreateJobApplicant")]
         public async Task<ActionResult<NewJobApplicant>> CreateJobApplicant(NewJobApplicant jobApplicant)
         {
-            var result = await _unitOfWork.NewJobApplicant.AddAsync(jobApplicant);
+            var result = await newJobApplicantService.AddAsync(jobApplicant);
             return result;
         }
 
         [HttpGet("GetAllJobApplicants")]
         public async Task<ActionResult<List<NewJobApplicant>>> GetAllJobApplicants()
         {
-            var result = await _unitOfWork.NewJobApplicant.GetAll();
+            var result = await newJobApplicantService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetJobApplicantById")]
@@ -140,7 +139,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.NewJobApplicant.GetById(id);
+                var result = newJobApplicantService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee with Id = {id} not found.");
@@ -155,42 +154,40 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditJobApplicant")]
         public async Task<ActionResult<NewJobApplicant>> EditJobApplicant(NewJobApplicant jobApplicant)
         {
-            var result = _unitOfWork.NewJobApplicant.Update(jobApplicant);
-            await _unitOfWork.Save();
+            var result = await newJobApplicantService.Update(jobApplicant);
             return result;
         }
         [HttpPost("CreateJobOpening")]
         public async Task<ActionResult<NewJobOpening>> CreateJobOpening(NewJobOpening jobOpening)
         {
-            var result = await _unitOfWork.NewJobOpening.AddAsync(jobOpening);
+            var result = await newJobOpeningService.AddAsync(jobOpening);
             return result;
         }
 
         [HttpGet("GetAllJobOpenings")]
         public async Task<ActionResult<List<NewJobOpening>>> GetAllJobOpenings()
         {
-            var result = await _unitOfWork.NewJobOpening.GetAll();
+            var result = await newJobOpeningService.GetAll();
             return Ok(result);
         }
 
         [HttpPost("EditJobOpening")]
         public async Task<ActionResult<NewJobOpening>> EditJobOpening(NewJobOpening jobOpening)
         {
-            var result = _unitOfWork.NewJobOpening.Update(jobOpening);
-            await _unitOfWork.Save();
+            var result = await newJobOpeningService.Update(jobOpening);
             return result;
         }
         [HttpPost("CreateEmployeeAddress")]
         public async Task<ActionResult<EmployeeAddress>> CreateEmployeeAddress(EmployeeAddress address)
         {
-            var result = await _unitOfWork.EmployeeAddress.AddAsync(address);
+            var result = await employeeAddressService.AddAsync(address);
             return result;
         }
 
         [HttpGet("GetAllAddresses")]
         public async Task<ActionResult<List<EmployeeAddress>>> GetAllAddresses()
         {
-            var result = await _unitOfWork.EmployeeAddress.GetAll();
+            var result = await employeeAddressService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetEmployeeAddressById")]
@@ -198,7 +195,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeAddress.GetById(id);
+                var result = employeeAddressService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee with Id = {id} not found.");
@@ -213,14 +210,13 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditEmployeeAddress")]
         public async Task<ActionResult<EmployeeAddress>> EditEmployeeAddress(EmployeeAddress address)
         {
-            var result = _unitOfWork.EmployeeAddress.Update(address);
-            await _unitOfWork.Save();
+            var result = await employeeAddressService.Update(address);
             return result;
         }
         [HttpPost("CreateEmplyeeJoining")]
         public async Task<ActionResult<EmplyeeJoiningDetails>> CreateEmplyeeJoining(EmplyeeJoiningDetails joiningDetails)
         {
-            var result = await _unitOfWork.EmployeeJoining.AddAsync(joiningDetails);
+            var result = await employeeJoiningService.AddAsync(joiningDetails);
             return result;
         }
         [HttpGet("GetEmplyeeJoiningDetailsById")]
@@ -228,7 +224,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeJoining.GetById(id);
+                var result = employeeJoiningService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee joining details with Id = {id} not found.");
@@ -243,20 +239,19 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllEmplyeeJoiningDetails")]
         public async Task<ActionResult<List<EmplyeeJoiningDetails>>> GetAllEmplyeeJoiningDetails()
         {
-            var result = await _unitOfWork.EmployeeJoining.GetAll();
+            var result = await employeeJoiningService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEmplyeeJoiningDetails")]
         public async Task<ActionResult<EmplyeeJoiningDetails>> EditEmplyeeJoiningDetails(EmplyeeJoiningDetails joiningDetails)
         {
-            var result = _unitOfWork.EmployeeJoining.Update(joiningDetails);
-            await _unitOfWork.Save();
+            var result = await employeeJoiningService.Update(joiningDetails);
             return result;
         }
         [HttpPost("CreateEmployeeSalary")]
         public async Task<ActionResult<EmployeeSalary>> CreateEmployeeSalary(EmployeeSalary employeeSalary)
         {
-            var result = await _unitOfWork.EmployeeSalary.AddAsync(employeeSalary);
+            var result = await employeeSalaryService.AddAsync(employeeSalary);
             return result;
         }
         [HttpGet("GetEmployeeSalaryById")]
@@ -264,7 +259,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeSalary.GetById(id);
+                var result = employeeSalaryService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Salary with Id = {id} not found.");
@@ -279,20 +274,19 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllEmployeeSalary")]
         public async Task<ActionResult<List<EmployeeSalary>>> GetAllEmployeeSalary()
         {
-            var result = await _unitOfWork.EmployeeSalary.GetAll();
+            var result = await employeeSalaryService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEmployeeSalary")]
         public async Task<ActionResult<EmployeeSalary>> EditEmployeeSalary(EmployeeSalary employeeSalary)
         {
-            var result = _unitOfWork.EmployeeSalary.Update(employeeSalary);
-            await _unitOfWork.Save();
+            var result = await employeeSalaryService.Update(employeeSalary);
             return result;
         }
         [HttpPost("CreateCostCenter")]
         public async Task<ActionResult<CostCenter>> CreateCostCenter(CostCenter costCenter)
         {
-            var result = await _unitOfWork.CostCenter.AddAsync(costCenter);
+            var result = await costCenterService.AddAsync(costCenter);
             return result;
         }
         [HttpGet("GetCostCenterById")]
@@ -300,7 +294,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.CostCenter.GetById(id);
+                var result = costCenterService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"CostCenter with Id = {id} not found.");
@@ -315,21 +309,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllCostCenters")]
         public async Task<ActionResult<List<CostCenter>>> GetAllCostCenters()
         {
-            var result = await _unitOfWork.CostCenter.GetAll();
+            var result = await costCenterService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditCostCenter")]
         public async Task<ActionResult<CostCenter>> EditCostCenter(CostCenter costCenter)
         {
-            var result = _unitOfWork.CostCenter.Update(costCenter);
-            await _unitOfWork.Save();
+            var result = await costCenterService.Update(costCenter);
             return result;
         }
 
         [HttpPost("CreateExit")]
         public async Task<ActionResult<Exit>> CreateExit(Exit exit)
         {
-            var result = await _unitOfWork.Exit.AddAsync(exit);
+            var result = await exitService.AddAsync(exit);
             return result;
         }
         [HttpGet("GetExitById")]
@@ -337,7 +330,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.Exit.GetById(id);
+                var result = exitService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Exit with Id = {id} not found.");
@@ -352,28 +345,26 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditExit")]
         public async Task<ActionResult<Exit>> EditExit(Exit exit)
         {
-            var result = _unitOfWork.Exit.Update(exit);
-            await _unitOfWork.Save();
+            var result = await exitService.Update(exit);
             return result;
         }
         [HttpPost("CreatePersonalDetails")]
         public async Task<ActionResult<PersonalDetails>> CreatePersonalDetails(PersonalDetails personalDetails)
         {
-            var result = await _unitOfWork.PersonalDetails.AddAsync(personalDetails);
+            var result = await employeePersonalService.AddAsync(personalDetails);
             return result;
         }
 
         [HttpGet("GetAllPersonalDetails")]
         public async Task<ActionResult<List<PersonalDetails>>> GetAllPersonalDetails()
         {
-            var result = await _unitOfWork.PersonalDetails.GetAll();
+            var result = await employeePersonalService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditPersonalDetails")]
         public async Task<ActionResult<PersonalDetails>> EditPersonalDetails(PersonalDetails personalDetails)
         {
-            var result = _unitOfWork.PersonalDetails.Update(personalDetails);
-            await _unitOfWork.Save();
+            var result = await employeePersonalService.Update(personalDetails);
             return result;
         }
         [HttpGet("GetPersonalDetailById")]
@@ -381,7 +372,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.PersonalDetails.GetById(id);
+                var result = employeePersonalService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Personal Detail with Id = {id} not found.");
@@ -396,14 +387,14 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("CreateEmployeeProfile")]
         public async Task<ActionResult<EmployeeProfile>> CreateEmployeeProfile(EmployeeProfile profile)
         {
-            var result = await _unitOfWork.EmployeeProfile.AddAsync(profile);
+            var result = await employeeProfileService.AddAsync(profile);
             return result;
         }
 
         [HttpGet("GetAllEmployeeProfiles")]
         public async Task<ActionResult<List<EmployeeProfile>>> GetAllEmployeeProfiles()
         {
-            var result = await _unitOfWork.EmployeeProfile.GetAll();
+            var result = await employeeProfileService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetEmployeeProfileById")]
@@ -411,7 +402,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeProfile.GetById(id);
+                var result = employeeProfileService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Profile with Id = {id} not found.");
@@ -426,28 +417,26 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditEmployeeProfile")]
         public async Task<ActionResult<EmployeeProfile>> EditEmployeeProfile(EmployeeProfile profile)
         {
-            var result = _unitOfWork.EmployeeProfile.Update(profile);
-            await _unitOfWork.Save();
+            var result = await employeeProfileService.Update(profile);
             return result;
         }
         [HttpPost("CreateEducationalQualification")]
         public async Task<ActionResult<EducationalQualification>> CreateEducationalQualification(EducationalQualification qualification)
         {
-            var result = await _unitOfWork.EducationalQualification.AddAsync(qualification);
+            var result = await educationalQualificationService.AddAsync(qualification);
             return result;
         }
 
         [HttpGet("GetAllEducationalQualifications")]
         public async Task<ActionResult<List<EducationalQualification>>> GetAllEducationalQualifications()
         {
-            var result = await _unitOfWork.EducationalQualification.GetAll();
+            var result = await educationalQualificationService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEducationalQualification")]
         public async Task<ActionResult<EducationalQualification>> EditEducationalQualification(EducationalQualification qualification)
         {
-            var result = _unitOfWork.EducationalQualification.Update(qualification);
-            await _unitOfWork.Save();
+            var result = await educationalQualificationService.Update(qualification);
             return result;
         }
         [HttpGet("GetEditEducationalQualificationById")]
@@ -455,7 +444,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EducationalQualification.GetById(id);
+                var result = educationalQualificationService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Educational Qualification with Id = {id} not found.");
@@ -470,14 +459,14 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("CreatePreviousWorkExperience")]
         public async Task<ActionResult<PreviousWorkExperience>> CreatePreviousWorkExperience(PreviousWorkExperience experience)
         {
-            var result = await _unitOfWork.PreviousWorkExperience.AddAsync(experience);
+            var result = await previousWorkExperienceService.AddAsync(experience);
             return result;
         }
 
         [HttpGet("GetAllPreviousWorkExperiences")]
         public async Task<ActionResult<List<PreviousWorkExperience>>> GetAllPreviousWorkExperiences()
         {
-            var result = await _unitOfWork.PreviousWorkExperience.GetAll();
+            var result = await previousWorkExperienceService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetPreviousWorkExperienceById")]
@@ -485,7 +474,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.PreviousWorkExperience.GetById(id);
+                var result = previousWorkExperienceService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Previous WorkExperience with Id = {id} not found.");
@@ -500,14 +489,13 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditPreviousWorkExperience")]
         public async Task<ActionResult<PreviousWorkExperience>> EditPreviousWorkExperience(PreviousWorkExperience experience)
         {
-            var result = _unitOfWork.PreviousWorkExperience.Update(experience);
-            await _unitOfWork.Save();
+            var result = await previousWorkExperienceService.Update(experience);
             return result;
         }
         [HttpPost("CreateEmployeeAttendance")]
         public async Task<ActionResult<EmployeeAttendanceLeaves>> CreateEmployeeAttendance(EmployeeAttendanceLeaves attendanceLeaves)
         {
-            var result = await _unitOfWork.EmployeeAttendance.AddAsync(attendanceLeaves);
+            var result = await employeeAttendanceService.AddAsync(attendanceLeaves);
             return result;
         }
         [HttpGet("GetEmployeeAttendanceById")]
@@ -515,7 +503,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = _unitOfWork.EmployeeAttendance.GetById(id);
+                var result = employeeAttendanceService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Employee Attendance with Id = {id} not found.");
@@ -530,14 +518,13 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpGet("GetAllEmployeeAttendances")]
         public async Task<ActionResult<List<EmployeeAttendanceLeaves>>> GetAllEmployeeAttendances()
         {
-            var result = await _unitOfWork.EmployeeAttendance.GetAll();
+            var result = await employeeAttendanceService.GetAll();
             return Ok(result);
         }
         [HttpPost("EditEmployeeAttendance")]
         public async Task<ActionResult<EmployeeAttendanceLeaves>> EditEmployeeAttendance(EmployeeAttendanceLeaves attendanceLeaves)
         {
-            var result = _unitOfWork.EmployeeAttendance.Update(attendanceLeaves);
-            await _unitOfWork.Save();
+            var result = await employeeAttendanceService.Update(attendanceLeaves);
             return result;
         }
     }

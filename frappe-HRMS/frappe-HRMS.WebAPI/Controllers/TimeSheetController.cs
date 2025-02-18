@@ -1,24 +1,25 @@
 ﻿using frappe_HRMS.Domain.TimeSheets;
-using frappe_HRMS.Services.Interfaces;
+using frappe_HRMS.Services.Interfaces.TimeSheet;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TimeSheetController(IUnitOfWork unitOfWork) : ControllerBase
+    public class TimeSheetController(ITimeSheetService timeSheetService,ITimeSheetListService timeSheetListService,
+        IBillingDetailsService billingDetailsService, IActivityTypeService activityTypeService) : ControllerBase
     {
         [HttpPost("CreateTimeSheet")]
         public async Task<ActionResult<TimeSheet>> CreateTimeSheet(TimeSheet timeSheet)
         {
-            var result = await unitOfWork.TimeSheet.AddAsync(timeSheet);
+            var result = await timeSheetService.AddAsync(timeSheet);
             return result;
         }
 
         [HttpGet("GetAllTimeSheets")]
         public async Task<ActionResult<List<TimeSheet>>> GetAllTimeSheets()
         {
-            var result = await unitOfWork.TimeSheet.GetAll();
+            var result = await timeSheetService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetTimeSheetById")]
@@ -26,7 +27,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.TimeSheet.GetById(id);
+                var result = timeSheetService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"TimeSheet with Id = {id} not found.");
@@ -42,21 +43,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditTimeSheet")]
         public async Task<ActionResult<TimeSheet>> EditTimeSheet(TimeSheet timeSheet)
         {
-            var result = unitOfWork.TimeSheet.Update(timeSheet);
-            await unitOfWork.Save();
+            var result = await timeSheetService.Update(timeSheet);
             return result;
         }
         [HttpPost("CreateTimeSheetList")]
         public async Task<ActionResult<TimeSheetList>> CreateTimeSheetList(TimeSheetList timeSheetList)
         {
-            var result = await unitOfWork.TimeSheetList.AddAsync(timeSheetList);
+            var result = await timeSheetListService.AddAsync(timeSheetList);
             return result;
         }
 
         [HttpGet("GetAllTimeSheetLists")]
         public async Task<ActionResult<List<TimeSheetList>>> GetAllTimeSheetLists()
         {
-            var result = await unitOfWork.TimeSheetList.GetAll();
+            var result = await timeSheetListService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetTimeSheetListById")]
@@ -64,7 +64,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.TimeSheetList.GetById(id);
+                var result = timeSheetListService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"TimeSheetList with Id = {id} not found.");
@@ -80,21 +80,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditTimeSheetList")]
         public async Task<ActionResult<TimeSheetList>> EditTimeSheetList(TimeSheetList timeSheetList)
         {
-            var result = unitOfWork.TimeSheetList.Update(timeSheetList);
-            await unitOfWork.Save();
+            var result = await timeSheetListService.Update(timeSheetList);
             return result;
         }
         [HttpPost("CreateActivityType")]
         public async Task<ActionResult<ActivityType>> CreateActivityType(ActivityType type)
         {
-            var result = await unitOfWork.ActivityType.AddAsync(type);
+            var result = await activityTypeService.AddAsync(type);
             return result;
         }
 
         [HttpGet("GetAllActivityTypes")]
         public async Task<ActionResult<List<ActivityType>>> GetAllActivityTypes()
         {
-            var result = await unitOfWork.ActivityType.GetAll();
+            var result = await activityTypeService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetActivityTypeById")]
@@ -102,7 +101,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.ActivityType.GetById(id);
+                var result = activityTypeService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"ActivityType with Id = {id} not found.");
@@ -118,21 +117,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditActivityType")]
         public async Task<ActionResult<ActivityType>> EditActivityType(ActivityType type)
         {
-            var result = unitOfWork.ActivityType.Update(type);
-            await unitOfWork.Save();
+            var result = await activityTypeService.Update(type);
             return result;
         }
         [HttpPost("CreateBillingDetails")]
         public async Task<ActionResult<BillingDetails>> CreateBillingDetails(BillingDetails billingDetails)
         {
-            var result = await unitOfWork.BillingDetails.AddAsync(billingDetails);
+            var result = await billingDetailsService.AddAsync(billingDetails);
             return result;
         }
 
         [HttpGet("GetAllBillingDetails")]
         public async Task<ActionResult<List<BillingDetails>>> GetAllBillingDetails()
         {
-            var result = await unitOfWork.BillingDetails.GetAll();
+            var result = await billingDetailsService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetBillingDetailsById")]
@@ -140,7 +138,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.BillingDetails.GetById(id);
+                var result = billingDetailsService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"BillingDetails with Id = {id} not found.");
@@ -156,8 +154,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditBillingDetails")]
         public async Task<ActionResult<BillingDetails>> EditBillingDetails(BillingDetails billingDetails)
         {
-            var result = unitOfWork.BillingDetails.Update(billingDetails);
-            await unitOfWork.Save();
+            var result = await billingDetailsService.Update(billingDetails);
             return result;
         }
     }

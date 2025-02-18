@@ -1,27 +1,25 @@
-﻿using frappe_HRMS.Domain.Employee;
-using frappe_HRMS.Domain.Leave;
-using frappe_HRMS.Services.Interfaces;
-using frappe_HRMS.Services.Services;
-using Microsoft.AspNetCore.Http;
+﻿using frappe_HRMS.Domain.Leave;
+using frappe_HRMS.Services.Interfaces.Leave;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frappe_HRMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LeaveController(IUnitOfWork unitOfWork) : ControllerBase
+    public class LeaveController(ILeaveApplicationService leaveApplicationService,ILeaveTypeService leaveTypeService,
+        ICompensatoryLeaveRequestService compensatoryLeaveRequestService) : ControllerBase
     {
         [HttpPost("CreateLeaveApplication")]
         public async Task<ActionResult<LeaveApplication>> CreateLeaveApplication(LeaveApplication leave)
         {
-            var result = await unitOfWork.LeaveApplication.AddAsync(leave);
+            var result = await leaveApplicationService.AddAsync(leave);
             return result;
         }
 
         [HttpGet("GetAllLeaveApplications")]
         public async Task<ActionResult<List<LeaveApplication>>> GetAllLeaveApplications()
         {
-            var result = await unitOfWork.LeaveApplication.GetAll();
+            var result = await leaveApplicationService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetLeaveApplicationById")]
@@ -29,7 +27,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.LeaveApplication.GetById(id);
+                var result = leaveApplicationService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"LeaveApplication with Id = {id} not found.");
@@ -45,21 +43,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditLeaveApplication")]
         public async Task<ActionResult<LeaveApplication>> EditLeaveApplication(LeaveApplication leave)
         {
-            var result = unitOfWork.LeaveApplication.Update(leave);
-            await unitOfWork.Save();
+            var result = await leaveApplicationService.Update(leave);
             return result;
         }
         [HttpPost("CreateLeaveType")]
         public async Task<ActionResult<LeaveType>> CreateLeaveType(LeaveType leaveType)
         {
-            var result = await unitOfWork.LeaveType.AddAsync(leaveType);
+            var result = await leaveTypeService.AddAsync(leaveType);
             return result;
         }
 
         [HttpGet("GetAllLeaveTypes")]
         public async Task<ActionResult<List<LeaveType>>> GetAllLeaveTypes()
         {
-            var result = await unitOfWork.LeaveType.GetAll();
+            var result = await leaveTypeService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetLeaveTypeById")]
@@ -67,7 +64,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.LeaveType.GetById(id);
+                var result = leaveTypeService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"LeaveType with Id = {id} not found.");
@@ -83,21 +80,20 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditLeaveType")]
         public async Task<ActionResult<LeaveType>> EditLeaveType(LeaveType leaveType)
         {
-            var result = unitOfWork.LeaveType.Update(leaveType);
-            await unitOfWork.Save();
+            var result = await leaveTypeService.Update(leaveType);
             return result;
         }
         [HttpPost("CreateCompensatoryLeaveRequest")]
         public async Task<ActionResult<CompensatoryLeaveRequest>> CreateCompensatoryLeaveRequest(CompensatoryLeaveRequest compensatoryLeave)
         {
-            var result = await unitOfWork.CompensatoryLeaveRequest.AddAsync(compensatoryLeave);
+            var result = await compensatoryLeaveRequestService.AddAsync(compensatoryLeave);
             return result;
         }
 
         [HttpGet("GetAllCompensatoryLeaveRequests")]
         public async Task<ActionResult<List<CompensatoryLeaveRequest>>> GetAllCompensatoryLeaveRequests()
         {
-            var result = await unitOfWork.CompensatoryLeaveRequest.GetAll();
+            var result = await compensatoryLeaveRequestService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetCompensatoryLeaveRequestId")]
@@ -105,7 +101,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         {
             try
             {
-                var result = unitOfWork.CompensatoryLeaveRequest.GetById(id);
+                var result = compensatoryLeaveRequestService.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"LeaveType with Id = {id} not found.");
@@ -121,8 +117,7 @@ namespace frappe_HRMS.WebAPI.Controllers
         [HttpPost("EditCompensatoryLeaveRequest")]
         public async Task<ActionResult<CompensatoryLeaveRequest>> EditCompensatoryLeaveRequest(CompensatoryLeaveRequest compensatoryLeave)
         {
-            var result = unitOfWork.CompensatoryLeaveRequest.Update(compensatoryLeave);
-            await unitOfWork.Save();
+            var result = await compensatoryLeaveRequestService.Update(compensatoryLeave);
             return result;
         }
     }
