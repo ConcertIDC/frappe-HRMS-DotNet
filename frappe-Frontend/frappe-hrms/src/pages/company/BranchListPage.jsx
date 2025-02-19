@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CommonTable from '../../Components/Common/CommonTable';
+import CommonTable from '../../components/common/CommonTable';
 import { getBranchList } from '../../redux/actions/CompanyAction';
 import { useDispatch, useSelector } from 'react-redux';
 

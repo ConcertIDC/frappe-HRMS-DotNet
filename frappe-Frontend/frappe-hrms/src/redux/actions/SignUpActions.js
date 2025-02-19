@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Signup } from "../constants/signUp";
-import { BASEURL } from "../../Constant/ConstatntData";
+import { BASEURL } from "../../constant/ConstatntData";
 import { signupApi } from "../../interceptor/service/SignupService";
 
 export const SignupAction = (payload) => async (dispatch) => {

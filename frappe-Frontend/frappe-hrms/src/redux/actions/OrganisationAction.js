@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Organisation } from "../constants/organisation";
-import { BASEURL } from "../../Constant/ConstatntData";
+import { BASEURL } from "../../constant/ConstatntData";
 import { organisationSetupApi } from "../../interceptor/service/OrganisationSetupService";
 
 export const OrganisationAction = (payload) => async (dispatch) => {

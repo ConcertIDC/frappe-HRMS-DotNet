@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Col, Form, Row } from 'react-bootstrap';
-import Button from '../Components/Button/Button';
-import CustomInput from '../Components/Input/CustomInput';
-import frappelogo from '../Assets/Images/frappe-hr2.png';
+import Button from '../components/button/Button';
+import CustomInput from '../components/input/CustomInput';
+import frappelogo from '../assets/images/frappe-hr2.png';
 import { LoginAction } from '../redux/actions/LoginActions';
-import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
     const [formData, setFormData] = useState({
@@ -14,7 +13,6 @@ const LoginComponent = () => {
     });
     const [validated, setValidated] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     useEffect(() => {
         localStorage.removeItem("Token");
     }, []);

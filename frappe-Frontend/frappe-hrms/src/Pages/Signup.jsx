@@ -1,12 +1,10 @@
 import React, { useState , useEffect} from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import CustomInput from '../Components/Input/CustomInput';
-import frappelogo from '../Assets/Images/frappe-hr2.png';
-import Button from '../Components/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import CustomInput from '../components/input/CustomInput';
+import frappelogo from '../assets/images/frappe-hr2.png';
+import Button from '../components/button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupAction } from '../redux/actions/SignUpActions'; 
-import { type } from '@testing-library/user-event/dist/type';
 
 function Signup() {
     useEffect(() => {
@@ -14,9 +12,7 @@ function Signup() {
     }, []);
  
     const [formData, setFormData] = useState({});
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const { loading } = useSelector((state) => state.signup);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

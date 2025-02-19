@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CommonTable from '../../Components/Common/CommonTable';
+import CommonTable from '../../components/common/CommonTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobApplicantList } from '../../redux/actions/JobAction';
 

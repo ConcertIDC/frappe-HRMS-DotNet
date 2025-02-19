@@ -1,20 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './Assets/Css/style.css';
-import Organisation from './Pages/OrganisationSetup';
-import Signup from "./Pages/Signup";
-import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard";
-import Layout from './Pages/Layout';
-import PrivateRoute from "./PrivateRouter/PrivateRouter";
-import EmployeeListPage from "./Pages/Employee/EmployeeListPage";
-import CompanyListPage from "./Pages/Company/CompanyListPage";
-import BranchListPage from "./Pages/Company/BranchListPage";
-import DepartmentListPage from "./Pages/Company/DepartmentListPage";
-import DesignationListPage from "./Pages/Company/DesignationListPage";
-import EmployeeGradeListPage from "./Pages/Employee/EmployeeGradeListPage";
-import EmployeeGroupListPage from "./Pages/Employee/EmployeeGroupListPage";
-import EmploymentTypeListPage from "./Pages/Employee/EmploymentTypeListPage";
-import JobApplicantListPage from "./Pages/Job/JobApplicantListPage";
+import './assets/css/style.css';
+import Organisation from './pages/OrganisationSetup';
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./privaterouter/PrivateRouter";
+import EmployeeListPage from "./pages/employee/EmployeeListPage";
+import CompanyListPage from "./pages/company/CompanyListPage";
+import BranchListPage from "./pages/company/BranchListPage";
+import DepartmentListPage from "./pages/company/DepartmentListPage";
+import DesignationListPage from "./pages/company/DesignationListPage";
+import EmployeeGradeListPage from "./pages/employee/EmployeeGradeListPage";
+import EmployeeGroupListPage from "./pages/employee/EmployeeGroupListPage";
+import EmploymentTypeListPage from "./pages/employee/EmploymentTypeListPage";
+import JobApplicantListPage from "./pages/Job/JobApplicantListPage";
+import LayoutWithoutSideBar from "./pages/layout/LayoutWithoutSideBar";
+import CompanyForm from "./pages/company/CompanyForm";
+import Layout from "./pages/layout/Layout";
 
 function App() {
   return (
@@ -36,6 +38,10 @@ function App() {
               <Route path="/employee-group" element={<EmployeeGroupListPage />} />
               <Route path="/employment-type" element={<EmploymentTypeListPage />} />
               <Route path="/job-applicant" element={<JobApplicantListPage />} />
+            </Route>
+
+            <Route element={<LayoutWithoutSideBar />}>
+              <Route path="/add-company" element={<CompanyForm />} />
             </Route>
           </Route>
         </Routes>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
 
-const CommonTable = ({ data, columns, title, searchTitle }) => {
+const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +41,7 @@ const CommonTable = ({ data, columns, title, searchTitle }) => {
   return (
     <div>
       <div className="d-flex justify-content-end mb-3">
-        <Button variant="dark" className="rounded">
+        <Button variant="dark" className="rounded" onClick={handleClick}>
           + Add {title}
         </Button>
       </div>

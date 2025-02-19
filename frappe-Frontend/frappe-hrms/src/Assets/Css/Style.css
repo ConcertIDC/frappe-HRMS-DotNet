@@ -103,3 +103,19 @@ color: rgb(127, 140, 141);
 .hover-table :hover {
     text-decoration: underline;
 }
+.nav-tabs .nav-link {
+    border:none !important;
+}
+.nav-tabs .nav-link.active {
+    border:none !important;
+    border-bottom: black 2px solid !important;
+    color: black !important;
+    font-weight: 600;
+}
+.nav-link{
+    color: rgb(71, 69, 69) !important;
+}
+.form-label{
+    color: rgb(71, 69, 69);
+}
+

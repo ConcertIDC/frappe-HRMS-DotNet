@@ -2,7 +2,7 @@
  import React from 'react';
  import { Link } from 'react-router-dom';
 // import { Navbar } from 'react-bootstrap';
- import logo from '../../Assets/Images/person.png';
+ import logo from '../../assets/images/person.png';
 import { Navbar, Nav, Form, FormControl, Dropdown } from "react-bootstrap";
 import { logoutAction } from '../../redux/actions/LoginActions';
 import { useDispatch } from 'react-redux';

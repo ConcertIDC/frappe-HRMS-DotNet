@@ -1,9 +1,9 @@
 // src/Pages/Layout.js
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../Components/Header/Header';
-import Sidebar from '../Components/sidebar/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 import { Col,Row } from 'react-bootstrap';
+import Header from '../../components/header/Header';
 
 const Layout = () => {
   return (

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import CustomInput from '../Components/Input/CustomInput';
+import CustomInput from '../components/input/CustomInput';
 import { Container, Col, Row, Form } from 'react-bootstrap';
-import '../Assets/Css/style.css';
-import frappelogo from '../Assets/Images/frappehr.png';
+import '../assets/css/style.css';
+import frappelogo from '../assets/images/frappehr.png';
 import 'bootstrap/dist/css/bootstrap.css';
-import Button from '../Components/Button/Button';
-import CustomDropdown from '../Components/Dropdown/CustomDropdown';
-import { countryOptions, currencyOptions, designtions, employeeOptions, INDUSTRY, inputs, languageOptions, timeZoneOptions } from '../Constant/ConstatntData';
-import Checkbox from '../Components/checkbox/CheckBox';
+import Button from '../components/button/Button';
+import CustomDropdown from '../components/dropdown/CustomDropdown';
+import { countryOptions, currencyOptions, designtions, employeeOptions, INDUSTRY, inputs, languageOptions, timeZoneOptions } from '../constant/ConstatntData';
+import Checkbox from '../components/checkbox/CheckBox';
 import { useDispatch } from 'react-redux';
 import { OrganisationAction } from '../redux/actions/OrganisationAction'; 
 

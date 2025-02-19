@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Shortcut from '../Components/Shortcut/Shortcut';
+import Shortcut from '../components/shortcut/Shortcut';
 
 const Dashboard = () => {
     return (
