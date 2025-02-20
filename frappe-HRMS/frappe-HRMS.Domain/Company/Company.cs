@@ -23,5 +23,14 @@ namespace frappe_HRMS.Domain.Company
         public bool IsDemo {  get; set; }
         public string? CompanyDescription => $"{CompanyName} - {CompanyAbbrevation}";
         public List<Employee.Employee>? Employees { get; set; }
+        public string? DefaultBuyingTerms { get; set; }
+        public string? DefaultSellingTerms { get; set; }
+        public decimal? MonthlySalesTarget { get; set; }
+        public string? DefaultWarehouseSalesReturn { get;set; }
+        public string? DefaultEmployeeAdvanceAccount { get; set; }
+        public string? BasicComponent { get; set; }
+        public string? ArrearComponent {get; set; }
+        public string? HRAComponent { get; set; }
+        public string? DefaultOperatingCostAccount {  get; set; }
     }   
 }

@@ -15,4 +15,7 @@ export const designationtApi = () => {
 export const employmentTypeApi = () => {
     return axiosInstance.get('/Company/GetAllemploymentTypes');
 };
+export const createCompanyApi = (payload) => {
+    return axiosInstance.post('/Company/CreateCompany',payload);
+};
 

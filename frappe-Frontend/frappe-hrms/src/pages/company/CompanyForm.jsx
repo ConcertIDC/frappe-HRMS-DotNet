@@ -1,204 +1,283 @@
-import React from "react";
-import { Container, Row, Col, Form, Button, Nav, Tab, Tabs } from "react-bootstrap";
-import CustomInput from "../../components/input/CustomInput";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Row, Col, Form, Button, Tab, Tabs } from "react-bootstrap";
+import { Formik, Field, ErrorMessage, Form as FormikForm } from "formik";
+import * as Yup from "yup";
+import { createCompanyList } from "../../redux/actions/CompanyAction";
+
+const validationSchema = Yup.object().shape({
+  companyName: Yup.string().required("Company name is required"),
+  companyAbbrevation: Yup.string().required("Abbr is required"),
+  currency: Yup.string().required("Default Currency is required"),
+  country: Yup.string().required("Country is required"),
+});
+
+const initialValues = {
+  companyName: "",
+  defaultLetterHead: "",
+  companyAbbrevation: "",
+  taxID: "",
+  currency: "",
+  domain: "",
+  country: "India",
+  dateofEstablishment: "",
+  isGroup: false,
+  defaultHolidayList: "",
+  parentCompany: "",
+  defaultBuyingTerms: "",
+  defaultSellingTerms: "",
+  monthlySalesTarget: "",
+  defaultWarehouseForSalesReturn: "",
+  defaultEmployeeAdvanceAccount: "",
+  basicComponent: "",
+  arrearComponent: "",
+  hraComponent: "",
+  defaultOperatingCostAccount: "",
+};
 
 const CompanyForm = () => {
+  const dispatch = useDispatch();
+  const [errorMessages, setErrorMessages] = useState([]);
+
   return (
     <Container fluid className="p-4">
-      {/* Header */}
       <Row className="mb-3">
         <Col>
-          <h4 className="fw-bold">
-            New Company 
-          </h4>
+          <h4 className="fw-bold">New Company</h4>
         </Col>
         <Col className="text-end">
-          <Button variant="dark">Save</Button>
+          <Button variant="dark" type="submit" form="company-form" >
+            Save
+          </Button>
         </Col>
       </Row>
 
-      {/* Tabs */}
-      <div className="border rounded ">
-      <Tabs defaultActiveKey="details" className="mb-3 px-2 border-bottom">
-        <Tab eventKey="details" title="Details">
-          <Form className="p-4">
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Company <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Letter Head</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          dispatch(createCompanyList(values))
+            .then(() => {
+              setSubmitting(false);
+            })
+            .catch((error) => {
+              setErrorMessages([error.message || "An error occurred"]);
+              setSubmitting(false);
+            });
+        }}
+      >
+        {({ errors, touched }) => (
+          <FormikForm id="company-form">
+            <Tabs defaultActiveKey="details" className="mb-3">
+              <Tab eventKey="details" title="Details">
+                <div className="p-4">
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Company <span className="text-danger">*</span></Form.Label>
+                        <Field name="companyName" type="text" className={`form-control bg-light ${errors.companyName && touched.companyName ? "is-invalid" : ""}`} />
+                        <ErrorMessage name="companyName" component="div" className="text-danger" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Letter Head</Form.Label>
+                        <Field name="defaultLetterHead" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Abbr <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" required className="bg-light"/>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Tax ID</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>
+                          Abbr <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Field
+                          name="companyAbbrevation"
+                          type="text"
+                          className={`form-control bg-light ${errors.companyAbbrevation && touched.companyAbbrevation ? "is-invalid border-danger" : ""
+                            }`}
+                        />
+                        <ErrorMessage name="companyAbbrevation" component="div" className="text-danger" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Tax ID</Form.Label>
+                        <Field name="taxID" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Currency <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" required className="bg-light"/>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Domain</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>
+                          Default Currency <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Field
+                          name="currency"
+                          type="text"
+                          className={`form-control bg-light ${errors.currency && touched.currency ? "is-invalid border-danger" : ""
+                            }`}
+                        />
+                        <ErrorMessage name="currency" component="div" className="text-danger" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Domain</Form.Label>
+                        <Field name="domain" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Country <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" value="India" className="bg-light" />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Date of Establishment</Form.Label>
-                  <Form.Control type="date" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>
+                          Country <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Field
+                          name="country"
+                          type="text"
+                          className={`form-control bg-light ${errors.country && touched.country ? "is-invalid border-danger" : ""
+                            }`}
+                        />
+                        <ErrorMessage name="country" component="div" className="text-danger" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Date of Establishment</Form.Label>
+                        <Field name="dateofEstablishment" type="date" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Group className="d-flex align-items-center">
+                        <Form.Check type="checkbox" name="isGroup" label="Is Group" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group className="d-flex align-items-center">
-                  <Form.Check type="checkbox" label="Is Group" />
-                </Form.Group>
-              </Col>
-            </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Holiday List</Form.Label>
+                        <Form.Control type="text" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Parent Company</Form.Label>
+                        <Form.Control type="text" name="parentCompany" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+              </Tab>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Holiday List</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Parent Company</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form>
-        </Tab>
 
-        {/* <Tab eventKey="accounts" title="Accounts">
-          <p>Accounts section content...</p>
-        </Tab> */}
+              {/* Buying & Selling Tab */}
+              <Tab eventKey="buying" title="Buying and Selling">
+                <h5 className="fw-bold px-4 mb-3">Buying & Selling Settings</h5>
+                <div className="px-4 mb-3">
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Buying Terms</Form.Label>
+                        <Field name="defaultBuyingTerms" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Selling Terms</Form.Label>
+                        <Field name="defaultSellingTerms" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row className="my-3">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Monthly Sales Target</Form.Label>
+                        <Form.Control type="text" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Warehouse for Sales Return</Form.Label>
+                        <Form.Control type="text" disabled className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
-        <Tab eventKey="buying" title="Buying and Selling">
-        <h5 className="fw-bold px-4 mb-3">Buying & Selling Settings</h5>
-          <Form className="px-4">
-            <Row>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Buying Terms</Form.Label>
-                  <Form.Control type="text"  className="bg-light" />
-                </Form.Group>
-              </Col>
-              <Col md={6} className="mb-3">
-                <Form.Group>
-                  <Form.Label>Default Selling Terms</Form.Label>
-                  <Form.Control type="text"  className="bg-light" />
-                </Form.Group>
-              </Col>
-            </Row>
-            
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Monthly Sales Target</Form.Label>
-                  <Form.Control type="text"  className="bg-light" />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Warehouse for Sales Return</Form.Label>
-                  <Form.Control type="text" disabled className="bg-light" />
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form>
-        </Tab>
+                </div>
+              </Tab>
 
-        <Tab eventKey="hr" title="HR & Payroll">
-        <h5 className="fw-bold px-4 mb-3">HR & Payroll Settings</h5>
-          <Form >
-            <Row className="mb-3 px-4">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Employee Advance Account</Form.Label>
-                  <Form.Control type="text" className="bg-light" />
-                </Form.Group>
-              </Col>
-            </Row>
-            <hr/>
-            <h5 className="fw-bold px-4 mb-3">HRA Settings</h5>
-            <Row className="mb-3 px-4">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Basic Component</Form.Label>
-                  <Form.Control type="text" className="bg-light" />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Arrear Component</Form.Label>
-                  <Form.Control type="text" className="bg-light" />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="mb-3 px-4">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>HRA Component</Form.Label>
-                  <Form.Control type="text" className="bg-light"/>
-                </Form.Group>
-              </Col>
-            </Row>
+              {/* HR & Payroll Tab */}
+              <Tab eventKey="hr" title="HR & Payroll">
+                <h5 className="fw-bold px-4 mb-3">HR & Payroll Settings</h5>
+                <div className=" mb-3">
+                  <Row className="px-4">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Employee Advance Account</Form.Label>
+                        <Field name="defaultEmployeeAdvanceAccount" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <hr />
+                  <h5 className="fw-bold px-4 mb-3">HRA Settings</h5>
+                  <Row className="mb-3 px-4">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Basic Component</Form.Label>
+                        <Form.Control type="text" name="basicComponent" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Arrear Component</Form.Label>
+                        <Form.Control type="text" name="arrearComponent" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row className="mb-3 px-4">
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>HRA Component</Form.Label>
+                        <Form.Control type="text" name="hraComponent" className="bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+              </Tab>
 
-          </Form>
-        </Tab>
+              {/* Stock & Manufacturing Tab */}
+              <Tab eventKey="stock" title="Stock and Manufacturing">
+                <h5 className="fw-bold px-4 mb-3">Manufacturing</h5>
+                <div className="px-4 mb-3">
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group>
+                        <Form.Label>Default Operating Cost Account</Form.Label>
+                        <Field name="defaultOperatingCostAccount" type="text" className="form-control bg-light" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+              </Tab>
+            </Tabs>
 
-        <Tab eventKey="stock" title="Stock and Manufacturing">
-        <h5 className="fw-bold px-4 mb-3">Manufacturing</h5>
-            <Row className="mb-3 px-4">
-              <Col md={6}>
-                <Form.Group>
-                  <Form.Label>Default Operating Cost Account</Form.Label>
-                  <Form.Control type="text" className="bg-light" />
-                </Form.Group>
-              </Col>
-            </Row>
-        </Tab>
-      </Tabs>
-      </div>
+
+          </FormikForm>
+        )}
+      </Formik>
     </Container>
+
   );
 };
 
