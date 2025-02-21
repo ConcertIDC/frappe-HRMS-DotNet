@@ -2,6 +2,7 @@ import { Company } from "../constants/company";
 
 const initialCompanyState = {
     CompanyModel: [],
+    companyDetails:{},
     loading: false,
 };
 
@@ -15,6 +16,8 @@ export const CompanyReducer = (state = initialCompanyState, action) => {
             return { ...state, CompanyModel: action?.payload.data, loading: false };
         case Company.ERROR.type:
             return { ...state, CompanyModel: action?.payload, loading: false };
+        case Company.DETAIL.type:
+            return { ...state, companyDetails: action?.payload, loading: false };
         default:
             return state;
     }

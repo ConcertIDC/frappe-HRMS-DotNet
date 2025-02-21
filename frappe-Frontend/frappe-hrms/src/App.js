@@ -15,8 +15,8 @@ import EmployeeGroupListPage from "./pages/employee/EmployeeGroupListPage";
 import EmploymentTypeListPage from "./pages/employee/EmploymentTypeListPage";
 import JobApplicantListPage from "./pages/Job/JobApplicantListPage";
 import LayoutWithoutSideBar from "./pages/layout/LayoutWithoutSideBar";
-import CompanyForm from "./pages/company/CompanyForm";
 import Layout from "./pages/layout/Layout";
+import CompanyForm from "./pages/company/CompanyForm";
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
 
             <Route element={<LayoutWithoutSideBar />}>
               <Route path="/add-company" element={<CompanyForm />} />
+              <Route path="/company/:id" element={<CompanyForm />} />
             </Route>
           </Route>
         </Routes>

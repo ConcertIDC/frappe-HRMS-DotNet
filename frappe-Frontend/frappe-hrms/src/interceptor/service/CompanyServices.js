@@ -18,4 +18,10 @@ export const employmentTypeApi = () => {
 export const createCompanyApi = (payload) => {
     return axiosInstance.post('/Company/CreateCompany',payload);
 };
+export const getCompanyApi = (id) => {
+    return axiosInstance.get(`/Company/GetCompanyById?id=${id}`);
+};
+export const updateCompanyApi = (payload) => {
+    return axiosInstance.put('/Company/EditCompany',payload);
+};
 

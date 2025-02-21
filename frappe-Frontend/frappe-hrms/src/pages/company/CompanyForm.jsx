@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Form, Button, Tab, Tabs } from "react-bootstrap";
 import { Formik, Field, ErrorMessage, Form as FormikForm } from "formik";
 import * as Yup from "yup";
-import { createCompanyList } from "../../redux/actions/CompanyAction";
+import { createCompany, getCompany, updateCompany } from "../../redux/actions/CompanyAction";
+import { useNavigate, useParams } from "react-router-dom";
+import { countryOptions, currencyOptions } from "../../constant/ConstatntData";
 
 const validationSchema = Yup.object().shape({
   companyName: Yup.string().required("Company name is required"),
@@ -37,38 +39,52 @@ const initialValues = {
 
 const CompanyForm = () => {
   const dispatch = useDispatch();
-  const [errorMessages, setErrorMessages] = useState([]);
+  const params = useParams();
+  const company = useSelector((state) => state.Company.companyDetails.data);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (params.id)
+      dispatch(getCompany(params.id));
+  }, []);
+  console.log(params.id ? company : initialValues);
 
   return (
     <Container fluid className="p-4">
       <Row className="mb-3">
         <Col>
-          <h4 className="fw-bold">New Company</h4>
+          <h4 className="fw-bold">{params.id ? 'Edit' : 'New'} Company</h4>
         </Col>
         <Col className="text-end">
           <Button variant="dark" type="submit" form="company-form" >
-            Save
+            {params.id ? 'Update' : "Save"}
           </Button>
         </Col>
       </Row>
 
       <Formik
-        initialValues={initialValues}
+        initialValues={params.id ? company : initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          dispatch(createCompanyList(values))
-            .then(() => {
-              setSubmitting(false);
-            })
-            .catch((error) => {
-              setErrorMessages([error.message || "An error occurred"]);
-              setSubmitting(false);
-            });
+        enableReinitialize
+        onSubmit={(values) => {
+          if (params.id) {
+            dispatch(updateCompany(values))
+              .then(() => {
+                navigate("/company");
+              })
+          }
+          else {
+            dispatch(createCompany(values))
+              .then(() => {
+                navigate("/company");
+              })
+          }
         }}
+
       >
-        {({ errors, touched }) => (
-          <FormikForm id="company-form">
-            <Tabs defaultActiveKey="details" className="mb-3">
+        {({ errors, touched, values, handleChange }) => (
+          <FormikForm id="company-form" className="rounded border">
+            <Tabs defaultActiveKey="details" className="mb-3 px-2">
               <Tab eventKey="details" title="Details">
                 <div className="p-4">
                   <Row>
@@ -118,10 +134,14 @@ const CompanyForm = () => {
                         </Form.Label>
                         <Field
                           name="currency"
-                          type="text"
+                          as="select"
+                          
                           className={`form-control bg-light ${errors.currency && touched.currency ? "is-invalid border-danger" : ""
                             }`}
-                        />
+                        >
+                          <option hidden></option>
+                          {currencyOptions.map((currency) => <option value={currency.value}>{currency.label}</option>)}
+                        </Field>
                         <ErrorMessage name="currency" component="div" className="text-danger" />
                       </Form.Group>
                     </Col>
@@ -139,12 +159,10 @@ const CompanyForm = () => {
                         <Form.Label>
                           Country <span className="text-danger">*</span>
                         </Form.Label>
-                        <Field
-                          name="country"
-                          type="text"
-                          className={`form-control bg-light ${errors.country && touched.country ? "is-invalid border-danger" : ""
-                            }`}
-                        />
+                        <Field as="select" name="country" className={`form-control bg-light ${errors.country && touched.country ? "is-invalid border-danger" : ""
+                          }`}>
+                          {countryOptions.map((country) => <option value={country.value}>{country.label}</option>)}
+                        </Field>
                         <ErrorMessage name="country" component="div" className="text-danger" />
                       </Form.Group>
                     </Col>
@@ -158,7 +176,7 @@ const CompanyForm = () => {
                   <Row className="mb-3">
                     <Col md={6}>
                       <Form.Group className="d-flex align-items-center">
-                        <Form.Check type="checkbox" name="isGroup" label="Is Group" />
+                        <Form.Check type="checkbox" checked={values?.isGroup} onChange={handleChange} name="isGroup" label="Is Group" />
                       </Form.Group>
                     </Col>
                   </Row>

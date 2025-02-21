@@ -9,7 +9,6 @@ const CompanyListPage = () => {
     { key: 'companyName', header: 'ID' },
     { key: 'country', header: 'Country' },
     { key: 'parentCompany', header: 'Parent Company' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
   const companyList = useSelector((state) => state.Company.CompanyModel);

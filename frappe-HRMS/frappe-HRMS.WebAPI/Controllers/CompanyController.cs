@@ -23,7 +23,23 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await companyService.AddAsync(company);
             return Ok(result);
         }
-
+        [HttpGet("GetCompanyById")]
+        public async Task<ActionResult<Company>> GetCompanyById(int id)
+        {
+            try
+            {
+                var result = companyService.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Company with Id = {id} not found.");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetAllCompanies")]
         public async Task<ActionResult<List<Company>>> GetAllCompanies()
         {
@@ -31,7 +47,7 @@ namespace frappe_HRMS.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("EditCompany")]
+        [HttpPut("EditCompany")]
         public async Task<ActionResult<Company>> EditCompany(Company company)
         {
             var result = await companyService.Update(company);

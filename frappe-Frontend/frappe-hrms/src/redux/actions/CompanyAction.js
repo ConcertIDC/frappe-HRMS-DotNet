@@ -1,5 +1,5 @@
 import { Company } from "../constants/company";
-import { branchApi, companyApi, createCompanyApi, departmentApi, designationtApi, employmentTypeApi } from "../../interceptor/service/CompanyServices";
+import { branchApi, companyApi, createCompanyApi, departmentApi, designationtApi, employmentTypeApi, getCompanyApi, updateCompanyApi } from "../../interceptor/service/CompanyServices";
 
 export const getCompanyList = () => async (dispatch) => {
     dispatch({
@@ -101,23 +101,59 @@ export const getEmploymentTypeList = () => async (dispatch) => {
     }
 };
 
-export const createCompanyList = (payload) => async (dispatch) => {
+export const createCompany = (payload) => async (dispatch) => {
     
     dispatch({
         type: Company.LOADING.type,
         payload: { loading: true },
     });
     try {
-        const { data } = await createCompanyApi(payload);
-        console.log("data", data);
-        await dispatch({
-            type: Company.SUCCESS.type,
-            payload: { loading: false, data: data },
-        });
+        await createCompanyApi(payload);
+        getCompanyList();
+
     } catch (err) {
         await dispatch({
             type: Company.ERROR.type,
+            payload: { loading: false },
+        });
+    }
+};
+
+export const getCompany = (id) => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+
+    try {
+        const { data } = await getCompanyApi(id);
+        await dispatch({
+            type: Company.DETAIL.type,
+            payload: { loading: false, data },
+        });
+    } catch (err) {
+        console.error("Error fetching company:", err);
+        
+        await dispatch({
+            type: Company.ERROR.type,
             payload: { loading: false, data: {} },
+        });
+    }
+};
+
+export const updateCompany = (payload) => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        await updateCompanyApi(payload);
+        getCompanyList();
+
+    } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false },
         });
     }
 };

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
+import { CiEdit, CiTrash } from "react-icons/ci";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { GiPencil } from "react-icons/gi";
+import { GrEdit } from "react-icons/gr";
+import { IoPencil } from "react-icons/io5";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { VscEdit } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 
 const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate=useNavigate();
 
   const allRowsSelected = selectedRows.length === data.length && data.length > 0;
 
@@ -37,6 +47,10 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const handleEdit = (id) => {
+    navigate(`/${title.toLowerCase()}/${id}`)
+  }
 
   return (
     <div>
@@ -80,6 +94,12 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                     {item.header}
                   </th>
                 ))}
+                <th className="px-3" style={{
+                      backgroundColor: "#c1c1c145",
+                      color: "rgb(77, 75, 75)",
+                      fontWeight: "normal",
+                      textAlign:  "right",
+                    }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -105,6 +125,7 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                         textAlign: index === columns.length - 1 ? "right" : "left",
                       }}
                       className="hover-table"
+                      onClick={() => handleEdit(item.id)}
                     >
                       {col.key === "status" ? (
                         <span
@@ -160,6 +181,7 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                       )}
                     </td>
                   ))}
+                  <td className="text-end "><MdOutlineModeEditOutline onClick={()=>handleEdit(item.id)} title="Edit" className="me-2 cursor-pointer"/><CiTrash title="Delete" color="red" className="me-2 cursor-pointer"/></td>
                 </tr>
               ))}
             </tbody>
