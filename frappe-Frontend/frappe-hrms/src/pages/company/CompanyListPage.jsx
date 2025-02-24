@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import CommonTable from '../../components/common/CommonTable';
-import { getCompanyList } from '../../redux/actions/CompanyAction';
+import { deleteCompany, getCompanyList } from '../../redux/actions/CompanyAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,8 +22,11 @@ const CompanyListPage = () => {
   const handleClick = () => {
     navigate('/add-company');
   }
+  const handleDelete = (id) => {
+    dispatch(deleteCompany(id));
+  }
 
-  return <CommonTable data={companyList} columns={columns} title={'Company'} searchTitle={'ID'} handleClick={handleClick}/>;
+  return <CommonTable handleDelete={handleDelete} data={companyList} columns={columns} title={'Company'} deleteTitle='companyName' searchTitle={'ID'} handleClick={handleClick}/>;
 };
 
 export default CompanyListPage;

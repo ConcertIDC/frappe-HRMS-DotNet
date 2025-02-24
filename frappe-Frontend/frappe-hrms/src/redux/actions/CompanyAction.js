@@ -1,5 +1,5 @@
 import { Company } from "../constants/company";
-import { branchApi, companyApi, createCompanyApi, departmentApi, designationtApi, employmentTypeApi, getCompanyApi, updateCompanyApi } from "../../interceptor/service/CompanyServices";
+import { branchApi, companyApi, createCompanyApi, deleteCompanyApi, departmentApi, designationtApi, employmentTypeApi, getCompanyApi, updateCompanyApi } from "../../interceptor/service/CompanyServices";
 
 export const getCompanyList = () => async (dispatch) => {
     dispatch({
@@ -109,8 +109,6 @@ export const createCompany = (payload) => async (dispatch) => {
     });
     try {
         await createCompanyApi(payload);
-        getCompanyList();
-
     } catch (err) {
         await dispatch({
             type: Company.ERROR.type,
@@ -148,9 +146,24 @@ export const updateCompany = (payload) => async (dispatch) => {
     });
     try {
         await updateCompanyApi(payload);
-        getCompanyList();
-
     } catch (err) {
+        await dispatch({
+            type: Company.ERROR.type,
+            payload: { loading: false },
+        });
+    }
+};
+
+export const deleteCompany = (companyId) => async (dispatch) => {
+    dispatch({
+        type: Company.LOADING.type,
+        payload: { loading: true },
+    });
+    try {
+        await deleteCompanyApi(companyId);
+        dispatch(getCompanyList());
+    } catch (err) {
+        console.log(err);
         await dispatch({
             type: Company.ERROR.type,
             payload: { loading: false },

@@ -53,6 +53,18 @@ namespace frappe_HRMS.WebAPI.Controllers
             var result = await companyService.Update(company);
             return result;
         }
+        [HttpDelete("DeleteCompany")]
+        public async Task<ActionResult<Company>> DeleteCompany(int companyId)
+        {
+            var company = companyService.GetById(companyId);
+            if (company == null)
+            {
+                return NotFound($"Company with ID {companyId} not found.");
+            }
+
+            await companyService.Delete(companyId);
+            return NoContent();
+        }
         [HttpPost("CreateBranch")]
         public async Task<ActionResult<Branch>> CreateBranch(Branch branch)
         {

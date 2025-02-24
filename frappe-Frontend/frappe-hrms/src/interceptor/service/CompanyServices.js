@@ -24,4 +24,7 @@ export const getCompanyApi = (id) => {
 export const updateCompanyApi = (payload) => {
     return axiosInstance.put('/Company/EditCompany',payload);
 };
+export const deleteCompanyApi = (companyId) => {
+    return axiosInstance.delete(`/Company/DeleteCompany?companyId=${companyId}`);
+};
 

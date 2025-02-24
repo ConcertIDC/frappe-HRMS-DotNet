@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
-import { CiEdit, CiTrash } from "react-icons/ci";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { FaDeleteLeft } from "react-icons/fa6";
-import { GiPencil } from "react-icons/gi";
-import { GrEdit } from "react-icons/gr";
-import { IoPencil } from "react-icons/io5";
+import { CiTrash } from "react-icons/ci";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { VscEdit } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
+import DeleteModal from './DeleteModal';
+import { useDispatch } from "react-redux";
 
-const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
+const CommonTable = ({ data, columns, title, searchTitle, handleClick, deleteTitle,handleDelete }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [currentDetail, setCurrentDetail] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const allRowsSelected = selectedRows.length === data.length && data.length > 0;
-
+  const handleClose = () => setShowDeleteModal(false);
   const toggleRowSelection = (id) => {
     setSelectedRows((prev) =>
       prev.includes(id) ? prev.filter((row) => row !== id) : [...prev, id]
@@ -49,8 +48,21 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
   );
 
   const handleEdit = (id) => {
-    navigate(`/${title.toLowerCase()}/${id}`)
-  }
+    navigate(`/${title.toLowerCase()}/${id}`);
+  };
+
+  const getStatusBadgeStyles = (status) => {
+    const styles = {
+      Open: { color: "#a14f00", backgroundColor: "#ffecd6" },
+      Replied: { color: "#a14f00", backgroundColor: "#ffecd6" },
+      Accepted: { color: "#267e4c", backgroundColor: "#d7f5e5" },
+      Rejected: { color: "#b23c3c", backgroundColor: "#fde8e8" },
+      Hold: { color: "#b23c3c", backgroundColor: "#fde8e8" },
+      1: { color: "#267e4c", backgroundColor: "#d7f5e5" },
+      0: { color: "#b23c3c", backgroundColor: "#fde8e8" },
+    };
+    return styles[status] || { color: "#000", backgroundColor: "#f1f1f1" };
+  };
 
   return (
     <div>
@@ -94,12 +106,17 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                     {item.header}
                   </th>
                 ))}
-                <th className="px-3" style={{
-                      backgroundColor: "#c1c1c145",
-                      color: "rgb(77, 75, 75)",
-                      fontWeight: "normal",
-                      textAlign:  "right",
-                    }}>Actions</th>
+                <th
+                  className="px-3"
+                  style={{
+                    backgroundColor: "#c1c1c145",
+                    color: "rgb(77, 75, 75)",
+                    fontWeight: "normal",
+                    textAlign: "right",
+                  }}
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -134,43 +151,19 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                             borderRadius: "15px",
                             fontSize: "14px",
                             display: "inline-block",
-                            color:
-                              item[col.key] === "Open" || item[col.key] === "Replied"
-                                ? "#a14f00"
-                                : item[col.key] === "Accepted"
-                                ? "#267e4c"
-                                : item[col.key] === "Rejected" || item[col.key] === "Hold"
-                                ? "#b23c3c"
-                                : item[col.key] === 1
-                                ? "#267e4c"
-                                : item[col.key] === 0
-                                ? "#b23c3c"
-                                : "#000",
-                            backgroundColor:
-                              item[col.key] === "Open"|| item[col.key] === "Replied"
-                                ? "#ffecd6"
-                                : item[col.key] === "Accepted"
-                                ? "#d7f5e5"
-                                : item[col.key] === "Rejected" || item[col.key] === "Hold"
-                                ? "#fde8e8"
-                                : item[col.key] === 1
-                                ? "#d7f5e5"
-                                : item[col.key] === 0
-                                ? "#fde8e8"
-                                : "#f1f1f1",
+                            ...getStatusBadgeStyles(item[col.key]),
                           }}
                         >
                           {item[col.key] === 1
                             ? "Active"
                             : item[col.key] === 0
-                            ? "Inactive"
-                            : item[col.key]}
+                              ? "Inactive"
+                              : item[col.key]}
                         </span>
                       ) : col.key === "disabled" ? (
                         <span
-                          className={`status-badge ${
-                            item.disabled ? "enabled-status" : "disabled-status"
-                          }`}
+                          className={`status-badge ${item.disabled ? "enabled-status" : "disabled-status"
+                            }`}
                         >
                           {item.disabled ? "Enabled" : "Disabled"}
                         </span>
@@ -181,7 +174,14 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
                       )}
                     </td>
                   ))}
-                  <td className="text-end "><MdOutlineModeEditOutline onClick={()=>handleEdit(item.id)} title="Edit" className="me-2 cursor-pointer"/><CiTrash title="Delete" color="red" className="me-2 cursor-pointer"/></td>
+                  <td className="text-end">
+                    <MdOutlineModeEditOutline
+                      onClick={() => handleEdit(item.id)}
+                      title="Edit"
+                      className="me-2 cursor-pointer"
+                    />
+                    <CiTrash title="Delete" color="red" className="me-2 cursor-pointer" onClick={() => { setCurrentDetail(item); setShowDeleteModal(true) }} />
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -209,6 +209,15 @@ const CommonTable = ({ data, columns, title, searchTitle ,handleClick}) => {
           </ButtonGroup>
         </div>
       </div>
+      <DeleteModal
+        show={showDeleteModal}
+        handleClose={handleClose}
+        handleDelete={() => {
+          handleDelete(currentDetail.id);
+          setShowDeleteModal(false);
+        }}
+        title={currentDetail ? currentDetail[deleteTitle] : ""}
+      />
     </div>
   );
 };

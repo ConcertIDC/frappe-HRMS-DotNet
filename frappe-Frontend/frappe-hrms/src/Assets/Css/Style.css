@@ -122,3 +122,6 @@ color: rgb(127, 140, 141);
 .cursor-pointer{
     cursor: pointer;
 }
+.modal-content{
+    width: 110% !important;
+}
