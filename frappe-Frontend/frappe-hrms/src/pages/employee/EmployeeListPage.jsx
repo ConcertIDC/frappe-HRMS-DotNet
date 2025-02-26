@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import CommonTable from '../../components/common/CommonTable';
 import { getEmployeeList } from '../../redux/actions/EmployeeAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeListPage = () => {
   const columns = [    
@@ -19,9 +20,13 @@ const EmployeeListPage = () => {
   }, [dispatch]);
 
   console.log(EmployeeList);
-  
 
-  return <CommonTable data={EmployeeList} columns={columns} title={'Employee'} searchTitle={'Full Name'}/>;
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/add-employee');
+  }
+
+  return <CommonTable data={EmployeeList} columns={columns} title={'Employee'} searchTitle={'Full Name'} handleClick={handleClick}/>;
 };
 
 export default EmployeeListPage;

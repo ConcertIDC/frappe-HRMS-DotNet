@@ -11,9 +11,9 @@ const CustomInput = ({ label, type = 'text', placeholder, ariaLabel, className, 
                     aria-label={ariaLabel}
                     placeholder={placeholder}
                     aria-describedby="basic-addon1"
-                    name={name}  // Added name prop for form control
-                    value={value}  // Added value prop to bind input with state
-                    onChange={onChange}  // Added onChange prop for handling input changes
+                    name={name}  
+                    value={value}  
+                    onChange={onChange}  
                     required={required}
                 />
             </label>

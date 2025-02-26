@@ -643,4 +643,28 @@ export const timeZoneOptions = [
     { value: 'Atlantic/Canary', label: 'Atlantic/Canary' }
 ]
 
+export const genderOptions = [
+    { value: '0', label: 'Male' },
+    { value: '1', label: 'Female' },
+    { value: '2', label: 'Transgender' },
+]
+
+export const employeeStatusOptions = [
+    { value: '0', label: 'Active' },
+    { value: '1', label: 'Inactive' },
+    { value: '2', label: 'Suspended' },
+    { value: '3', label: 'Left' }
+]
+
+export const salutationOptions = [
+    { value: '0', label: 'Dr' },
+    { value: '1', label: 'Madam' },
+    { value: '2', label: 'Master' },
+    { value: '3', label: 'Miss' },
+    { value: '4', label: 'Mr' },
+    { value: '5', label: 'Mrs' },
+    { value: '6', label: 'Ms' },
+    { value: '7', label: 'Mx' },
+    { value: '8', label: 'Prof' },
+]
   

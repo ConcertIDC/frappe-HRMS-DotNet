@@ -87,7 +87,7 @@ const CompanyForm = () => {
             <Tabs defaultActiveKey="details" className="mb-3 px-2">
               <Tab eventKey="details" title="Details">
                 <div className="p-4">
-                  <Row>
+                  <Row className="mb-3">
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Company <span className="text-danger">*</span></Form.Label>
@@ -185,13 +185,13 @@ const CompanyForm = () => {
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Default Holiday List</Form.Label>
-                        <Form.Control type="text" className="bg-light" />
+                        <Field type="text" name className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Parent Company</Form.Label>
-                        <Form.Control type="text" name="parentCompany" className="bg-light" />
+                        <Field type="text" name="parentCompany" className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -200,7 +200,7 @@ const CompanyForm = () => {
 
 
               {/* Buying & Selling Tab */}
-              <Tab eventKey="buying" title="Buying and Selling">
+              <Tab eventKey="buying" title="Buying & Selling">
                 <h5 className="fw-bold px-4 mb-3">Buying & Selling Settings</h5>
                 <div className="px-4 mb-3">
                   <Row>
@@ -221,13 +221,13 @@ const CompanyForm = () => {
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Monthly Sales Target</Form.Label>
-                        <Form.Control type="text" className="bg-light" />
+                        <Field type="text" className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Default Warehouse for Sales Return</Form.Label>
-                        <Form.Control type="text" disabled className="bg-light" />
+                        <Field type="text"  className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -253,13 +253,13 @@ const CompanyForm = () => {
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Basic Component</Form.Label>
-                        <Form.Control type="text" name="basicComponent" className="bg-light" />
+                        <Field type="text" name="basicComponent" className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Arrear Component</Form.Label>
-                        <Form.Control type="text" name="arrearComponent" className="bg-light" />
+                        <Field type="text" name="arrearComponent" className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -267,7 +267,7 @@ const CompanyForm = () => {
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>HRA Component</Form.Label>
-                        <Form.Control type="text" name="hraComponent" className="bg-light" />
+                        <Field type="text" name="hraComponent" className="form-control bg-light" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -275,7 +275,7 @@ const CompanyForm = () => {
               </Tab>
 
               {/* Stock & Manufacturing Tab */}
-              <Tab eventKey="stock" title="Stock and Manufacturing">
+              <Tab eventKey="stock" title="Stock & Manufacturing">
                 <h5 className="fw-bold px-4 mb-3">Manufacturing</h5>
                 <div className="px-4 mb-3">
                   <Row>
