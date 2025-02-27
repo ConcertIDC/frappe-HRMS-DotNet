@@ -47,7 +47,7 @@ export const getEmployeeGradeList = () => async (dispatch) => {
     try {
         const { data } = await employeeGradeApi();
         await dispatch({
-            type: Employee.SUCCESS.type,
+            type: Employee.EMPLOYEE_GRADE.type,
             payload: { loading: false, data: data },
         });
     } catch (err) {

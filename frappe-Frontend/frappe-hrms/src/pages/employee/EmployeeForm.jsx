@@ -1,10 +1,25 @@
 import { Field, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Form, Button, Tab, Tabs } from "react-bootstrap";
 import { employeeStatusOptions, genderOptions, salutationOptions } from "../../constant/ConstatntData";
+import { useDispatch, useSelector } from "react-redux";
+import { getBranchList, getCompanyList, getDepartmentList, getDesignationList, getEmploymentTypeList } from "../../redux/actions/CompanyAction";
+import { getEmployeeGradeList, getEmployeeGroupList } from "../../redux/actions/EmployeeAction";
 
 const EmployeeForm = () => {
+    const dispatch = useDispatch();
 
+    const employee = useSelector((state) => state);
+console.log("Employeee",employee)
+    useEffect(() => {
+        dispatch(getCompanyList());
+        dispatch(getBranchList());
+        dispatch(getDepartmentList());
+        dispatch(getDesignationList());
+        dispatch(getEmployeeGradeList());
+        dispatch(getEmployeeGroupList());
+        dispatch(getEmploymentTypeList());
+    }, [dispatch]);
     return (
 
         <Container fluid className="p-4">
@@ -22,7 +37,7 @@ const EmployeeForm = () => {
                 <div className='border rounded'>
                     <Tabs defaultActiveKey="overview" className="mb-3 px-2">
                         <Tab eventKey="overview" title="Overview">
-                            <div className="p-4">
+                            <div className="px-4">
                                 <Row>
                                     <Col md={4}>
                                         <Form.Group className="mb-3">
@@ -75,7 +90,77 @@ const EmployeeForm = () => {
                                         </Form.Group>
                                     </Col>
                                 </Row>
+                                
 
+                            </div>
+                            <hr/>
+                            <div className="px-4">
+                                <h5 className="fw-bold mb-3">Company Details</h5>
+                                <Row>
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Company</Form.Label>
+                                            <Field as='select' name="company" type="text" className="form-control bg-light" >                                                
+                                                {employee.company.companyModel.map((company) => <option value={company.id}>{company.companyName}</option>)}
+                                            </Field>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Designation</Form.Label>
+                                            <Field as='select' name="designation" type="text" className="form-control bg-light" >
+                                                <option hidden></option>
+                                                {employee.company.designation.map((designation) => <option value={designation.id}>{designation.designationName}</option>)}
+                                            </Field>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Branch</Form.Label>
+                                            <Field as='select' name="branch" type="text" className="form-control bg-light" >
+                                                <option hidden></option>
+                                                {employee.company.branch.map((branch) => <option value={branch.id}>{branch.branchName}</option>)}
+                                            </Field>
+                                        </Form.Group>   
+                                    </Col>                           
+                                </Row>
+                                <Row className="my-3">
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Department</Form.Label>
+                                            <Field as='select' name="department" type="text" className="form-control bg-light" >
+                                                <option hidden></option>
+                                                {employee.company.department.map((department) => <option value={department.id}>{department.departmentName}</option>)}
+                                            </Field>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Reports to</Form.Label>
+                                            <Field name="reportsto" type="text" className="form-control bg-light" />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Grade</Form.Label>
+                                            <Field as='select' name="grade" type="text" className="form-control bg-light" >
+                                                <option hidden></option>
+                                                {employee.employee.employeeGrade.map((grade) => <option value={grade.id}>{grade.grade}</option>)}
+                                            </Field>
+                                        </Form.Group>   
+                                    </Col>                           
+                                </Row>
+                                <Row className="mb-3"> 
+                                    <Col md={4}>
+                                        <Form.Group>
+                                            <Form.Label>Employmnet Type</Form.Label>
+                                            <Field as='select' name="employmentType" type="text" className="form-control bg-light" >
+                                                <option hidden></option>
+                                                {employee.company.employmentType.map((employmentType) => <option value={employmentType.id}>{employmentType.type}</option>)}
+                                            </Field>
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
                             </div>
                         </Tab>
 

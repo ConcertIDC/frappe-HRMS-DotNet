@@ -100,7 +100,6 @@ const CommonTable = ({ data, columns, title, searchTitle, handleClick, deleteTit
                       backgroundColor: "#c1c1c145",
                       color: "rgb(77, 75, 75)",
                       fontWeight: "normal",
-                      textAlign: index === columns.length - 1 ? "right" : "left",
                     }}
                   >
                     {item.header}
@@ -139,7 +138,7 @@ const CommonTable = ({ data, columns, title, searchTitle, handleClick, deleteTit
                         fontWeight: index === 0 ? "550" : "normal",
                         color: index === 0 ? "rgb(78, 76, 76)" : "rgb(77, 75, 75)",
                         cursor: "pointer",
-                        textAlign: index === columns.length - 1 ? "right" : "left",
+                        
                       }}
                       className="hover-table"
                       onClick={() => handleEdit(item.id)}

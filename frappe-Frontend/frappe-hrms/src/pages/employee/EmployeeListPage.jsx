@@ -10,10 +10,9 @@ const EmployeeListPage = () => {
     { key: 'status', header: 'Status' },
     { key: 'designation', header: 'Designation' },
     { key: 'series', header: 'ID' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const EmployeeList = useSelector((state) => state.Employee.EmployeeModel);
+  const EmployeeList = useSelector((state) => state.employee.employeeModel);
   
   useEffect(() => {
     dispatch(getEmployeeList());

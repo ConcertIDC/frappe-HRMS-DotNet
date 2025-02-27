@@ -7,10 +7,9 @@ const BranchListPage = () => {
   const columns = [    
     { key: 'branchName', header: 'ID' },
     { key: 'branchName', header: 'Branch' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const branchList = useSelector((state) => state.Company.CompanyModel);
+  const branchList = useSelector((state) => state.company.branch);
 
   useEffect(() => {
     dispatch(getBranchList());

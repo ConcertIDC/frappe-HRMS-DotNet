@@ -9,10 +9,9 @@ const JobApplicantListPage = () => {
     { key: 'status', header: 'Status' },
     { key: 'designation', header: 'Job Opening' },
     { key: 'emailAddress', header: 'ID' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const JobApplicantList = useSelector((state) => state.Job.JobModel);
+  const JobApplicantList = useSelector((state) => state.job.JobModel);
   
   useEffect(() => {
     dispatch(getJobApplicantList());

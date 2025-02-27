@@ -11,7 +11,7 @@ const CompanyListPage = () => {
     { key: 'parentCompany', header: 'Parent Company' },
   ];
   const dispatch = useDispatch();
-  const companyList = useSelector((state) => state.Company.CompanyModel);
+  const companyList = useSelector((state) => state.company.companyModel);
 
   useEffect(() => {
     dispatch(getCompanyList());

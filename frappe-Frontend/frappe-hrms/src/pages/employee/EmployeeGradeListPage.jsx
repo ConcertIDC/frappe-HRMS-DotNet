@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 const EmployeeGradeListPage = () => {
   const columns = [    
     { key: 'grade', header: 'ID' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const EmployeeGradeList = useSelector((state) => state.Employee.EmployeeModel);
+  const EmployeeGradeList = useSelector((state) => state.employee.employeeGrade);
   
   useEffect(() => {
     dispatch(getEmployeeGradeList());

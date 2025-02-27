@@ -8,10 +8,9 @@ const DepartmentListPage = () => {
     { key: 'departmentName', header: 'ID' },
     { key: 'disabled', header: 'Status' },
     { key: 'departmentName', header: 'Department' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const departmentList = useSelector((state) => state.Company.CompanyModel);
+  const departmentList = useSelector((state) => state.company.department);
 
   useEffect(() => {
     dispatch(getDepartmentList());

@@ -7,10 +7,9 @@ const EmploymentTypeListPage = () => {
   const columns = [    
     { key: 'type', header: 'ID' },
     { key: 'type', header: 'Employment Type' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const EmploymentTypeList = useSelector((state) => state.Company.CompanyModel);
+  const EmploymentTypeList = useSelector((state) => state.company.employmentType);
   
   useEffect(() => {
     dispatch(getEmploymentTypeList());

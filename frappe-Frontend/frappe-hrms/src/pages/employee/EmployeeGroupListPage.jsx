@@ -7,10 +7,9 @@ const EmployeeGroupListPage = () => {
   const columns = [    
     { key: 'name', header: 'ID' },
     { key: 'name', header: 'Name' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const EmployeeGroupList = useSelector((state) => state.Employee.EmployeeModel);
+  const EmployeeGroupList = useSelector((state) => state.employee.EmployeeModel);
   
   useEffect(() => {
     dispatch(getEmployeeGroupList());

@@ -11,10 +11,10 @@ import { JobReducer } from '../reducers/JobReducer';
 const rootReducer = combineReducers({
     auth: LoginReducer,
     signup : SignupReducer,
-    Organisation : OrganisationReducer,
-    Company : CompanyReducer,
-    Employee : EmployeeReducer,
-    Job : JobReducer,
+    organisation : OrganisationReducer,
+    company : CompanyReducer,
+    employee : EmployeeReducer,
+    job : JobReducer,
 });
 console.log('CompanyReducer');
 

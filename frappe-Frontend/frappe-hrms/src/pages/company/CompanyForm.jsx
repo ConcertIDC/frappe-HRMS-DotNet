@@ -40,7 +40,7 @@ const initialValues = {
 const CompanyForm = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const company = useSelector((state) => state.Company.companyDetails.data);
+  const company = useSelector((state) => state.company.companyDetails.data);
   const navigate = useNavigate();
 
   useEffect(() => {

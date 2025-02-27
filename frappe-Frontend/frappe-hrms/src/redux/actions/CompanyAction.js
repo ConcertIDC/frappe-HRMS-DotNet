@@ -30,7 +30,7 @@ export const getBranchList = () => async (dispatch) => {
         const { data } = await branchApi();
         console.log("data", data);
         await dispatch({
-            type: Company.SUCCESS.type,
+            type: Company.BRANCH.type,
             payload: { loading: false, data: data },
         });
     } catch (err) {
@@ -50,7 +50,7 @@ export const getDepartmentList = () => async (dispatch) => {
         const { data } = await departmentApi();
         console.log("data", data);
         await dispatch({
-            type: Company.SUCCESS.type,
+            type: Company.DEPARTMENT.type,
             payload: { loading: false, data: data },
         });
     } catch (err) {
@@ -70,7 +70,7 @@ export const getDesignationList = () => async (dispatch) => {
         const { data } = await designationtApi();
         console.log("data", data);
         await dispatch({
-            type: Company.SUCCESS.type,
+            type: Company.DESIGNATION.type,
             payload: { loading: false, data: data },
         });
     } catch (err) {
@@ -90,7 +90,7 @@ export const getEmploymentTypeList = () => async (dispatch) => {
         const { data } = await employmentTypeApi();
         console.log("data", data);
         await dispatch({
-            type: Company.SUCCESS.type,
+            type: Company.EMPLOYMENT_TYPE.type,
             payload: { loading: false, data: data },
         });
     } catch (err) {

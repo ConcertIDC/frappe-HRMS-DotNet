@@ -7,10 +7,9 @@ const DesignationListPage = () => {
   const columns = [    
     { key: 'designationName', header: 'ID' },
     { key: 'designationName', header: 'Designation' },
-    { key: 'action', header: 'Actions' },
   ];
   const dispatch = useDispatch();
-  const designationList = useSelector((state) => state.Company.CompanyModel);
+  const designationList = useSelector((state) => state.company.designation);
 
   useEffect(() => {
     dispatch(getDesignationList());
