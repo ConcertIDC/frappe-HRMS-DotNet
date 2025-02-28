@@ -1,7 +1,7 @@
 import { Job } from "../constants/job";
 
 const initialJobState = {
-    JobModel: [],
+    jobModel: [],
     loading: false,
 };
 
@@ -10,11 +10,11 @@ export const JobReducer = (state = initialJobState, action) => {
         case Job.LOADING.type:
             return { ...state, loading: true };
         case Job.REQUEST.type:
-            return { ...state, JobModel: action?.payload };
+            return { ...state, jobModel: action?.payload };
         case Job.SUCCESS.type:            
-            return { ...state, JobModel: action?.payload.data, loading: false };
+            return { ...state, jobModel: action?.payload.data, loading: false };
         case Job.ERROR.type:
-            return { ...state, JobModel: action?.payload, loading: false };
+            return { ...state, jobModel: action?.payload, loading: false };
         default:
             return state;
     }

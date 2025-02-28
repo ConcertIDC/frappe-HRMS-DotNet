@@ -10,7 +10,7 @@ namespace frappe_HRMS.Domain.Employee
 {
     public class EmployeeSalary : BaseEntity
     {
-        public string? CTC {  get; set; }
+        public decimal? CTC {  get; set; }
         public int? CostCenterId { get; set; }
         [ForeignKey(nameof(CostCenterId))]
         public virtual CostCenter? CostCenter { get; set; }

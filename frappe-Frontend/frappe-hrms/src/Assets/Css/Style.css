@@ -108,7 +108,7 @@ color: rgb(127, 140, 141);
 }
 .nav-tabs .nav-link.active {
     border:none !important;
-    border-bottom: black 2px solid !important;
+    border-bottom: black 1px solid !important;
     color: black !important;
     font-weight: 600;
 }
@@ -125,3 +125,14 @@ color: rgb(127, 140, 141);
 .modal-content{
     width: 110% !important;
 }
+.form-check-input:checked{
+    background-color: black !important;
+    border-color: black !important;
+}
+.form-label,.form-check-label,p {
+    font-size: 15px !important;
+}
+
+/* .form-control{
+    height: 30px;
+} */

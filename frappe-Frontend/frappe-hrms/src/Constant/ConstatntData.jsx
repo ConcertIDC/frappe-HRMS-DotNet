@@ -667,4 +667,49 @@ export const salutationOptions = [
     { value: '7', label: 'Mx' },
     { value: '8', label: 'Prof' },
 ]
-  
+
+export const preferedContactOptions = [
+    { value: '', label: '' },
+    { value: 'Company Email', label: 'Company Email' },
+    { value: 'Personal Email', label: 'Personal Email' },
+    { value: 'User ID', label: 'User ID' }  
+]
+
+export const addressTypeOptions = [
+    { value: '', label: '' },
+    { value: 'Rented', label: 'Rented' },
+    { value: 'Owned', label: 'Owned' }
+]
+
+export const salaryModeOptions = [
+    { value: '', label: '' },
+    { value: 'Bank', label: 'Bank' },
+    { value: 'Cash', label: 'Cash' },
+    { value: 'Cheque', label: 'Cheque' },
+]
+
+export const maritalStatusOptions = [
+    { value: '', label: '' },
+    { value: 'Single', label: 'Single' },
+    { value: 'Married', label: 'Married' },
+    { value: 'Divorced', label: 'Divorced' },
+    { value: 'Widowed', label: 'Widowed' }
+]
+
+export const bloodGroupOptions=[
+    { value: '', label: '' },
+    { value: 'A+', label: 'A+' },
+    { value: 'A-', label: 'A-' },
+    { value: 'B+', label: 'B+' },
+    { value: 'B-', label: 'B-' },
+    { value: 'AB+', label: 'AB+' },
+    { value: 'AB-', label: 'AB-' },
+    { value: 'O+', label: 'O+' },
+    { value: 'O-', label: 'O-' },
+]
+
+export const booleanOptions=[
+    { value: '', label: '' },
+    { value: '0', label: 'No' },
+    { value: '1', label: 'Yes' },
+]
