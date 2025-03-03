@@ -1,18 +1,46 @@
 import { Field, Formik } from "formik";
 import React, { useEffect } from "react";
-import { Container, Row, Col, Form, Button, Tab, Tabs } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Tab, Tabs, Accordion } from "react-bootstrap";
 import { addressTypeOptions, bloodGroupOptions, booleanOptions, currencyOptions, employeeStatusOptions, genderOptions, maritalStatusOptions, preferedContactOptions, salaryModeOptions, salutationOptions } from "../../constant/ConstatntData";
 import { useDispatch, useSelector } from "react-redux";
 import { getBranchList, getCompanyList, getDepartmentList, getDesignationList, getEmploymentTypeList } from "../../redux/actions/CompanyAction";
 import { getEmployeeGradeList, getEmployeeGroupList } from "../../redux/actions/EmployeeAction";
 import { getJobApplicantList } from "../../redux/actions/JobAction";
 import { boolean } from "yup";
+import CommonTable from '../../components/common/CommonTable';
+import CustomEditTable from "../../components/common/CustomEditTable";
 
 const EmployeeForm = () => {
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
+    const previousExperienceInitialValues = { id: "", company: "", designation: "", salary: "", address: "" }
+    const historyValues = { id: "", branch: "", department: "", designation: "", fromDate: "", toDate: "" }
+    const qualificationValues = { id: "", school: "", qualification: "", level: "", yearOfPassing: "" }
+    const [previousExperience, setPreviousExperience] = React.useState([previousExperienceInitialValues]);
+    const [history, setHistory] = React.useState([historyValues]);
+    const [qualification, setQualification] = React.useState([qualificationValues]);
     const employee = useSelector((state) => state);
-    console.log("Employeee", employee)
+
+    const previousExperienceColumns = [
+        { key: 'company', header: 'Company' },
+        { key: 'designation', header: 'Designation' },
+        { key: 'salary', header: 'Salary', cell: (col) => <>$ {Number(col?.salary).toFixed(2)}</> },
+        { key: 'address', header: 'Address' },
+    ];
+    const historyColumns = [
+        { key: 'branch', header: 'Branch',type: 'select', options: employee.company.branch.map((branch) => { return { label: branch.branchName, value: branch.id } }) },
+        { key: 'department', header: 'Department', type: 'select', options: employee.company.department.map((department) => { return { label: department.departmentName, value: department.id } }) },
+        { key: 'designation', header: 'Designation',type: 'select', options: employee.company.designation.map((designation) => { return { label: designation.designationName, value: designation.id } }) },
+        { key: 'fromDate', header: 'From Date', type: 'date' },
+        { key: 'toDate', header: 'To Data', type: 'date' },
+    ];
+    const qualificationColumns = [
+        { key: 'school', header: 'School/University' },
+        { key: 'qualification', header: 'Qualification' },
+        { key: 'level', header: 'Level' },
+        { key: 'yearOfPassing', header: 'Year Of Passing' },
+    ];
+
     useEffect(() => {
         dispatch(getCompanyList());
         dispatch(getBranchList());
@@ -23,6 +51,15 @@ const EmployeeForm = () => {
         dispatch(getEmploymentTypeList());
         dispatch(getJobApplicantList());
     }, [dispatch]);
+
+    const Branchdropdown = ({ index }) => {
+        return (
+            <Field as='select' name={`historyValues${index}.branchId`} type="text" className="form-control bg-light" >
+                <option hidden></option>
+                {employee.company.branch.map((branch) => <option value={branch.id}>{branch.branchName}</option>)}
+            </Field>
+        )
+    }
     return (
 
         <Container fluid className="p-4">
@@ -467,7 +504,28 @@ const EmployeeForm = () => {
                             </div>
                         </Tab>
                         <Tab eventKey="profile" title="Profile">
-                            <div></div>
+                            <div>
+                                <Accordion defaultActiveKey={['0']} alwaysOpen>
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header>Educational Qualification </Accordion.Header>
+                                        <Accordion.Body>
+                                            <CustomEditTable data={qualification} columns={qualificationColumns} initialValues={qualificationValues} title={'Education'} />
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                    <Accordion.Item eventKey="1">
+                                        <Accordion.Header>Previous Work Experience</Accordion.Header>
+                                        <Accordion.Body>
+                                            <CustomEditTable data={previousExperience} columns={previousExperienceColumns} tableName={'previous_work_experience'} initialValues={previousExperienceInitialValues} title={'External Work History'} />
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                    <Accordion.Item eventKey="2">
+                                        <Accordion.Header>History In Company</Accordion.Header>
+                                        <Accordion.Body>
+                                            <CustomEditTable data={history} columns={historyColumns} initialValues={historyValues} title={'Internal Work History'} />
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>
                         </Tab>
                         <Tab eventKey="exit" title="Exit">
                             <div className="px-4 mb-3">

@@ -11,7 +11,7 @@ namespace frappe_HRMS.Domain.Employee
     {
         public string? Company {  get; set; }
         public string? Designation { get; set; }
-        public string? Salary { get; set; }
+        public decimal? Salary { get; set; }
         public string? Address { get; set;}
         public string? Contact { get; set; }
         public int? TotalExperience { get; set; }

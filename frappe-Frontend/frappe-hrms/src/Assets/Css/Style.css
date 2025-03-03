@@ -133,6 +133,12 @@ color: rgb(127, 140, 141);
     font-size: 15px !important;
 }
 
+.accordion-button{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    background-color: white !important;
+    color: black !important;
+}
 /* .form-control{
     height: 30px;
 } */
